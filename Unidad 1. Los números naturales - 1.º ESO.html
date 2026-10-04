@@ -1,0 +1,220 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Unidad 1. Los números naturales - 1.º ESO</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff6dc;--card:#fff;--ink:#1d2a5b;--soft:#5a668f;--ok:#1f9e89;--hi:#ffc93c;--bad:#e5533d;--line:#e8dcb5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a36;--card:#1e2650;--ink:#f4f1e6;--soft:#aab3da;--line:#34407a;--ok:#46d1bb}}
+:root[data-theme="dark"]{--bg:#141a36;--card:#1e2650;--ink:#f4f1e6;--soft:#aab3da;--line:#34407a;--ok:#46d1bb}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 17px/1.5 Fredoka,"Trebuchet MS",system-ui,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:clamp(26px,6vw,38px);line-height:1.1;margin:0 0 6px;font-weight:600}
+.sub{color:var(--soft);margin:0 0 16px}
+.name{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+input{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:12px;padding:8px 12px;min-width:0}
+input:focus,button:focus-visible,summary:focus-visible{outline:3px solid var(--hi);outline-offset:2px}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;padding:4px 2px 14px}
+.tab{flex:0 0 auto;border:2px solid var(--ink);background:var(--card);color:var(--ink);border-radius:14px;padding:8px 12px;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.tab[aria-selected=true]{background:var(--hi);color:#1d2a5b}
+.tab.done{border-color:var(--ok);box-shadow:0 4px 0 var(--ok)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+details{background:var(--card);border:2px dashed var(--hi);border-radius:14px;padding:10px 14px;margin-bottom:14px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+.q{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.q input{width:130px}
+.q .t{flex:1 1 100%}
+button.go{font:inherit;font-weight:600;background:var(--ink);color:var(--bg);border:0;border-radius:12px;padding:9px 16px;cursor:pointer}
+.msg{font-weight:600}.good{color:var(--ok)}.wrong{color:var(--bad)}
+.big{font-size:56px;font-weight:600;line-height:1}
+.row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)}
+.nav{display:flex;justify-content:space-between;margin-top:8px}
+sup{font-size:.7em}
+.crit{padding:8px 0;border-bottom:1px solid var(--line)}.crit small{color:var(--soft);display:block}h2{font-size:20px;margin:18px 0 6px}.bar{height:8px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:4px}.bar i{display:block;height:100%;background:var(--ok)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}.opts label{display:flex;gap:6px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:6px 12px;cursor:pointer;background:var(--card)}.q .opts input{width:auto;accent-color:var(--ok)}
+@media print{body{background:#fff;color:#000}main>.sub,.tabs,.go,#pm,.pbar,#pn{display:none!important}.card{break-inside:avoid;border-color:#999}main{max-width:none}}
+.opts input[type=radio]{width:auto;min-width:0;padding:0;accent-color:var(--ok)}
+textarea{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:12px;padding:8px;word-break:break-all}
+</style></head><body><main>
+<h1>Unidad 1. Los números naturales</h1>
+<p class="sub"><b>Matemáticas · 1.º ESO</b>. 6 bloques, 10 ejercicios en cada uno (4 de ellos para elegir la respuesta correcta). Los números cambian cada vez que empiezas de nuevo.</p>
+<div class="name"><label for="nm">Tu nombre:</label><input id="nm" placeholder="Nombre y apellidos" autocomplete="name"><label for="cs">Curso:</label><input id="cs" placeholder="p. ej. 1.º ESO B" size="12"></div>
+<div class="name pbar"><button class="go" onclick="svOpen()">Guardar mi progreso</button><button class="go" onclick="ldOpen()">Continuar con un código</button></div><div id="pn"></div>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div id="view"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const MR=Math.random.bind(Math);let rnd=MR,seed=0;const mul=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+const R=(a,b)=>Math.floor(rnd()*(b-a+1))+a,P=a=>a[R(0,a.length-1)],f=n=>n.toLocaleString('es-ES'),S=(b,e)=>`${b}<sup>${e}</sup>`;
+const B=[
+{n:'Sistema decimal',e:'🔢',tip:'Cada cifra vale según su lugar: U (unidades), D (decenas ×10), C (centenas ×100), UM (unidad de millar ×1.000), DM (decena de millar ×10.000). Para redondear a las centenas, mira la cifra de las decenas: si es 5 o más, sube una centena; si no, baja.',
+g:()=>{const n=R(10000,99999),s=String(n),[nm,i]=P([['unidades',4],['decenas',3],['centenas',2],['unidades de millar',1]]),d=[R(1,9),R(0,9),R(0,9),R(0,9)],x=R(12345,98765);
+return[{t:`¿Qué cifra ocupa el lugar de las ${nm} en ${f(n)}?`,a:+s[i]},
+{t:`Escribe con cifras: ${d[0]} unidades de millar, ${d[1]} centenas, ${d[2]} decenas y ${d[3]} unidades.`,a:d[0]*1000+d[1]*100+d[2]*10+d[3]},
+{t:`Redondea ${f(x)} a las centenas.`,a:Math.round(x/100)*100}]}},
+{n:'Las 4 operaciones',e:'➕',tip:'En la resta, el minuendo es mayor que el sustraendo. En la división: dividendo = divisor × cociente + resto, y el resto siempre es menor que el divisor. Comprueba tus resultados con la operación contraria.',
+g:()=>{const a=R(5000,9800),b=R(1200,4900),c=R(100,999),d=R(12,48),dv=R(11,35),q=R(12,99),r=R(1,dv-1);
+return[{t:`Calcula: ${f(a)} − ${f(b)} + ${c}`,a:a-b+c},{t:`Calcula: ${c} × ${d}`,a:c*d},{t:`Al dividir ${f(dv*q+r)} entre ${dv}, ¿cuál es el resto?`,a:r}]}},
+{n:'Combinadas',e:'🧮',tip:'Orden: 1.º paréntesis ( ) y corchetes [ ] (de dentro hacia fuera: primero los paréntesis y después los corchetes), 2.º multiplicaciones y divisiones (de izquierda a derecha), 3.º sumas y restas.',
+g:()=>{const a=R(2,9),b=R(2,9),c=R(2,9),k=R(2,6);
+return[{t:`${a} + ${b} × ${c}`,a:a+b*c},{t:`(${a} + ${b}) × ${c} − ${k}`,a:(a+b)*c-k},{t:`(${k*a} + ${k*b}) ÷ ${k} + ${c} × ${b}`,a:a+b+c*b}]}},
+{n:'Potencias',e:'⚡',tip:'Una potencia es una multiplicación repetida: 2³ = 2·2·2 = 8. Mismas bases: al multiplicar se suman los exponentes, al dividir se restan, y en una potencia de potencia se multiplican.',
+g:()=>{const b=P([2,3,4,5]),e=R(2,4),x=R(2,9),m=R(2,5),n=R(2,5);
+return[{t:`Calcula ${S(b,e)}.`,a:b**e},{t:`${S(x,m)} · ${S(x,n)} = ${S(x,'?')} → ¿cuánto vale el exponente?`,a:m+n},
+R(0,1)?{t:`${S(x,m+n)} : ${S(x,n)} = ${S(x,'?')} → ¿cuánto vale el exponente?`,a:m}:{t:`(${S(x,m)})<sup>${n}</sup> = ${S(x,'?')} → ¿cuánto vale el exponente?`,a:m*n}]}},
+{n:'Raíces',e:'√',tip:'La raíz cuadrada es la operación contraria a elevar al cuadrado: √49 = 7 porque 7² = 49. Si no es exacta, la raíz entera es el mayor número cuyo cuadrado no supera al número.',
+g:()=>{const r=R(3,20),s=R(2,9),t=R(2,9),w=R(30,99);
+return[{t:`√${r*r} = ?`,a:r},{t:`Raíz cuadrada entera (por defecto) de ${w}.`,a:Math.floor(Math.sqrt(w))},{t:`2 × √${s*s} + √${t*t} = ?`,a:2*s+t}]}},
+{n:'Problemas',e:'🧩',tip:'Lee dos veces, subraya los datos, decide qué operaciones necesitas y escribe la respuesta con sentido. Si sobran personas tras dividir, hace falta un grupo más (otro autobús).',
+g:()=>{const n=P(['Lucía','Marcos','Irene','Hugo']),a=R(2,6),p=R(2,5),b=R(2,5),q=R(2,6),pl=P([40,45,50]),k=R(200,480),fi=R(12,25),bu=R(14,30),li=R(10,fi*bu-60);
+return[{t:`${n} compra ${a} cuadernos de ${p} € cada uno y ${b} bolígrafos de ${q} € cada uno. Paga con un billete de 100 €. ¿Cuántos euros le devuelven?`,a:100-a*p-b*q},
+{t:`Un instituto organiza una excursión para ${k} alumnos. Cada autobús tiene ${pl} plazas. ¿Cuántos autobuses necesitan como mínimo?`,a:Math.ceil(k/pl)},
+{t:`Un cine tiene ${fi} filas con ${bu} butacas cada una. Hoy se han vendido ${fi*bu-li} entradas. ¿Cuántas butacas quedan libres?`,a:li}]}}
+];
+const q1=(t,a)=>({t,a}),K=(c,t)=>`<em>${c}</em> <br>${t}`,RM=n=>{let r='';[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']].forEach(([v,c])=>{while(n>=v){r+=c;n-=v}});return r};
+const T=[
+[()=>{const n=R(10000,99999),s=String(n),[nm,i]=P([['unidades',4],['decenas',3],['centenas',2],['unidades de millar',1]]);return q1(`¿Qué cifra ocupa el lugar de las ${nm} en ${f(n)}?`,+s[i])},
+()=>{const d=[R(1,9),R(0,9),R(0,9),R(0,9)];return q1(`Escribe con cifras: ${d[0]} unidades de millar, ${d[1]} centenas, ${d[2]} decenas y ${d[3]} unidades.`,d[0]*1000+d[1]*100+d[2]*10+d[3])},
+()=>{const n=R(10000,99999),s=String(n),[nm,i,v]=P([['centenas',2,100],['decenas',3,10],['unidades de millar',1,1000]]);return q1(K('El valor de una cifra depende del lugar que ocupa: un 7 en las centenas vale 700.',`En ${f(n)}, ¿cuánto vale la cifra de las ${nm}?`),+s[i]*v)},
+()=>{const x=R(12345,98765);return q1(`Redondea ${f(x)} a las centenas.`,Math.round(x/100)*100)},
+()=>{const n=R(1000,9999);return q1(K('Para saber cuántas decenas hay en total en un número se quita la cifra de las unidades: en 358 hay 35 decenas.',`¿Cuántas decenas hay en total en ${f(n)}?`),Math.floor(n/10))},
+()=>{const x=R(10,99)*100+99;return q1(K('El sucesor de un número es el que va justo después (+1) y el antecesor el que va justo antes (−1).',`¿Cuál es el sucesor de ${f(x)}?`),x+1)},
+()=>{const x=R(12345,98765);return q1(K('Para redondear a los millares se mira la cifra de las centenas: si es 5 o más, se sube un millar.',`Redondea ${f(x)} a las unidades de millar.`),Math.round(x/1000)*1000)},
+()=>{const n=R(14,1999);return q1(K('Los números romanos suman sus letras (I=1, V=5, X=10, L=50, C=100, D=500, M=1000); si una letra menor va delante de una mayor, se resta (IV=4, IX=9, XL=40, XC=90).',`¿Qué número representa ${RM(n)}?`),n)},
+()=>{let x;do{x=R(1001,9899)}while(x%1000==0);return q1(K('El siguiente millar exacto de 4.370 es 5.000, y para llegar hay que sumar 630.',`¿Cuánto hay que sumar a ${f(x)} para llegar al siguiente millar exacto?`),(Math.floor(x/1000)+1)*1000-x)},
+()=>{const d=[];while(d.length<3){const x=R(1,9);if(!d.includes(x))d.push(x)}const A=[...d].sort((a,b)=>b-a),Z=[...d].sort((a,b)=>a-b);return q1(K('El número mayor se forma colocando las cifras de mayor a menor; el menor, de menor a mayor.',`Con las cifras ${d.join(', ')} (usando cada una una sola vez) se forman el mayor y el menor número posibles. ¿Cuál es su diferencia?`),+A.join('')-+Z.join(''))}],
+[()=>{const a=R(1000,4000),b=R(1000,4000),c=R(100,999);return q1(`Calcula: ${f(a)} + ${f(b)} + ${c}`,a+b+c)},
+()=>{const a=R(5000,9800),b=R(1200,4900);return q1(`Calcula: ${f(a)} − ${f(b)}`,a-b)},
+()=>{const c=R(100,999),d=R(12,48);return q1(`Calcula: ${c} × ${d}`,c*d)},
+()=>{const dv=R(12,35),q=R(12,99);return q1(`Calcula: ${f(dv*q)} ÷ ${dv}`,q)},
+()=>{const a=R(12,95);return q1(K('Multiplicar por 10, 100 o 1.000 añade 1, 2 o 3 ceros; dividir por 10, 100 o 1.000 los quita.',`Calcula: ${a} × 1.000 ÷ 100`),a*10)},
+()=>{const a=R(5000,9800),b=R(1200,4900),c=R(100,999);return q1(`Calcula: ${f(a)} − ${f(b)} + ${c}`,a-b+c)},
+()=>{const dv=R(11,35),q=R(12,99),r=R(1,dv-1);return q1(`Al dividir ${f(dv*q+r)} entre ${dv}, ¿cuál es el resto?`,r)},
+()=>{const s=R(1200,4900),d=R(500,3900);return q1(K('En una resta, minuendo − sustraendo = diferencia; por tanto, minuendo = sustraendo + diferencia.',`En una resta, el sustraendo es ${f(s)} y la diferencia es ${f(d)}. ¿Cuál es el minuendo?`),s+d)},
+()=>{const dv=R(11,35),q=R(12,99),r=R(1,dv-1);return q1(K('Prueba de la división: dividendo = divisor × cociente + resto.',`En una división, el divisor es ${dv}, el cociente es ${q} y el resto es ${r}. ¿Cuál es el dividendo?`),dv*q+r)},
+()=>{const x=R(12,48),y=R(1,9);return q1(K('Propiedad distributiva: a × (b + c) = a × b + a × c. Por ejemplo, 7 × 102 = 7 × 100 + 7 × 2.',`Calcula ${x} × ${100+y} usando la propiedad distributiva.`),x*(100+y))}],
+[()=>{const a=R(2,9),b=R(2,9),c=R(2,9);return q1(K('Primero se hacen las multiplicaciones y divisiones, y después las sumas y restas.',`Calcula: ${a} + ${b} × ${c}`),a+b*c)},
+()=>{const a=R(2,9),b=R(2,9),c=R(2,9);return q1(`Calcula: (${a} + ${b}) × ${c}`,(a+b)*c)},
+()=>{const a=R(6,9),b=R(6,9),c=R(2,5),d=R(2,5);return q1(`Calcula: ${a} × ${b} − ${c} × ${d}`,a*b-c*d)},
+()=>{const a=R(2,9),b=R(2,9),c=R(2,9),k=R(2,6);return q1(`Calcula: (${a} + ${b}) × ${c} − ${k}`,(a+b)*c-k)},
+()=>{const a=R(2,9),b=R(2,9),c=R(5,9),d=R(1,4);return q1(K('Lo que está entre paréntesis se calcula primero, aunque haya multiplicaciones.',`Calcula: ${a} + ${b} × (${c} − ${d})`),a+b*(c-d))},
+()=>{const a=R(2,6),b=R(2,6),c=R(2,6),d=R(1,7);return q1(K('Los corchetes [ ] se usan cuando ya hay paréntesis dentro: se resuelve primero el paréntesis más interno y después el corchete.',`Calcula: [${a} × (${b} + ${c})] − ${d}`),a*(b+c)-d)},
+()=>{const a=R(2,9),b=R(2,9),k=R(2,5),m=R(2,4);return q1(`Calcula: [(${a} + ${b}) × ${k*m}] ÷ ${k}`,(a+b)*m)},
+()=>{const a=R(2,9),b=R(2,6),c=R(2,6),d=R(2,6),e=R(1,9);return q1(`Calcula: ${a} + [${b} × (${c} + ${d})] − ${e}`,a+b*(c+d)-e)},
+()=>{const a=R(2,9),b=R(2,9),c=R(2,9),k=R(2,6);return q1(`Calcula: [(${k*a} + ${k*b}) ÷ ${k}] + ${c} × ${b}`,a+b+c*b)},
+()=>{const A=R(2,6),B2=R(2,6),C=R(2,5),E=R(2,5),X=(A+B2)*C,m=R(1,Math.floor((X-1)/E)),D=X-E*m;return q1(K('Orden completo: 1.º paréntesis ( ), 2.º corchetes [ ], 3.º × y ÷, 4.º + y −.',`Calcula: [(${A} + ${B2}) × ${C} − ${D}] ÷ ${E}`),m)}],
+[()=>{const b=R(2,12);return q1(K('Elevar al cuadrado es multiplicar un número por sí mismo: 7² = 7 · 7 = 49.',`Calcula ${S(b,2)}.`),b*b)},
+()=>{const x=R(2,5),n=R(3,6);return q1(K('En una potencia, la base es el factor que se repite y el exponente indica cuántas veces se repite: 4 · 4 · 4 = 4³.',`${Array(n).fill(x).join(' · ')} = ${S(x,'?')} → ¿cuánto vale el exponente?`),n)},
+()=>{const e=R(5,8);return q1(K('Las potencias de 2 se van duplicando: 2, 4, 8, 16, 32...',`Calcula ${S(2,e)}.`),2**e)},
+()=>{const n=R(2,5);return q1(K('Una potencia de 10 es un 1 seguido de tantos ceros como indica el exponente: 10³ = 1.000.',`Calcula ${S(10,n)}.`),10**n)},
+()=>{const x=R(2,9),y=R(2,9);return q1(K('Cualquier número (distinto de 0) elevado a 0 vale 1, y elevado a 1 vale el mismo número.',`Calcula ${S(x,0)} + ${S(y,1)}.`),1+y)},
+()=>{const x=R(2,9),m=R(2,5),n=R(2,5);return q1(K('Producto de potencias de la misma base: se suman los exponentes.',`${S(x,m)} · ${S(x,n)} = ${S(x,'?')} → ¿cuánto vale el exponente?`),m+n)},
+()=>{const x=R(2,9),m=R(2,5),n=R(2,5);return q1(K('Cociente de potencias de la misma base: se restan los exponentes.',`${S(x,m+n)} : ${S(x,n)} = ${S(x,'?')} → ¿cuánto vale el exponente?`),m)},
+()=>{const x=R(2,9),m=R(2,5),n=R(2,5);return q1(K('Potencia de una potencia: se multiplican los exponentes.',`(${S(x,m)})<sup>${n}</sup> = ${S(x,'?')} → ¿cuánto vale el exponente?`),m*n)},
+()=>{const x=R(2,9),y=R(2,9);return q1(K('Cada potencia se calcula por separado antes de sumar.',`Calcula ${S(x,2)} + ${S(y,2)}.`),x*x+y*y)},
+()=>{const x=P([2,3]),m=R(2,4),n=R(2,4),p=R(1,m+n-1);return q1(K('Al operar con la misma base: x<sup>m</sup> · x<sup>n</sup> : x<sup>p</sup> = x<sup>m+n−p</sup>. Después se calcula el valor.',`Calcula ${S(x,m)} · ${S(x,n)} : ${S(x,p)}.`),x**(m+n-p))}],
+[()=>{const r=R(3,12);return q1(K('La raíz cuadrada es la operación contraria a elevar al cuadrado: √49 = 7 porque 7² = 49.',`√${r*r} = ?`),r)},
+()=>{const r=R(3,14);return q1(K('Los cuadrados perfectos son 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121...',`¿Cuál es el cuadrado perfecto que va justo después de ${r*r}?`),(r+1)**2)},
+()=>{const r=R(13,25);return q1(`√${r*r} = ?`,r)},
+()=>{const w=R(30,99);return q1(`Raíz cuadrada entera (por defecto) de ${w}.`,Math.floor(Math.sqrt(w)))},
+()=>{const r=R(2,9);return q1(K('Si un cuadrado perfecto termina en 2 ceros, su raíz termina en 1 cero: √900 = 30.',`√${f(r*r*100)} = ?`),r*10)},
+()=>{const s=R(2,9),t=R(2,9);return q1(`2 × √${s*s} + √${t*t} = ?`,2*s+t)},
+()=>{const w=R(30,199),r=Math.floor(Math.sqrt(w));return q1(K('Radicando = (raíz entera)² + resto. Por ejemplo, para 30: 30 = 5² + 5.',`Calcula el resto de la raíz cuadrada entera de ${w}.`),w-r*r)},
+()=>{const[x,y]=P([[3,4],[6,8],[5,12],[9,12],[8,15]]);return q1(K('Primero se calcula el radicando (como si fuera un paréntesis) y después la raíz.',`√(${x*x} + ${y*y}) = ?`),Math.round(Math.sqrt(x*x+y*y)))},
+()=>{const r=R(4,20);return q1(K('El lado de un cuadrado es la raíz cuadrada de su área.',`Un cuadrado tiene un área de ${r*r} cm². ¿Cuánto mide su lado, en cm?`),r)},
+()=>{const w=R(30,200);return q1(K('La raíz entera por exceso es la raíz entera por defecto más 1.',`¿Cuál es el menor número natural cuyo cuadrado es mayor que ${w}?`),Math.floor(Math.sqrt(w))+1)}],
+[()=>{const fi=R(12,25),bu=R(14,30),li=R(10,fi*bu-60);return q1(`Un cine tiene ${fi} filas con ${bu} butacas cada una. Hoy se han vendido ${fi*bu-li} entradas. ¿Cuántas butacas quedan libres?`,li)},
+()=>{const c=P([6,12]),nb=R(5,30),r=R(1,c-1);return q1(K('Si te preguntan cuántas veces cabe una cantidad en otra, divide y quédate con el cociente.',`Una frutería envasa ${c*nb+r} huevos en cajas de ${c}. ¿Cuántas cajas completas se pueden llenar?`),nb)},
+()=>{const s=R(4,12);return q1(K('Un cuadrado de lado s tiene s² cuadrados unidad (una potencia).',`Un salón cuadrado de ${s} m de lado se cubre con baldosas de 1 m². ¿Cuántas baldosas hacen falta?`),s*s)},
+()=>{const n=P(['Lucía','Marcos','Irene','Hugo']),a=R(8,16),k=R(2,4),x=R(2,9);return q1(`${n} tiene ${a} años. Su padre tiene ${k} veces su edad más ${x} años. ¿Cuántos años tiene el padre?`,k*a+x)},
+()=>{const n=P(['Lucía','Marcos','Irene','Hugo']),a=R(2,6),p=R(2,5),b=R(2,5),q=R(2,6);return q1(`${n} compra ${a} cuadernos de ${p} € cada uno y ${b} bolígrafos de ${q} € cada uno. Paga con un billete de 100 €. ¿Cuántos euros le devuelven?`,100-a*p-b*q)},
+()=>{const L=R(5,30),k=R(2,6);return q1(K('Una semana tiene 7 días: primero calcula lo que se pierde en una semana.',`Un grifo gotea ${L} litros al día. ¿Cuántos litros se pierden en ${k} semanas?`),L*7*k)},
+()=>{const k=R(200,480),pl=P([40,45,50]);return q1(`Un instituto organiza una excursión para ${k} alumnos. Cada autobús tiene ${pl} plazas. ¿Cuántos autobuses necesitan como mínimo?`,Math.ceil(k/pl))},
+()=>{const A=R(80,150),b=R(10,40),c=R(5,35),d=R(10,40),e=R(5,35);return q1(`Un tren sale con ${A} viajeros. En la primera parada bajan ${b} y suben ${c}. En la segunda parada bajan ${d} y suben ${e}. ¿Cuántos viajeros hay ahora en el tren?`,A-b+c-d+e)},
+()=>{const d=R(20,45),k=R(3,6),x=R(30,120),T2=x+d*k+R(10,90);return q1(`Un ciclista quiere recorrer ${T2} km. Ya lleva ${x} km y recorre ${d} km cada día durante ${k} días. ¿Cuántos km le faltarán todavía?`,T2-x-d*k)},
+()=>{const N=R(20,80),c=R(5,12),v=c+R(2,9);return q1(K('Ganancia = lo que se ingresa por las ventas − lo que costó comprar.',`Una librería compra ${N} libros a ${c} € cada uno y los vende todos a ${v} € cada uno. ¿Cuántos euros gana en total?`),N*(v-c))}]
+];
+const opts=a=>{const c=[...new Set([a+1,a-1,a+2,a-2,a+10,a-10,a+3,a+5,a+100,a+7].filter(v=>v>=0&&v!=a))].sort(()=>rnd()-.5).slice(0,3);return[a,...c].sort(()=>rnd()-.5)};
+const O=(q,i)=>`<div class="opts" role="radiogroup" aria-label="Opciones ${i+1}">`+q.o.map(v=>`<label><input type="radio" name="o${i}" value="${v}" ${q.pts!==null||q.bad.includes(v)?'disabled':''}${q.pts!==null&&q.pts>0&&v==q.a?' checked':''}>${f(v)}</label>`).join('')+'</div>';
+let St,cur=0,mode=null;
+function gen(sd){seed=sd;rnd=mul(sd);St=T.map(b=>b.map((g,i)=>{const q=g();return{...q,tries:0,pts:null,msg:'',bad:[],o:[1,3,6,8].includes(i)?opts(q.a):null}}));
+}
+function start(){gen((MR()*4294967296)>>>0);cur=0;mode=null;draw()}
+function draw(){
+document.getElementById('tabs').innerHTML=B.map((b,i)=>`<button class="tab${St[i].every(q=>q.pts!==null)?' done':''}" role="tab" aria-selected="${cur==i}" onclick="cur=${i};draw()">${b.e} ${b.n}</button>`).join('')+`<button class="tab" role="tab" aria-selected="${cur==6}" onclick="cur=6;draw()">🏆 Mi nota</button>`;
+const v=document.getElementById('view');
+if(cur==6)return report(v);
+const b=B[cur];
+v.innerHTML=`<details open><summary>💡 Recuerda</summary><p>${b.tip}</p></details>`+St[cur].map((q,i)=>`<div class="card"><div class="q"><div class="t"><b>${i+1}.</b> ${q.t}</div>
+${q.o?O(q,i):`<input id="i${i}" inputmode="numeric" aria-label="Respuesta ${i+1}" ${q.pts!==null?'disabled':''} onkeydown="if(event.key=='Enter')chk(${i})">`}<button class="go" onclick="chk(${i})" ${q.pts!==null?'disabled':''}>Comprobar</button><span class="msg ${q.pts===null?'wrong':'good'}">${q.msg}</span></div></div>`).join('')+
+`<div class="nav"><button class="go" ${cur==0?'disabled':''} onclick="cur--;draw()">Anterior</button><button class="go" onclick="cur++;draw()">${cur==5?'Ver mi nota':'Siguiente'}</button></div>`}
+function chk(i){const q=St[cur][i];if(q.pts!==null)return;const raw=q.o?((document.querySelector('input[name=o'+i+']:checked')||{}).value||''):document.getElementById('i'+i).value.replace(/[.\s]/g,'').replace(',','.');
+if(raw==='')return;const ok=parseFloat(raw)===q.a;q.tries++;q.ans=raw;if(q.o&&!ok)q.bad.push(+raw);
+if(ok){q.pts=q.tries==1?1:.5;q.msg=q.tries==1?'¡Correcto! +1':'¡Bien, a la segunda! +0,5'}
+else if(q.tries==1)q.msg='Casi. Repasa el recuadro "Recuerda" e inténtalo otra vez.';
+else{q.pts=0;q.msg='La solución era '+f(q.a)+'. ¡Fíjate cómo se hace!'}
+draw();if(q.pts===null){const e=document.getElementById('i'+i);e&&e.focus()}else for(let k=i+1;k<10;k++){const e=document.getElementById('i'+k);if(e&&!e.disabled){e.focus();break}}}
+const C=[{s:'A.2 Cantidad: números naturales y sistema de numeración decimal',c:['1.2','1.3']},
+{s:'A.3 Sentido de las operaciones: suma, resta, multiplicación y división de números naturales',c:['1.2','1.3','2.1']},
+{s:'A.3 Sentido de las operaciones: jerarquía de operaciones y uso de paréntesis',c:['1.2','1.3','2.1']},
+{s:'A.4 Relaciones: potencias de exponente natural y sus propiedades',c:['1.2','1.3']},
+{s:'A.4 Relaciones: raíz cuadrada exacta y entera',c:['1.2','1.3']},
+{s:'A.3 Sentido de las operaciones: resolución de problemas de aplicación con números naturales',c:['1.1','1.2','1.3','2.2']}];
+const CR={'1.1':'Iniciarse en la interpretación de problemas matemáticos sencillos, reconociendo los datos, estableciendo relaciones básicas entre ellos y comprendiendo las preguntas formuladas.','1.2':'Aplicar herramientas y estrategias apropiadas que contribuyan a la resolución de problemas.','1.3':'Obtener soluciones matemáticas de un problema, activando los conocimientos necesarios.','2.1':'Comprobar la corrección matemática de las soluciones de un problema.','2.2':'Comprobar la validez de las soluciones de un problema, comprobando su coherencia en el contexto planteado.'};
+const cual=n=>n<5?'Insuficiente':n<6?'Suficiente':n<7?'Bien':n<9?'Notable':'Sobresaliente';
+const bp=i=>St[i].reduce((s,q)=>s+(q.pts||0),0),fn=x=>x.toFixed(1).replace('.',','),nota=()=>St.flat().reduce((s,q)=>s+(q.pts||0),0)/60*10;
+const crit=()=>Object.keys(CR).map(k=>{const bs=C.map((c,i)=>c.c.includes(k)?i:-1).filter(i=>i>=0);return{k,t:CR[k],p:Math.round(bs.reduce((s,i)=>s+bp(i),0)/(10*bs.length)*100)}});
+const pl=s=>String(s).replace(/<sup>(.*?)<\/sup>/g,'^$1').replace(/<[^>]+>/g,'').replace(/√/g,'raiz de ').replace(/−/g,'-').replace(/€/g,' euros').replace(/→/g,'->').replace(/[^\x00-\xFF]/g,'');
+const det=()=>{const sol=q=>typeof ans=='function'?ans(q):q.a,nm=document.getElementById('nm').value.trim()||'Sin nombre',cs=document.getElementById('cs').value.trim()||'sin indicar';
+return`<div class="card" id="det"><h2>Detalle de los ejercicios</h2><p class="sub">Alumno/a: ${nm} · Curso: ${cs} · Fecha: ${new Date().toLocaleDateString('es-ES')}</p>`+B.map((b,i)=>`<p><b>${b.e} ${b.n}</b> (${fn(bp(i))} / 10)</p>`+St[i].map((q,j)=>`<div class="crit"><b>${j+1}.</b> ${q.t}<small>Respuesta: ${q.ans==null?'sin responder':q.ans}${mode=='con'?' · Solución: '+sol(q):''} · Puntos: ${q.pts==null?'-':String(q.pts).replace('.',',')}</small></div>`).join('')).join('')+`</div>`};
+function gate(v){v.innerHTML=`<div class="card"><h2>Antes de ver tu nota</h2><p>Elige qué informe quieres generar:</p>
+<div class="opts" role="radiogroup" aria-label="Tipo de informe" style="flex-direction:column;align-items:stretch"><label><input type="radio" name="md" value="sin"> Informe con resultados, sin soluciones</label>
+<label><input type="radio" name="md" value="con"> Informe con resultados y con soluciones (hace falta el código)</label></div>
+<p><label for="cd">Código (solo para el informe con soluciones):</label> <input id="cd" type="password" autocomplete="off" size="14"></p>
+<p><button class="go" onclick="setMode()">Ver mi nota y generar el informe</button></p><p class="msg wrong" id="gm" role="status"></p></div>`}
+function setMode(){const m=(document.querySelector('input[name=md]:checked')||{}).value,g=document.getElementById('gm');
+if(!m){g.textContent='Elige una de las dos opciones.';return}
+if(m=='con'&&document.getElementById('cd').value.trim().toLowerCase()!='revelar'){g.textContent='Código incorrecto.';return}
+mode=m;draw()}
+function report(v){if(!mode)return gate(v);const n=nota(),pend=St.flat().filter(q=>q.pts===null).length,nm=document.getElementById('nm').value.trim()||'Sin nombre';
+v.innerHTML=`<div class="card"><p class="sub">Informe de ${nm}${document.getElementById('cs').value.trim()?' · '+document.getElementById('cs').value.trim():''}</p><div class="big">${fn(n)}<span style="font-size:24px"> / 10</span></div><p><b>${cual(n)}</b>${pend?` · Te quedan ${pend} ejercicios sin responder.`:''}</p>
+<h2>Saberes básicos</h2>`+B.map((b,i)=>`<div class="crit"><div class="row" style="border:0;padding:0"><span>${b.e} ${b.n}</span><b>${fn(bp(i))} / 10</b></div><small>${C[i].s}</small></div>`).join('')+
+`<h2>Criterios de evaluación</h2>`+crit().map(c=>`<div class="crit"><div class="row" style="border:0;padding:0"><span><b>${c.k}</b></span><b>${c.p} %</b></div><small>${c.t}</small><div class="bar"><i style="width:${c.p}%"></i></div></div>`).join('')+
+`<p><button class="go" onclick="makePdf()">Descargar informe en PDF</button> <button class="go" onclick="prn()">Imprimir / guardar como PDF</button> <button class="go" onclick="mode=null;draw()">Cambiar tipo de informe</button> <button class="go" style="background:var(--hi);color:#1d2a5b" onclick="start()">Empezar de nuevo</button></p><p class="msg" id="pm" role="status"></p></div>`+det()}
+function buildPdf(){
+const nm=document.getElementById('nm').value.trim()||'Sin nombre',n=nota(),d=new window.jspdf.jsPDF({unit:'mm',format:'a4'});let y=18;
+const T=(t,o={})=>{d.setFont('helvetica',o.b?'bold':'normal');d.setFontSize(o.s||10);d.splitTextToSize(pl(t),o.w||180).forEach(l=>{if(y>280){d.addPage();y=18}d.text(l,o.x||15,y);y+=(o.s||10)*.45});y+=o.g==null?1.5:o.g};
+T('Informe de evaluación'+(mode=='con'?' (con soluciones)':''),{b:1,s:18,g:2});T('Unidad 1. Los números naturales · Matemáticas · 1.º ESO',{b:1,s:12});
+T('Alumno/a: '+nm+'     Curso: '+(document.getElementById('cs').value.trim()||'sin indicar')+'     Fecha: '+new Date().toLocaleDateString('es-ES'));
+T('Calificación: '+fn(n)+' / 10 ('+cual(n)+')',{b:1,s:14,g:3});
+T('Calificación = puntos obtenidos (60 máx.) / 60 x 10. Acierto a la primera: 1 punto; a la segunda: 0,5; fallo: 0.',{s:8,g:4});
+T('Saberes básicos trabajados',{b:1,s:13});B.forEach((b,i)=>{T(b.n+': '+fn(bp(i))+' / 10',{b:1});T(C[i].s+'. Criterios: '+C[i].c.join(', '),{s:9,x:20,w:175,g:2.5})});
+y+=2;T('Criterios de evaluación (grado de logro)',{b:1,s:13});crit().forEach(c=>{T(c.k+' ('+c.p+' %)',{b:1});T(c.t,{s:9,x:20,w:175,g:2.5})});
+y+=2;T('Detalle de los ejercicios',{b:1,s:13});
+B.forEach((b,i)=>{T(b.n,{b:1,g:1});St[i].forEach((q,j)=>{T((j+1)+'. '+q.t,{x:18,w:177,g:.5});T('Respuesta: '+(q.ans==null?'sin responder':q.ans)+(mode=='con'?'   Solución: '+q.a:'')+'   Puntos: '+(q.pts==null?'-':String(q.pts).replace('.',',')),{s:9,x:22,g:2.5})})});
+y+=4;T('Referencia curricular: Real Decreto 217/2022 (LOMLOE) y Orden de 30 de mayo de 2023 por la que se desarrolla el currículo de ESO en Andalucía (Matemáticas, 1.º ESO).',{s:8});
+return d}
+const fname=()=>'informe-unidad1-'+(document.getElementById('nm').value.trim()||'Sin nombre').replace(/[^\wáéíóúñÁÉÍÓÚÑ ]/g,'').trim().replace(/\s+/g,'-')+'.pdf';
+const prn=()=>{try{window.print()}catch(e){document.getElementById('pm').textContent='No se puede imprimir desde esta vista. Usa la opción de imprimir de tu navegador.'}};
+async function makePdf(){const pm=document.getElementById('pm');pm.textContent='Preparando el informe...';let d;
+try{d=buildPdf()}catch(e){pm.textContent='No se ha podido crear el PDF en esta vista. Usa "Imprimir / guardar como PDF" o consulta el detalle de abajo.';return}
+const fn2=fname();
+try{const D=window.claude&&claude.use?await claude.use('downloads'):null;if(D){await D.save({filename:fn2,data:d.output('arraybuffer')});pm.textContent='Informe listo.';return}}catch(e){if(e&&e.code=='declined'){pm.textContent='Descarga cancelada.';return}}
+try{const u=URL.createObjectURL(d.output('blob')),a=document.createElement('a');a.href=u;a.download=fn2;document.body.appendChild(a);a.click();a.remove();pm.innerHTML='Si el PDF no se ha descargado, <a href="'+u+'" target="_blank" rel="noopener">ábrelo aquí</a> o usa "Imprimir / guardar como PDF".'}catch(e){pm.textContent='Usa "Imprimir / guardar como PDF" para guardar el informe.'}}
+const stc=q=>q.pts===null?(q.tries?'w':'n'):q.pts==1?'a':q.pts==.5?'b':'z';
+const hs=x=>{let h=0;for(const c of x)h=(h*31+c.charCodeAt(0))%1679616;return h.toString(36)};
+const b64=x=>btoa(unescape(encodeURIComponent(x))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const ub64=x=>decodeURIComponent(escape(atob(x.replace(/-/g,'+').replace(/_/g,'/'))));
+function mkCode(){const cl=x=>String(x).replace(/[;|]/g,''),p=[seed,cur,cl(document.getElementById('nm').value.trim()),cl(document.getElementById('cs').value.trim()),St.flat().map(q=>stc(q)+(q.ans==null?'':cl(q.ans))).join(';')].join('|');return'U1.'+b64(p)+'.'+hs(p)}
+function ldCode(txt){try{const m=txt.trim().replace(/\s+/g,'').match(/^U1\.([\w-]+)\.([0-9a-z]+)$/);if(!m)throw 0;const p=ub64(m[1]);if(hs(p)!==m[2])throw 1;const a=p.split('|'),it=a[4].split(';');if(it.length!=B.length*10)throw 2;gen(+a[0]);let k=0;
+St.forEach(b=>b.forEach(q=>{const s=it[k++],c=s[0],v=s.slice(1);if(c=='n')return;q.ans=v;q.tries=c=='a'||c=='w'?1:2;if(c=='w'){q.msg='Casi. Repasa el recuadro "Recuerda" e inténtalo otra vez.';if(q.o)q.bad=[typeof q.o[0]=='number'?+v:v]}else{q.pts=c=='a'?1:c=='b'?.5:0;q.msg=c=='a'?'¡Correcto! +1':c=='b'?'¡Bien, a la segunda! +0,5':'La solución era '+(typeof ans=='function'?ans(q):f(q.a))+'. ¡Fíjate cómo se hace!'}}));
+document.getElementById('nm').value=a[2];document.getElementById('cs').value=a[3];cur=Math.min(+a[1],B.length);mode=null;draw();return''}catch(e){return'Código no válido, incompleto o de otra unidad. Revisa que lo has copiado entero.'}}
+const pnl=h=>{document.getElementById('pn').innerHTML=h};
+function svOpen(){const c=mkCode();pnl(`<div class="card"><h2>Tu código de progreso</h2><p>Copia este código y guárdalo. Para continuar, abre de nuevo el enlace, pulsa «Continuar con un código» y pégalo.</p><textarea id="cdt" readonly rows="5" style="width:100%">${c}</textarea><p><button class="go" onclick="cpCode()">Copiar código</button> <button class="go" onclick="pnl('')">Cerrar</button> <span class="msg good" id="cpm"></span></p><p class="sub">Longitud del código: ${c.length} caracteres</p></div>`)}
+function cpCode(){const t=document.getElementById('cdt'),m=document.getElementById('cpm');t.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}
+if(!ok&&navigator.clipboard)navigator.clipboard.writeText(t.value).then(()=>m.textContent='Copiado.',()=>m.textContent='Selecciona el texto y cópialo a mano.');else m.textContent=ok?'Copiado.':'Selecciona el texto y cópialo a mano.'}
+function ldOpen(){pnl(`<div class="card"><h2>Continuar con un código</h2><p>Pega aquí tu código de progreso:</p><textarea id="cdi" rows="4" style="width:100%"></textarea><p><button class="go" onclick="ldGo()">Cargar</button> <button class="go" onclick="pnl('')">Cerrar</button></p><p class="msg wrong" id="ldm" role="status"></p></div>`)}
+function ldGo(){const m=ldCode(document.getElementById('cdi').value);if(m)document.getElementById('ldm').textContent=m;else pnl('')}
+start();
+</script></body></html>
