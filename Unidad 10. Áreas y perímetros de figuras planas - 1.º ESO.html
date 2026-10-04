@@ -1,0 +1,330 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Unidad 10. Áreas y perímetros de figuras planas - 1.º ESO</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff6dc;--card:#fff;--ink:#1d2a5b;--soft:#5a668f;--ok:#1f9e89;--hi:#ffc93c;--bad:#e5533d;--line:#e8dcb5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a36;--card:#1e2650;--ink:#f4f1e6;--soft:#aab3da;--line:#34407a;--ok:#46d1bb}}
+:root[data-theme="dark"]{--bg:#141a36;--card:#1e2650;--ink:#f4f1e6;--soft:#aab3da;--line:#34407a;--ok:#46d1bb}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 17px/1.5 Fredoka,"Trebuchet MS",system-ui,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:clamp(26px,6vw,38px);line-height:1.1;margin:0 0 6px;font-weight:600}
+.sub{color:var(--soft);margin:0 0 16px}
+.name{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+input{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:12px;padding:8px 12px;min-width:0}
+input:focus,button:focus-visible,summary:focus-visible{outline:3px solid var(--hi);outline-offset:2px}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;padding:4px 2px 14px}
+.tab{flex:0 0 auto;border:2px solid var(--ink);background:var(--card);color:var(--ink);border-radius:14px;padding:8px 12px;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.tab[aria-selected=true]{background:var(--hi);color:#1d2a5b}
+.tab.done{border-color:var(--ok);box-shadow:0 4px 0 var(--ok)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+details{background:var(--card);border:2px dashed var(--hi);border-radius:14px;padding:10px 14px;margin-bottom:14px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+.q{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.q input{width:130px}
+.q .t{flex:1 1 100%}
+button.go{font:inherit;font-weight:600;background:var(--ink);color:var(--bg);border:0;border-radius:12px;padding:9px 16px;cursor:pointer}
+.msg{font-weight:600}.good{color:var(--ok)}.wrong{color:var(--bad)}
+.big{font-size:56px;font-weight:600;line-height:1}
+.row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)}
+.nav{display:flex;justify-content:space-between;margin-top:8px}
+sup{font-size:.7em}
+.crit{padding:8px 0;border-bottom:1px solid var(--line)}.crit small{color:var(--soft);display:block}h2{font-size:20px;margin:18px 0 6px}.bar{height:8px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:4px}.bar i{display:block;height:100%;background:var(--ok)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}.opts label{display:flex;gap:6px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:6px 12px;cursor:pointer;background:var(--card)}.q .opts input{width:auto;accent-color:var(--ok)}
+@media print{body{background:#fff;color:#000}main>.sub,.tabs,.go,#pm,.pbar,#pn{display:none!important}.card{break-inside:avoid;border-color:#999}main{max-width:none}}
+.opts input[type=radio]{width:auto;min-width:0;padding:0;accent-color:var(--ok)}
+textarea{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:12px;padding:8px;word-break:break-all}
+.gr{display:block;width:100%;height:auto;margin:10px 0 2px;background:var(--card);border:2px solid var(--line);border-radius:12px}
+.gr text{font:600 11px Fredoka,"Trebuchet MS",system-ui,sans-serif;fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:3.5px;stroke-linejoin:round}
+.gr .lb{font-size:15px;font-weight:700;fill:var(--bad)}.gr .tk{font-size:13px;font-weight:700}
+.gr .l2{stroke:var(--ink);stroke-width:2.5;fill:none}.gr .ln{stroke:var(--bad);stroke-width:2.6;fill:none}
+.gr .arc{stroke:var(--bad);stroke-width:2.2;fill:none}.gr .pt{fill:var(--bad)}
+.gr .ds{stroke:var(--soft);stroke-width:1.6;stroke-dasharray:5 4;fill:none}.gr .gl{stroke:var(--line);stroke-width:1}
+.gr .fg{fill:rgba(255,201,60,.30);stroke:var(--ink);stroke-width:2.2}.gr .cel{fill:rgba(255,201,60,.55);stroke:var(--ink);stroke-width:1.2}
+.gr .gd{fill:rgba(70,170,100,.35);stroke:var(--ink);stroke-width:2}.gr .hole{fill:var(--card);stroke:var(--ink);stroke-width:2}
+.gr .wt{fill:rgba(70,150,230,.45);stroke:var(--ink);stroke-width:1.8}.gr .pa{fill:rgba(220,180,110,.55);stroke:var(--ink);stroke-width:2}
+.crit .gr{max-width:240px!important}
+</style></head><body><main>
+<h1>Unidad 10. Áreas y perímetros de figuras planas</h1>
+<p class="sub"><b>Matemáticas · 1.º ESO</b>. 7 bloques, 10 ejercicios en cada uno (4 de ellos para elegir la respuesta correcta). Escribe solo el número (decimales con coma, por ejemplo 2,5). Los números cambian cada vez que empiezas de nuevo. En cada bloque hay ejercicios con una ilustración que debes interpretar.</p>
+<div class="name"><label for="nm">Tu nombre:</label><input id="nm" placeholder="Nombre y apellidos" autocomplete="name"><label for="cs">Curso:</label><input id="cs" placeholder="p. ej. 1.º ESO B" size="12"></div>
+<div class="name pbar"><button class="go" onclick="svOpen()">Guardar mi progreso</button><button class="go" onclick="ldOpen()">Continuar con un código</button></div><div id="pn"></div>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div id="view"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const MR=Math.random.bind(Math);let rnd=MR,seed=0;const mul=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+const R=(a,b)=>Math.floor(rnd()*(b-a+1))+a,P=a=>a[R(0,a.length-1)],f=n=>n.toLocaleString('es-ES'),S=(b,e)=>`${b}<sup>${e}</sup>`;
+const gcd=(a,b)=>b?gcd(b,a%b):a,sh=a=>[...a].sort(()=>rnd()-.5);
+const ft=(n,d)=>d==1?''+n:`${n}/${d}`,rd=(n,d)=>{const g=gcd(n,d);return[n/g,d/g]},Q=(t,n,d,r)=>{const[x,y]=rd(n,d);return{t,a:x/y,s:ft(x,y),fr:[x,y],red:r}},ans=q=>q.s!=null?q.s:String(q.a);
+const dc=x=>String(+x.toFixed(6)).replace('.',','),Dd=(t,x)=>({t,a:+x.toFixed(6),s:dc(x),dec:1}),fx=(x,k)=>x.toFixed(k).replace('.',','),fs=([n,d])=>`${n}/${d}`,num=x=>+x.replace(',','.');
+const rs=()=>{const k=R(1,3);let t='';for(let i=0;i<k;i++)t+=R(0,9);if(t.endsWith('0'))t=t.slice(0,-1)+R(1,9);return t},dl=()=>{const e=R(1,9);let L;do{L=Array.from({length:4},()=>`${e},${rs()}`)}while(new Set(L.map(num)).size<4);return L};
+const isEx=d=>{d/=gcd(d,1);while(d%2==0)d/=2;while(d%5==0)d/=5;return d==1};
+const z=n=>n<0?'−'+(-n):''+n,nz=(a,b)=>{let x=0;while(!x)x=R(a,b);return x},sg=n=>n<0?'− '+(-n):'+ '+n;
+const cj=()=>{const T=P([['m²','dm²',100],['m²','cm²',10000],['dm²','cm²',100]]),v=R(1,99)/P([1,10]);return R(0,1)?Dd(`Expresa ${dc(v)} ${T[0]} en ${T[1]}.`,v*T[2]):Dd(`Expresa ${dc(+(v*T[2]).toFixed(4))} ${T[1]} en ${T[0]}.`,v)};
+const B=[
+{n:'Superficie y área',e:'🟦',tip:'La superficie es la parte del plano que ocupa una figura; el área es el número que mide esa superficie, en unidades cuadradas (cm², m²...). El perímetro es la longitud de su contorno y se mide en cm, m... Cada escalón entre unidades de superficie vale 100: 1 m² = 100 dm² = 10 000 cm².',
+g:()=>{const a=R(3,15),b=R(3,15),a2=R(3,12),b2=R(3,12);
+return[{t:`¿Cuántos cuadrados de 1 cm de lado caben en un rectángulo de ${a} cm por ${b} cm?`,a:a*b},cj(),{t:`Un rectángulo tiene un lado de ${a2} cm y un perímetro de ${2*(a2+b2)} cm. ¿Cuánto mide el otro lado, en cm?`,a:b2}]}},
+{n:'Cuadriláteros',e:'▭',tip:'Rectángulo: A = b · h. Cuadrado: A = lado². Paralelogramo: A = b · h (la altura es perpendicular a la base). Rombo: A = D · d / 2. Trapecio: A = (B + b) · h / 2.',
+g:()=>{const b=R(3,20),h=R(2,15),D=2*R(2,10),d=R(3,16),B=R(5,20),bb=R(2,B-1),hh=2*R(2,8),s=R(2,12),bp=R(3,15),hp=R(2,12);
+return[R(0,1)?{t:`Un rectángulo mide ${b} cm de base y ${h} cm de altura. ¿Cuál es su área, en cm²?`,a:b*h}:{t:`Un rectángulo mide ${b} cm de base y ${h} cm de altura. ¿Cuál es su perímetro, en cm?`,a:2*(b+h)},R(0,1)?{t:`Un paralelogramo tiene ${bp} cm de base y ${hp} cm de altura. ¿Cuál es su área, en cm²?`,a:bp*hp}:{t:`Un rombo tiene diagonales de ${D} cm y ${d} cm. ¿Cuál es su área, en cm²?`,a:D*d/2},R(0,1)?{t:`Calcula el área, en cm², de un trapecio de bases ${B} cm y ${bb} cm y altura ${hh} cm.`,a:(B+bb)*hh/2}:{t:`Un cuadrado tiene un perímetro de ${4*s} cm. ¿Cuál es su área, en cm²?`,a:s*s}]}},
+{n:'Triángulos',e:'🔺',tip:'El área de un triángulo es base · altura / 2: es la mitad de un paralelogramo con la misma base y altura. En un triángulo rectángulo, los catetos son base y altura. El perímetro es la suma de los tres lados.',
+g:()=>{const b=R(3,20),h=2*R(2,10),b2=R(4,14),h2=2*R(2,8),c1=R(3,12),c2=2*R(2,8),a=R(3,12),bs=R(2,10);
+return[{t:`Calcula el área, en cm², de un triángulo de base ${b} cm y altura ${h} cm.`,a:b*h/2},{t:`Un triángulo tiene un área de ${b2*h2/2} cm² y una base de ${b2} cm. ¿Cuánto mide su altura, en cm?`,a:h2},R(0,1)?{t:`Un triángulo rectángulo tiene catetos de ${c1} cm y ${c2} cm. ¿Cuál es su área, en cm²?`,a:c1*c2/2}:{t:`Un triángulo isósceles tiene dos lados iguales de ${a} cm y el otro lado mide ${bs} cm. ¿Cuál es su perímetro, en cm?`,a:2*a+bs}]}},
+{n:'Polígonos regulares',e:'⬡',tip:'El área de un polígono regular es perímetro · apotema / 2. La apotema es la distancia del centro al punto medio de un lado. El perímetro es nº de lados · lado. Se puede dividir el polígono en triángulos iguales con vértice en el centro.',
+g:()=>{const n=P([5,6,8,10]),l=R(2,12),ap=R(2,12),n2=P([5,6,8]),l2=2*R(2,8),ap2=2*R(1,6),n3=P([5,6,8,10]),l3=R(3,12);
+return[{t:`Un polígono regular de ${n} lados tiene lado ${l} cm. ¿Cuánto mide su perímetro, en cm?`,a:n*l},Dd(`Un polígono regular de ${n2} lados tiene lado ${l2} cm y apotema ${ap} cm. ¿Cuál es su área, en cm²?`,n2*l2*ap/2),{t:`Un polígono regular de ${n3} lados con lado ${l3} cm tiene un área de ${n3*l3*ap2/2} cm². ¿Cuánto mide su apotema, en cm?`,a:ap2}]}},
+{n:'Descomposición',e:'🧱',tip:'Para hallar el área de un polígono irregular, divídelo en figuras conocidas (rectángulos, triángulos...) y suma sus áreas. Otras veces conviene restar: área de la figura grande menos la de la parte que falta.',
+g:()=>{const a=R(4,12),b=R(3,10),c=R(2,8),d=R(2,8),L=R(8,20),l=R(2,L-3),A=R(4,12),B=R(4,12),h=2*R(2,6);
+return[{t:`Una figura en forma de L está formada por un rectángulo de ${a} cm × ${b} cm y otro de ${c} cm × ${d} cm unidos sin solaparse. ¿Cuál es su área, en cm²?`,a:a*b+c*d},{t:`Un marco cuadrado tiene ${L} cm de lado exterior y un hueco cuadrado de ${l} cm de lado. ¿Cuál es el área del marco, en cm²?`,a:L*L-l*l},{t:`Una casa dibujada tiene una parte rectangular de ${A} cm × ${B} cm y un tejado triangular encima, de base ${B} cm y altura ${h} cm. ¿Cuál es el área total, en cm²?`,a:A*B+B*h/2}]}},
+{n:'Círculo',e:'⭕',tip:'Área del círculo: A = π · r². Longitud de la circunferencia: L = 2 · π · r. El radio es la mitad del diámetro. Semicírculo: la mitad del área. Corona circular: π · (R² − r²). En los ejercicios usa π = 3,14.',
+g:()=>{const r=R(1,15),d=2*R(1,10),rs=R(2,12),Rr=R(4,12),r2=R(2,Rr-1);
+return[R(0,1)?Dd(`Calcula el área de un círculo de radio ${r} cm (π = 3,14), en cm².`,3.14*r*r):Dd(`Calcula la longitud de una circunferencia de radio ${r} cm (π = 3,14), en cm.`,2*3.14*r),Dd(`Calcula el área de un círculo de ${d} cm de diámetro (π = 3,14), en cm².`,3.14*(d/2)*(d/2)),R(0,1)?Dd(`Calcula el área de un semicírculo de radio ${rs} cm (π = 3,14), en cm².`,3.14*rs*rs/2):Dd(`Una corona circular tiene radio exterior ${Rr} cm y radio interior ${r2} cm. ¿Cuál es su área, en cm²? (π = 3,14)`,3.14*(Rr*Rr-r2*r2))]}},
+{n:'Problemas de aplicación',e:'🛒',tip:'Haz un dibujo, anota los datos con sus unidades y decide qué calcular: ¿área (superficie que se cubre) o perímetro (longitud que se rodea)? Después multiplica por el precio o divide para contar piezas. Comprueba que las unidades coinciden.',
+g:()=>{const a=R(10,40),b=R(10,40),p=R(5,30),pa=R(3,8),pb=R(2,5),c=R(1,2),d=R(1,2),r=R(2,10),pr=R(2,9),a2=R(3,10),b2=R(3,10);
+return[{t:`Una parcela rectangular mide ${a} m por ${b} m y se vende a ${p} € el m². ¿Cuántos euros cuesta la parcela?`,a:a*b*p},{t:`Una pared mide ${pa} m de largo y ${pb} m de alto y tiene una ventana de ${c} m por ${d} m. ¿Cuántos m² hay que pintar?`,a:pa*pb-c*d},R(0,1)?Dd(`Un jardín circular tiene ${r} m de radio. Sembrar césped cuesta ${pr} € por m². ¿Cuántos euros cuesta en total? (π = 3,14)`,3.14*r*r*pr):{t:`Una habitación mide ${a2} m por ${b2} m y se cubre con baldosas cuadradas de 50 cm de lado. ¿Cuántas baldosas hacen falta?`,a:4*a2*b2}]}}
+];
+
+/* ===== Ejercicios con ilustraciones de figuras planas ===== */
+const GQ=(()=>{
+const rad=d=>d*Math.PI/180,pol=(cx,cy,r,a)=>[cx+r*Math.cos(rad(a)),cy-r*Math.sin(rad(a))],f1=v=>v.toFixed(1),
+SV=(W,H,c)=>`<svg class="gr" role="img" aria-label="Ilustración del ejercicio" viewBox="0 0 ${W} ${H}" style="max-width:${W}px">${c}</svg>`,
+tx=(p,t,c='tk',dy=4)=>`<text class="${c}" x="${f1(p[0])}" y="${f1(p[1]+dy)}" text-anchor="middle">${t}</text>`,
+sg=(p,q,c='l2')=>`<line class="${c}" x1="${f1(p[0])}" y1="${f1(p[1])}" x2="${f1(q[0])}" y2="${f1(q[1])}"/>`,
+pg=(Q2,c='fg')=>`<polygon class="${c}" points="${Q2.map(p=>f1(p[0])+','+f1(p[1])).join(' ')}"/>`,
+dt=p=>`<circle class="pt" cx="${f1(p[0])}" cy="${f1(p[1])}" r="3.5"/>`,
+cir=(c,r,k='fg')=>`<circle class="${k}" cx="${f1(c[0])}" cy="${f1(c[1])}" r="${f1(r)}"/>`,
+fit=(pts,W,H,pd)=>{const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys),k=Math.min((W-2*pd)/((x1-x0)||1),(H-2*pd)/((y1-y0)||1)),ox=(W-k*(x1-x0))/2,oy=(H-k*(y1-y0))/2;return(x,y)=>[ox+(x-x0)*k,H-oy-(y-y0)*k]},
+lab=(p,t,dx,dy)=>tx([p[0]+dx,p[1]+dy],t),mid=(p,q)=>[(p[0]+q[0])/2,(p[1]+q[1])/2],
+rt=(F,sx,sy)=>`<polyline class="arc" points="${f1(F[0]+sx)},${f1(F[1])} ${f1(F[0]+sx)},${f1(F[1]+sy)} ${f1(F[0])},${f1(F[1]+sy)}"/>`;
+const W=320,H=230;
+const g0=(vv)=>{const nc=R(3,7),hs=Array.from({length:nc},()=>R(1,4)),k=26,ox=(W-nc*k)/2,mh=Math.max(...hs),oy=(H-mh*k)/2;let c='',area=0,per=0;
+for(let i=0;i<=nc;i++)c+=sg([ox+i*k,oy],[ox+i*k,oy+mh*k],'gl');for(let j=0;j<=mh;j++)c+=sg([ox,oy+j*k],[ox+nc*k,oy+j*k],'gl');
+hs.forEach((h,i)=>{for(let r=0;r<h;r++){area++;c+=`<rect class="cel" x="${ox+i*k}" y="${oy+(mh-1-r)*k}" width="${k}" height="${k}"/>`;
+if(i==0||hs[i-1]<=r)per++;if(i==nc-1||hs[i+1]<=r)per++;if(r==h-1)per++;if(r==0)per++}});
+const ar=vv==null?R(0,1):vv;return{t:`Cada cuadradito de la cuadrícula mide 1 cm de lado. ¿Cuál es el ${ar?'área (en cm²)':'perímetro (en cm)'} de la figura coloreada?${SV(W,H,c)}`,a:ar?area:per}};
+const g1=(vv)=>{const v=vv==null?R(0,2):vv;
+if(v==0){const b=R(5,16),h=R(3,10),s2=h+R(1,4),o=Math.sqrt(s2*s2-h*h),f=fit([[0,0],[b,0],[b+o,h],[o,h]],W,H,64),A=f(0,0),Bq=f(b,0),Cq=f(b+o,h),D=f(o,h),F=f(o,0);
+const c=pg([A,Bq,Cq,D])+sg(D,F,'ds')+rt(F,8,-8).replace(/-8/g,'-8')+lab(mid(A,Bq),`${b} cm`,0,20)+lab(mid(Bq,Cq),`${s2} cm`,34,0)+lab([mid(A,D)[0]-40,mid(D,F)[1]],`h = ${h} cm`,0,0);
+return{t:`Calcula el área, en cm², del paralelogramo de la figura (la línea discontinua es su altura).${SV(W,H,c)}`,a:b*h}}
+if(v==1){const Bb=R(8,20),bb=R(3,Bb-3),hh=2*R(2,5),off=(Bb-bb)/2,sl=Math.round(Math.hypot(hh,off)),f=fit([[0,0],[Bb,0],[off+bb,hh],[off,hh]],W,H,64),A=f(0,0),Bq=f(Bb,0),Cq=f(off+bb,hh),D=f(off,hh),F=f(off,0);
+const c=pg([A,Bq,Cq,D])+sg(D,F,'ds')+lab(mid(A,Bq),`${Bb} cm`,0,20)+lab(mid(D,Cq),`${bb} cm`,0,-10)+lab(mid(Bq,Cq),`${sl+1} cm`,34,0)+lab([mid(A,D)[0]-40,mid(D,F)[1]],`h = ${hh} cm`,0,0);
+return{t:`Calcula el área, en cm², del trapecio de la figura (la línea discontinua es su altura).${SV(W,H,c)}`,a:(Bb+bb)*hh/2}}
+const D2=2*R(2,8),d=R(3,12),sd=Math.round(Math.hypot(D2/2,d/2))+1,f=fit([[-D2/2,0],[0,d/2],[D2/2,0],[0,-d/2]],W,H,64),Wv=f(-D2/2,0),N=f(0,d/2),E=f(D2/2,0),S2=f(0,-d/2),O2=f(0,0);
+const c=pg([Wv,N,E,S2])+sg(Wv,E,'ds')+sg(N,S2,'ds')+tx([(O2[0]+E[0])/2,O2[1]-8],`${D2} cm`)+tx([O2[0]+32,(O2[1]+N[1])/2],`${d} cm`)+lab(mid(N,E),`${sd} cm`,24,-8);
+return{t:`Calcula el área, en cm², del rombo de la figura (las líneas discontinuas son sus diagonales).${SV(W,H,c)}`,a:D2*d/2}};
+const g2=(vv)=>{const v=vv==null?R(0,2):vv;
+if(v==0){const b=R(5,16),h=2*R(2,8),ax=R(1,b-1),sl=Math.round(Math.hypot(ax,h)),sr=Math.round(Math.hypot(b-ax,h)),f=fit([[0,0],[b,0],[ax,h]],W,H,72),A=f(0,0),Bq=f(b,0),T=f(ax,h),F=f(ax,0);
+const c=pg([A,Bq,T])+sg(T,F,'ds')+rt(F,8,-8)+lab(mid(A,Bq),`${b} cm`,0,20)+lab([ax>b/2?mid(T,Bq)[0]+40:mid(T,A)[0]-40,mid(T,F)[1]],`h = ${h} cm`,0,0)+(ax>b/2?lab(mid(A,T),`${sl} cm`,-30,-6):lab(mid(T,Bq),`${sr} cm`,30,-6));
+return{t:`Calcula el área, en cm², del triángulo de la figura (la línea discontinua es su altura).${SV(W,H,c)}`,a:b*h/2}}
+if(v==1){const [x,y,z2]=P([[3,4,5],[6,8,10],[5,12,13],[9,12,15],[8,15,17]]),sw=R(0,1),c1=sw?x:y,c2=sw?y:x,f=fit([[0,0],[c1,0],[0,c2]],W,H,64),A=f(0,0),Bq=f(c1,0),T=f(0,c2);
+const c=pg([A,Bq,T])+rt(A,10,-10)+lab(mid(A,Bq),`${c1} cm`,0,20)+lab(mid(A,T),`${c2} cm`,-34,0)+lab(mid(Bq,T),`${z2} cm`,34,-6);
+return{t:`Calcula el área, en cm², del triángulo rectángulo de la figura.${SV(W,H,c)}`,a:c1*c2/2}}
+let a,b,x;do{a=R(4,10);b=R(4,10);x=R(3,10)}while(Math.abs(a-b)>=x||x>=a+b);const cx=(x*x+a*a-b*b)/(2*x),cy=Math.sqrt(a*a-cx*cx),f=fit([[0,0],[x,0],[cx,cy]],W,H,64),A=f(0,0),Bq=f(x,0),T=f(cx,cy);
+const c=pg([A,Bq,T])+lab(mid(A,Bq),'x',0,20)+lab(mid(A,T),`${a} cm`,-30,-6)+lab(mid(Bq,T),`${b} cm`,30,-6);
+return{t:`El triángulo de la figura tiene un perímetro de ${a+b+x} cm. ¿Cuánto mide el lado x, en cm?${SV(W,H,c)}`,a:x}};
+const g3=(vv)=>{const v=vv==null?R(0,2):vv,n=v==2?P([5,6,7,8,9,10]):P([5,6,8]),C0=[160,118],V=Array.from({length:n},(_,k)=>pol(160,118,90,90+k*360/n)),m=mid(V[0],V[1]),dd=Math.hypot(m[0]-160,m[1]-118),out=[m[0]+(m[0]-160)/dd*24,m[1]+(m[1]-118)/dd*24];
+if(v==0){const l=2*R(2,6),ap=R(2,9);return{t:`El polígono regular de la figura tiene marcados el lado y la apotema (la figura no está a escala). ¿Cuál es su área, en cm²?${SV(W,H,pg(V)+sg(C0,m,'ds')+dt(C0)+tx(out,`l = ${l} cm`)+tx([(C0[0]+m[0])/2+34,(C0[1]+m[1])/2],`ap = ${ap} cm`))}`,a:n*l*ap/2}}
+if(v==1){const nn=6,V6=Array.from({length:6},(_,k)=>pol(160,118,90,90+k*60)),m6=mid(V6[0],V6[1]),o6=[m6[0]+(m6[0]-160)/Math.hypot(m6[0]-160,m6[1]-118)*24,m6[1]+(m6[1]-118)/Math.hypot(m6[0]-160,m6[1]-118)*24],l=2*R(2,6),ap=R(2,9);
+const c=pg(V6)+V6.map(p=>sg(C0,p,'l2')).join('')+sg(C0,m6,'ds')+dt(C0)+tx(o6,`l = ${l} cm`)+tx([(C0[0]+m6[0])/2+34,(C0[1]+m6[1])/2+6],`ap = ${ap} cm`);
+return{t:`El hexágono regular de la figura se ha dividido en triángulos iguales (la figura no está a escala). ¿Cuál es el área de todo el hexágono, en cm²?${SV(W,H,c)}`,a:6*l*ap/2}}
+const l=R(2,12);return{t:`Este polígono regular tiene el lado marcado. ¿Cuánto mide su perímetro, en cm?${SV(W,H,pg(V)+V.map(p=>dt(p)).join('')+tx(out,`l = ${l} cm`))}`,a:n*l}};
+const g4=(vv)=>{const v=vv==null?R(0,2):vv;
+if(v==0){const Wd=R(6,12),Ht=R(5,10),w=R(2,Wd-2),h=R(2,Ht-2),f=fit([[0,0],[Wd,0],[Wd,Ht-h],[Wd-w,Ht-h],[Wd-w,Ht],[0,Ht]],W,H,60),pts=[f(0,0),f(Wd,0),f(Wd,Ht-h),f(Wd-w,Ht-h),f(Wd-w,Ht),f(0,Ht)];
+const c=pg(pts)+lab(mid(pts[0],pts[1]),`${Wd} cm`,0,20)+lab(mid(pts[0],pts[5]),`${Ht} cm`,-32,0)+lab(mid(pts[3],pts[2]),`${w} cm`,0,-8)+lab(mid(pts[3],pts[4]),`${h} cm`,-26,0);
+return R(0,1)?{t:`La figura se ha obtenido quitando un rectángulo de una esquina de otro rectángulo. ¿Cuál es su área, en cm²?${SV(W,H,c)}`,a:Wd*Ht-w*h}:{t:`La figura se ha obtenido quitando un rectángulo de una esquina de otro rectángulo. ¿Cuál es su perímetro, en cm?${SV(W,H,c)}`,a:2*(Wd+Ht)}}
+if(v==1){const A0=R(3,8),B0=2*R(2,6),h=2*R(1,4),f=fit([[0,0],[B0,0],[B0,A0],[B0/2,A0+h],[0,A0]],W,H,64),pts=[f(0,0),f(B0,0),f(B0,A0),f(B0/2,A0+h),f(0,A0)],Mf=f(B0/2,A0),Bs=f(B0/2,0);
+const c=pg(pts)+sg(pts[4],pts[2],'l2')+sg(pts[3],Mf,'ds')+lab(mid(pts[0],pts[1]),`${B0} cm`,0,20)+lab(mid(pts[0],pts[4]),`${A0} cm`,-32,0)+lab([Mf[0]+42,(pts[3][1]+Mf[1])/2],`h = ${h} cm`,0,0);
+return{t:`Calcula el área total, en cm², de la casa dibujada (rectángulo más tejado triangular; la línea discontinua es la altura del tejado).${SV(W,H,c)}`,a:A0*B0+B0*h/2}}
+const L=R(8,20),l=R(2,L-4),f=fit([[0,0],[L,0],[L,L],[0,L]],W,H,40),O1=[f(0,0),f(L,0),f(L,L),f(0,L)],o=(L-l)/2,I=[f(o,o),f(o+l,o),f(o+l,o+l),f(o,o+l)];
+const c=pg(O1,'gd')+pg(I,'hole')+lab(mid(O1[0],O1[1]),`${L} cm`,0,20)+tx(mid(I[0],I[2]),`${l} cm`);
+return{t:`Un marco cuadrado tiene el lado exterior y el hueco interior que se indican en la figura. ¿Cuál es el área del marco, en cm²?${SV(W,H,c)}`,a:L*L-l*l}};
+const g5=(vv)=>{const v=vv==null?R(0,3):vv,O=[160,115];
+if(v==0){const r=R(1,15),th=R(10,60),q=pol(160,115,44,th),nv=pol(0,0,20,th+90),c=cir(O,84)+sg(O,pol(160,115,84,th),'ln')+dt(O)+tx([q[0]+nv[0],q[1]+nv[1]],`r = ${r} cm`);
+return R(0,1)?Dd(`Calcula el área del círculo de la figura, en cm² (π = 3,14).${SV(W,H,c)}`,3.14*r*r):Dd(`Calcula la longitud de la circunferencia de la figura, en cm (π = 3,14).${SV(W,H,c)}`,2*3.14*r)}
+if(v==1){const d=2*R(2,8),c=`<path class="fg" d="M76 160 A84 84 0 0 1 244 160 Z"/>`+tx([160,180],`d = ${d} cm`)+dt([160,160]);
+return Dd(`Calcula el área del semicírculo de la figura, en cm² (π = 3,14).${SV(W,H,c)}`,3.14*(d/2)*(d/2)/2)}
+if(v==2){const Rr=R(4,12),r2=R(2,Rr-1),c=cir(O,86,'gd')+cir(O,48,'hole')+dt(O)+sg(O,pol(160,115,86,25),'ln')+sg(O,pol(160,115,48,205),'ln')+tx(pol(160,115,116,25),`R = ${Rr} cm`)+tx(pol(160,115,30,205).map((x,i)=>x+(i?12.7:5.9)),`r = ${r2} cm`);
+return Dd(`La figura es una corona circular con los radios que se indican. ¿Cuál es su área, en cm²? (π = 3,14)${SV(W,H,c)}`,3.14*(Rr*Rr-r2*r2))}
+const L=R(40,100),d=2*R(15,35),f=fit([[0,0],[L+d,0],[L+d,d],[0,d]],W,H,40),TL=f(d/2,d),TR=f(L+d/2,d),BL=f(d/2,0),BR=f(L+d/2,0),rr=(BL[1]-TL[1])/2;
+const c=`<path class="fg" d="M${f1(TL[0])} ${f1(TL[1])} L${f1(TR[0])} ${f1(TR[1])} A${f1(rr)} ${f1(rr)} 0 0 1 ${f1(BR[0])} ${f1(BR[1])} L${f1(BL[0])} ${f1(BL[1])} A${f1(rr)} ${f1(rr)} 0 0 1 ${f1(TL[0])} ${f1(TL[1])} Z"/>`+sg(TL,BL,'ds')+lab(mid(TL,TR),`${L} m`,0,-10)+tx([TL[0]+36,(TL[1]+BL[1])/2],`d = ${d} m`);
+return Dd(`La figura es una pista formada por un rectángulo y dos semicírculos iguales. ¿Cuántos metros mide su contorno? (π = 3,14)${SV(W,H,c)}`,2*L+3.14*d)};
+const g6=(vv)=>{const v=vv==null?R(0,3):vv;
+if(v==0){const Wl=R(6,10),Hl=R(3,4),wa=R(1,2),wb=R(1,2),da=1,db=2,f=fit([[0,0],[Wl,0],[Wl,Hl],[0,Hl]],W,H,56),r=(x0,y0,x1,y1)=>[f(x0,y0),f(x1,y0),f(x1,y1),f(x0,y1)],wy=Hl-wb-.5;
+const c=pg(r(0,0,Wl,Hl),'pa')+pg(r(1,wy,1+wa,wy+wb),'wt')+pg(r(Wl-da-1,0,Wl-1,db),'fg')+lab(f(Wl/2,0),`${Wl} m`,0,20)+lab(f(Wl,Hl/2),`${Hl} m`,30,0)+tx(f(1+wa/2,wy+wb/2),`${wa}×${wb}`)+tx(f(Wl-1-da/2,db/2),`${da}×${db}`);
+return{t:`Una pared se va a pintar, menos la ventana (azul) y la puerta (amarilla), cuyas medidas en metros están escritas en el plano. ¿Cuántos m² hay que pintar?${SV(W,H,c)}`,a:Wl*Hl-wa*wb-da*db}}
+if(v==1){const r=R(2,10),pr=R(2,9),c=cir([160,115],84,'gd')+dt([160,115])+tx([160,100],`r = ${r} m`)+tx([160,140],`${pr} € / m²`);
+return Dd(`Sembrar césped en el jardín circular del plano cuesta lo que indica la figura por cada m². ¿Cuántos euros cuesta en total? (π = 3,14)${SV(W,H,c)}`,3.14*r*r*pr)}
+if(v==2){const a2=R(3,10),b2=R(3,10),f=fit([[0,0],[a2,0],[a2,b2],[0,b2]],W,H,64),Rq=[f(0,0),f(a2,0),f(a2,b2),f(0,b2)],t0=[24,198],c=pg(Rq,'pa')+lab(mid(Rq[0],Rq[1]),`${a2} m`,0,20)+lab(mid(Rq[1],Rq[2]),`${b2} m`,30,0)+`<rect class="fg" x="40" y="10" width="26" height="26"/>`+tx([53,52],'baldosa')+tx([53,64],'50 cm × 50 cm');
+return{t:`La habitación del plano se cubre con baldosas cuadradas como la que se muestra arriba a la izquierda. ¿Cuántas baldosas hacen falta?${SV(W,H,c)}`,a:4*a2*b2}}
+const a3=R(10,40),b3=R(10,40),pv=R(3,15),f=fit([[0,0],[a3,0],[a3,b3],[0,b3]],W,H,64),Rq=[f(0,0),f(a3,0),f(a3,b3),f(0,b3)],c=pg(Rq,'gd')+lab(mid(Rq[0],Rq[1]),`${a3} m`,0,20)+lab(mid(Rq[1],Rq[2]),`${b3} m`,30,0)+lab(mid(Rq[3],Rq[2]),`valla: ${pv} € el metro`,0,-12);
+return{t:`Se quiere vallar completamente el terreno rectangular del plano. ¿Cuántos euros cuesta la valla?${SV(W,H,c)}`,a:2*(a3+b3)*pv}};
+return[g0,g1,g2,g3,g4,g5,g6]})();
+const q1=(t,a)=>({t,a}),NM={5:'pentágono',6:'hexágono',8:'octógono',10:'decágono'},G=(i,v)=>()=>GQ[i](v);
+const T=[
+[()=>{const a=R(3,15),b=R(3,15);return q1(`¿Cuántos cuadrados de 1 cm de lado caben en un rectángulo de ${a} cm por ${b} cm?`,a*b)},
+G(0,1),G(0,0),cj,
+()=>{const a=R(3,12),b=R(3,12);return q1(`Un rectángulo tiene un lado de ${a} cm y un perímetro de ${2*(a+b)} cm. ¿Cuánto mide el otro lado, en cm?`,b)},
+()=>{const a=R(3,12),b=R(3,12);return q1(`Un rectángulo tiene un área de ${a*b} cm² y un lado de ${a} cm. ¿Cuánto mide el otro lado, en cm?`,b)},
+()=>{let a,b,c,d;do{a=R(3,12);b=R(3,12);c=R(3,12);d=R(3,12)}while(a*b==c*d);return q1(`El rectángulo A mide ${a} cm × ${b} cm y el rectángulo B mide ${c} cm × ${d} cm. ¿Cuántos cm² más tiene el de mayor área?`,Math.abs(a*b-c*d))},
+()=>{const m=R(1,5),d=R(10,90);return q1(`Una mesa tiene una superficie de ${m} m² y una alfombra de ${d} dm². ¿Cuántos dm² suman entre las dos?`,m*100+d)},
+()=>{const s=R(2,12);return q1(`Se duplica el lado de un cuadrado de ${s} cm. ¿Cuántos cm² aumenta su área?`,3*s*s)},
+()=>{const a=R(2,6),b=R(2,5);return Dd(`Un rectángulo mide ${a},5 m por ${b*10} dm. ¿Cuál es su área, en m²?`,(a+.5)*b)}],
+[()=>{const b=R(3,20),h=R(2,15);return q1(`Un rectángulo mide ${b} cm de base y ${h} cm de altura. ¿Cuál es su área, en cm²?`,b*h)},
+()=>{const b=R(3,20),h=R(2,15);return q1(`Un rectángulo mide ${b} cm de base y ${h} cm de altura. ¿Cuál es su perímetro, en cm?`,2*(b+h))},
+()=>{const s=R(2,12);return q1(`Un cuadrado tiene un perímetro de ${4*s} cm. ¿Cuál es su área, en cm²?`,s*s)},
+()=>{const s=R(2,12);return q1(`Un cuadrado tiene un área de ${s*s} cm². ¿Cuál es su perímetro, en cm?`,4*s)},
+G(1,0),
+()=>{const D=2*R(2,10),d=R(3,16);return q1(`Un rombo tiene un área de ${D*d/2} cm² y una diagonal de ${D} cm. ¿Cuánto mide la otra diagonal, en cm?`,d)},
+G(1,2),
+()=>{const B=R(5,20),b=R(2,B-1),h=2*R(2,8);return q1(`Un trapecio tiene bases de ${B} cm y ${b} cm y un área de ${(B+b)*h/2} cm². ¿Cuánto mide su altura, en cm?`,h)},
+G(1,1),
+()=>{const h=R(2,9);return q1(`El perímetro de un rectángulo es ${8*h} cm y su base es el triple de su altura. ¿Cuál es su área, en cm²?`,3*h*h)}],
+[()=>{const a=R(3,12),b=R(2,10);return q1(`Un triángulo isósceles tiene dos lados iguales de ${a} cm y el otro lado mide ${b} cm. ¿Cuál es su perímetro, en cm?`,2*a+b)},
+()=>{const l=R(3,15);return q1(`Un triángulo equilátero tiene un perímetro de ${3*l} cm. ¿Cuánto mide cada lado, en cm?`,l)},
+G(2,0),
+()=>{const b=R(4,14),h=2*R(2,8);return q1(`Un triángulo tiene un área de ${b*h/2} cm² y una base de ${b} cm. ¿Cuánto mide su altura, en cm?`,h)},
+G(2,1),
+()=>{const[l,b,h]=P([[5,6,4],[10,12,8],[13,10,12],[17,16,15],[25,14,24]]);return q1(`Un triángulo isósceles tiene dos lados iguales de ${l} cm y su lado desigual mide ${b} cm. La altura sobre el lado desigual mide ${h} cm. ¿Cuál es su área, en cm²?`,b*h/2)},
+G(2,2),
+()=>{const[x,y,z]=P([[3,4,5],[6,8,10],[5,12,13],[9,12,15],[8,15,17]]);return q1(`Un triángulo rectángulo tiene catetos de ${x} cm y ${y} cm y una hipotenusa de ${z} cm. ¿Cuál es su perímetro, en cm?`,x+y+z)},
+()=>{const b=R(4,14),h=2*R(2,8);return q1(`Un triángulo y un rectángulo tienen la misma base de ${b} cm y la misma altura de ${h} cm. ¿Cuántos cm² más de área tiene el rectángulo?`,b*h/2)},
+()=>{const l=R(4,15),b=R(2,2*l-1);return q1(`El perímetro de un triángulo isósceles es ${2*l+b} cm y su lado desigual mide ${b} cm. ¿Cuánto mide cada uno de los lados iguales, en cm?`,l)}],
+[()=>{const n=P([5,6,8,10]),l=R(2,12);return q1(`Un polígono regular tiene un perímetro de ${n*l} cm y cada lado mide ${l} cm. ¿Cuántos lados tiene?`,n)},
+()=>{const n=P([5,6,8,10]),l=R(2,12);return q1(`Un ${NM[n]} regular tiene un perímetro de ${n*l} cm. ¿Cuánto mide cada lado, en cm?`,l)},
+G(3,2),
+()=>{const n=P([5,6,8,10]),l=R(3,12),ap=2*R(1,6);return q1(`Un polígono regular de ${n} lados con lado ${l} cm tiene un área de ${n*l*ap/2} cm². ¿Cuánto mide su apotema, en cm?`,ap)},
+G(3,0),
+()=>{const l=R(2,12),ap=R(2,12);return Dd(`Un hexágono regular de lado ${l} cm y apotema ${ap} cm se divide en 6 triángulos iguales con vértice en el centro. ¿Cuál es el área de cada triángulo, en cm²?`,l*ap/2)},
+G(3,1),
+()=>{const l=R(2,10),ap=R(2,12);return q1(`Un hexágono regular tiene un perímetro de ${6*l} cm y una apotema de ${ap} cm. ¿Cuál es su área, en cm²?`,3*l*ap)},
+()=>{const k=R(1,6),ap=R(2,10);return q1(`Un pentágono regular tiene un área de ${5*k*ap} cm² y una apotema de ${ap} cm. ¿Cuál es su perímetro, en cm?`,10*k)},
+()=>{const k=R(1,6);return q1(`Un hexágono regular de lado ${2*k} cm tiene el mismo perímetro que un cuadrado. ¿Cuánto mide el lado del cuadrado, en cm?`,3*k)}],
+[()=>{const a=R(4,12),b=R(3,10),c=R(2,8),d=R(2,8);return q1(`Una figura en forma de L está formada por un rectángulo de ${a} cm × ${b} cm y otro de ${c} cm × ${d} cm unidos sin solaparse. ¿Cuál es su área, en cm²?`,a*b+c*d)},
+G(4,0),
+()=>{const w=R(1,3),H=R(w+3,12),W=R(8,20);return q1(`Un jardín rectangular mide ${W} m de largo y ${H} m de ancho. Un camino recto de ${w} m de ancho recorre todo el largo del jardín. ¿Cuántos m² del jardín no son camino?`,W*(H-w))},
+()=>{const L=R(8,14),c1=R(2,6),c2=2*R(1,3);return q1(`A un cuadrado de ${L} cm de lado se le corta una esquina con forma de triángulo rectángulo de catetos ${c1} cm y ${c2} cm. ¿Cuál es el área que queda, en cm²?`,L*L-c1*c2/2)},
+G(4,1),
+()=>{const b=R(2,5),a=R(b+3,15);return q1(`Una cruz está formada por dos rectángulos iguales de ${a} cm × ${b} cm que se cruzan formando un cuadrado central de ${b} cm de lado. ¿Cuál es el área de la cruz, en cm²?`,2*a*b-b*b)},
+G(4,2),
+()=>{const a=R(5,12),b=R(3,8),c=R(2,8);return q1(`Un pentágono se forma con un rectángulo de ${a} cm × ${b} cm y dos triángulos rectángulos iguales pegados a los lados de ${b} cm, cada uno con base ${b} cm y altura ${c} cm. ¿Cuál es el área total, en cm²?`,a*b+b*c)},
+()=>{const n=R(4,7),s=R(1,3);return q1(`Una figura en forma de escalera tiene columnas de cuadrados de ${s} cm de lado: la primera tiene 1 cuadrado, la segunda 2, y así hasta la columna ${n}, que tiene ${n}. ¿Cuál es su área, en cm²?`,s*s*n*(n+1)/2)},
+()=>{const a=R(8,15),b=R(6,12),t=R(1,3);return q1(`De un rectángulo de ${a} cm × ${b} cm se recortan dos cuadrados iguales de ${t} cm de lado. ¿Cuál es el área que queda, en cm²?`,a*b-2*t*t)}],
+[()=>{const d=2*R(1,10);return Dd(`Calcula el área de un círculo de ${d} cm de diámetro (π = 3,14), en cm².`,3.14*(d/2)*(d/2))},
+()=>{const r=R(1,15);return q1(`Una circunferencia mide ${dc(2*3.14*r)} cm de longitud (π = 3,14). ¿Cuánto mide su radio, en cm?`,r)},
+G(5,0),
+()=>{const d=2*R(2,8);return Dd(`Calcula el perímetro, en cm, de un semicírculo de ${d} cm de diámetro, contando también el diámetro (π = 3,14).`,3.14*d/2+d)},
+G(5,1),
+()=>{const d=R(30,70);return Dd(`Una rueda tiene ${d} cm de diámetro. ¿Cuántos cm recorre en una vuelta completa? (π = 3,14)`,3.14*d)},
+G(5,2),
+()=>{const r=R(2,10);return Dd(`Dentro de un cuadrado de ${2*r} cm de lado se dibuja el círculo más grande posible. ¿Cuál es el área, en cm², de la parte del cuadrado que queda fuera del círculo? (π = 3,14)`,4*r*r-3.14*r*r)},
+()=>{const r=2*R(1,6);return Dd(`Calcula el área, en cm², de un cuarto de círculo de radio ${r} cm (π = 3,14).`,3.14*r*r/4)},
+G(5,3)],
+[()=>{const a=R(10,40),b=R(10,40),p=R(5,30);return q1(`Una parcela rectangular mide ${a} m por ${b} m y se vende a ${p} € el m². ¿Cuántos euros cuesta la parcela?`,a*b*p)},
+()=>{const a=R(20,80),b=R(20,80);return q1(`Se quiere poner una cenefa alrededor de un mural rectangular de ${a} cm por ${b} cm. ¿Cuántos cm de cenefa hacen falta?`,2*(a+b))},
+G(6,3),
+()=>{const a=R(4,12),b=R(2,4),c=R(5,10);return q1(`Hay que pintar una pared de ${a} m por ${b} m. Cada bote de pintura cubre ${c} m². ¿Cuántos botes hay que comprar como mínimo?`,Math.ceil(a*b/c))},
+G(6,0),
+()=>{const a=R(6,20),b=R(4,12);return q1(`Una piscina rectangular de ${a} m por ${b} m está rodeada por un camino de 1 m de ancho. ¿Cuál es el área del camino, en m²?`,2*a+2*b+4)},
+G(6,1),
+()=>{const d=2*R(3,10),p=R(2,9);return Dd(`Una plaza circular de ${d} m de diámetro se rodea con una valla que cuesta ${p} € el metro. ¿Cuántos euros cuesta la valla? (π = 3,14)`,3.14*d*p)},
+G(6,2),
+()=>{const a=R(3,9),b=R(3,9),h=R(2,3);return q1(`Se van a pintar las cuatro paredes de una habitación de ${a} m por ${b} m y ${h} m de altura (sin contar suelo, techo, puertas ni ventanas). ¿Cuántos m² hay que pintar?`,2*(a+b)*h)}]
+];
+['Si te dan una cuadrícula, cada cuadradito es 1 unidad cuadrada: cuenta los cuadraditos para el área y los lados del contorno para el perímetro.','Fíjate en cuál es la altura (la línea discontinua, perpendicular a la base): los otros lados inclinados no se usan para el área.','En un triángulo rectángulo los catetos son base y altura. Si hay un lado desconocido, usa el perímetro: suma de los tres lados.','Cuenta los lados del polígono en la figura para saber cuántos son. Un polígono regular se puede dividir en triángulos iguales con vértice en el centro.','Observa cómo está formada la figura: ¿hay que sumar áreas o restar la parte que falta?','Fíjate en qué dato te dan: el radio (del centro a la circunferencia) o el diámetro (el doble). En una corona, resta el círculo pequeño del grande.','Interpreta el plano: ¿qué hay que calcular, área o perímetro? Resta ventanas y puertas en las paredes y multiplica por el precio al final.'].forEach((t,i)=>B[i].tip+=' '+t);
+const mkO=q=>{if(q.o)return sh(q.o);const a=q.a;let c;
+if(q.fr){const[n,d]=q.fr;c=[[n+1,d],[n,d+1],[n+1,d+1],[d,n],[n-1,d],[n,d-1],[n+2,d],[n,d+2],[2*n,d]].filter(([x,y])=>x>=1&&y>=1&&Math.abs(x/y-a)>1e-9).map(([x,y])=>ft(x,y))}
+else if(q.dec){const u=Math.pow(10,-((String(q.s).split(',')[1]||'').length));c=[a+u,a-u,a+10*u,a-10*u,a*10,a/10,a*100,a/100,a+1,a-1,a+2*u,a+100*u].filter(v=>v>=0&&Math.abs(v-a)>1e-9).map(dc)}
+else c=[-a,a+1,a-1,a+2,a-2,a+10,a-10,a+3,a+5,a+100,a+7].filter(v=>v!=a).map(String);
+return sh([ans(q),...sh([...new Set(c)]).slice(0,3)])};
+const O=(q,i)=>`<div class="opts" role="radiogroup" aria-label="Opciones ${i+1}">`+q.o.map(v=>`<label><input type="radio" name="o${i}" value="${v}" ${q.pts!==null||q.bad.includes(v)?'disabled':''}${q.pts!==null&&q.pts>0&&v==ans(q)?' checked':''}>${v}</label>`).join('')+'</div>';
+let St,cur=0,mode=null;
+function gen(sd){seed=sd;rnd=mul(sd);St=T.map(b=>b.map((g,i)=>{const q=g();return{...q,tries:0,pts:null,msg:'',bad:[],o:[1,3,6,8].includes(i)?mkO(q):null}}));
+}
+function start(){gen((MR()*4294967296)>>>0);cur=0;mode=null;draw()}
+function draw(){
+document.getElementById('tabs').innerHTML=B.map((b,i)=>`<button class="tab${St[i].every(q=>q.pts!==null)?' done':''}" role="tab" aria-selected="${cur==i}" onclick="cur=${i};draw()">${b.e} ${b.n}</button>`).join('')+`<button class="tab" role="tab" aria-selected="${cur==B.length}" onclick="cur=B.length;draw()">🏆 Mi nota</button>`;
+const v=document.getElementById('view');
+if(cur==B.length)return report(v);
+const b=B[cur];
+v.innerHTML=`<details open><summary>💡 Recuerda</summary><p>${b.tip}</p></details>`+St[cur].map((q,i)=>`<div class="card"><div class="q"><div class="t"><b>${i+1}.</b> ${q.t}</div>
+${q.o?O(q,i):`<input id="i${i}" inputmode="text" autocomplete="off" aria-label="Respuesta ${i+1}" ${q.pts!==null?'disabled':''} onkeydown="if(event.key=='Enter')chk(${i})">`}<button class="go" onclick="chk(${i})" ${q.pts!==null?'disabled':''}>Comprobar</button><span class="msg ${q.pts===null?'wrong':'good'}">${q.msg}</span></div></div>`).join('')+
+`<div class="nav"><button class="go" ${cur==0?'disabled':''} onclick="cur--;draw()">Anterior</button><button class="go" onclick="cur++;draw()">${cur==B.length-1?'Ver mi nota':'Siguiente'}</button></div>`}
+const pa=r=>{r=String(r).replace(/[−–]/g,'-').replace(/\s+/g,'').replace(',','.');if(/^-?\d+\/-?\d+$/.test(r)){const[n,d]=r.split('/').map(Number);return d?n/d:NaN}return/^-?\d*\.?\d+$/.test(r)?+r:NaN};
+function chk(i){const q=St[cur][i];if(q.pts!==null)return;const raw=q.o?((document.querySelector('input[name=o'+i+']:checked')||{}).value||''):document.getElementById('i'+i).value.trim();
+if(raw==='')return;const v=pa(raw);if(isNaN(v)){q.msg='Escribe un número, por ejemplo 2,35 (sin puntos de millar).';draw();return}
+const ok=q.red?raw.replace(/\s/g,'')===q.s:Math.abs(v-q.a)<1e-9;q.tries++;q.ans=raw;if(q.o&&!ok)q.bad.push(raw);
+if(ok){q.pts=q.tries==1?1:.5;q.msg=q.tries==1?'¡Correcto! +1':'¡Bien, a la segunda! +0,5'}
+else if(q.tries==1)q.msg='Casi. Repasa el recuadro "Recuerda" e inténtalo otra vez.';
+else{q.pts=0;q.msg='La solución era '+ans(q)+'. ¡Fíjate cómo se hace!'}
+draw();if(q.pts===null){const e=document.getElementById('i'+i);e&&e.focus()}else for(let k=i+1;k<10;k++){const e=document.getElementById('i'+k);if(e&&!e.disabled){e.focus();break}}}
+const C=[{s:'B.1 Magnitudes y B.2 Medición: superficie y área; unidades de superficie',c:['1.2','1.3']},
+{s:'B.2 Medición: área y perímetro de cuadriláteros',c:['1.2','1.3','2.1']},
+{s:'B.2 Medición: área y perímetro de triángulos',c:['1.2','1.3','2.1']},
+{s:'B.2 Medición: área y perímetro de polígonos regulares',c:['1.2','1.3','2.1']},
+{s:'B.2 Medición y C.1 Figuras geométricas: descomposición de polígonos para el cálculo de áreas',c:['1.2','1.3','2.1']},
+{s:'B.2 Medición: longitud de la circunferencia y área del círculo',c:['1.2','1.3','2.1']},
+{s:'B.2 Medición y B.3 Estimación y relaciones: resolución de problemas de áreas y perímetros',c:['1.1','1.2','1.3','2.2']}];
+const CR={'1.1':'Iniciarse en la interpretación de problemas matemáticos sencillos, reconociendo los datos, estableciendo relaciones básicas entre ellos y comprendiendo las preguntas formuladas.','1.2':'Aplicar herramientas y estrategias apropiadas que contribuyan a la resolución de problemas.','1.3':'Obtener soluciones matemáticas de un problema, activando los conocimientos necesarios.','2.1':'Comprobar la corrección matemática de las soluciones de un problema.','2.2':'Comprobar la validez de las soluciones de un problema, comprobando su coherencia en el contexto planteado.'};
+const cual=n=>n<5?'Insuficiente':n<6?'Suficiente':n<7?'Bien':n<9?'Notable':'Sobresaliente';
+const bp=i=>St[i].reduce((s,q)=>s+(q.pts||0),0),fn=x=>x.toFixed(1).replace('.',','),nota=()=>St.flat().reduce((s,q)=>s+(q.pts||0),0)/(B.length*10)*10;
+const crit=()=>Object.keys(CR).filter(k=>C.some(c=>c.c.includes(k))).map(k=>{const bs=C.map((c,i)=>c.c.includes(k)?i:-1).filter(i=>i>=0);return{k,t:CR[k],p:Math.round(bs.reduce((s,i)=>s+bp(i),0)/(10*bs.length)*100)}});
+const pl=s=>String(s).replace(/<svg[\s\S]*?<\/svg>/g,' [ilustración en la aplicación] ').replace(/<sup>(.*?)<\/sup>/g,'^$1').replace(/<[^>]+>/g,'').replace(/√/g,'raiz de ').replace(/−/g,'-').replace(/€/g,' euros').replace(/→/g,'->').replace(/[^\x00-\xFF]/g,'');
+const det=()=>{const sol=q=>typeof ans=='function'?ans(q):q.a,nm=document.getElementById('nm').value.trim()||'Sin nombre',cs=document.getElementById('cs').value.trim()||'sin indicar';
+return`<div class="card" id="det"><h2>Detalle de los ejercicios</h2><p class="sub">Alumno/a: ${nm} · Curso: ${cs} · Fecha: ${new Date().toLocaleDateString('es-ES')}</p>`+B.map((b,i)=>`<p><b>${b.e} ${b.n}</b> (${fn(bp(i))} / 10)</p>`+St[i].map((q,j)=>`<div class="crit"><b>${j+1}.</b> ${q.t}<small>Respuesta: ${q.ans==null?'sin responder':q.ans}${mode=='con'?' · Solución: '+sol(q):''} · Puntos: ${q.pts==null?'-':String(q.pts).replace('.',',')}</small></div>`).join('')).join('')+`</div>`};
+function gate(v){v.innerHTML=`<div class="card"><h2>Antes de ver tu nota</h2><p>Elige qué informe quieres generar:</p>
+<div class="opts" role="radiogroup" aria-label="Tipo de informe" style="flex-direction:column;align-items:stretch"><label><input type="radio" name="md" value="sin"> Informe con resultados, sin soluciones</label>
+<label><input type="radio" name="md" value="con"> Informe con resultados y con soluciones (hace falta el código)</label></div>
+<p><label for="cd">Código (solo para el informe con soluciones):</label> <input id="cd" type="password" autocomplete="off" size="14"></p>
+<p><button class="go" onclick="setMode()">Ver mi nota y generar el informe</button></p><p class="msg wrong" id="gm" role="status"></p></div>`}
+function setMode(){const m=(document.querySelector('input[name=md]:checked')||{}).value,g=document.getElementById('gm');
+if(!m){g.textContent='Elige una de las dos opciones.';return}
+if(m=='con'&&document.getElementById('cd').value.trim().toLowerCase()!='revelar'){g.textContent='Código incorrecto.';return}
+mode=m;draw()}
+function report(v){if(!mode)return gate(v);const n=nota(),pend=St.flat().filter(q=>q.pts===null).length,nm=document.getElementById('nm').value.trim()||'Sin nombre';
+v.innerHTML=`<div class="card"><p class="sub">Informe de ${nm}${document.getElementById('cs').value.trim()?' · '+document.getElementById('cs').value.trim():''}</p><div class="big">${fn(n)}<span style="font-size:24px"> / 10</span></div><p><b>${cual(n)}</b>${pend?` · Te quedan ${pend} ejercicios sin responder.`:''}</p>
+<h2>Saberes básicos</h2>`+B.map((b,i)=>`<div class="crit"><div class="row" style="border:0;padding:0"><span>${b.e} ${b.n}</span><b>${fn(bp(i))} / 10</b></div><small>${C[i].s}</small></div>`).join('')+
+`<h2>Criterios de evaluación</h2>`+crit().map(c=>`<div class="crit"><div class="row" style="border:0;padding:0"><span><b>${c.k}</b></span><b>${c.p} %</b></div><small>${c.t}</small><div class="bar"><i style="width:${c.p}%"></i></div></div>`).join('')+
+`<p><button class="go" onclick="makePdf()">Descargar informe en PDF</button> <button class="go" onclick="prn()">Imprimir / guardar como PDF</button> <button class="go" onclick="mode=null;draw()">Cambiar tipo de informe</button> <button class="go" style="background:var(--hi);color:#1d2a5b" onclick="start()">Empezar de nuevo</button></p><p class="msg" id="pm" role="status"></p></div>`+det()}
+function buildPdf(){
+const nm=document.getElementById('nm').value.trim()||'Sin nombre',n=nota(),d=new window.jspdf.jsPDF({unit:'mm',format:'a4'});let y=18;
+const T=(t,o={})=>{d.setFont('helvetica',o.b?'bold':'normal');d.setFontSize(o.s||10);d.splitTextToSize(pl(t),o.w||180).forEach(l=>{if(y>280){d.addPage();y=18}d.text(l,o.x||15,y);y+=(o.s||10)*.45});y+=o.g==null?1.5:o.g};
+T('Informe de evaluación'+(mode=='con'?' (con soluciones)':''),{b:1,s:18,g:2});T('Unidad 10. Áreas y perímetros de figuras planas · Matemáticas · 1.º ESO',{b:1,s:12});
+T('Alumno/a: '+nm+'     Curso: '+(document.getElementById('cs').value.trim()||'sin indicar')+'     Fecha: '+new Date().toLocaleDateString('es-ES'));
+T('Calificación: '+fn(n)+' / 10 ('+cual(n)+')',{b:1,s:14,g:3});
+T('Calificación = puntos obtenidos (70 máx.) / 70 x 10. Acierto a la primera: 1 punto; a la segunda: 0,5; fallo: 0.',{s:8,g:4});
+T('Saberes básicos trabajados',{b:1,s:13});B.forEach((b,i)=>{T(b.n+': '+fn(bp(i))+' / 10',{b:1});T(C[i].s+'. Criterios: '+C[i].c.join(', '),{s:9,x:20,w:175,g:2.5})});
+y+=2;T('Criterios de evaluación (grado de logro)',{b:1,s:13});crit().forEach(c=>{T(c.k+' ('+c.p+' %)',{b:1});T(c.t,{s:9,x:20,w:175,g:2.5})});
+y+=2;T('Detalle de los ejercicios',{b:1,s:13});
+B.forEach((b,i)=>{T(b.n,{b:1,g:1});St[i].forEach((q,j)=>{T((j+1)+'. '+q.t,{x:18,w:177,g:.5});T('Respuesta: '+(q.ans==null?'sin responder':q.ans)+(mode=='con'?'   Solución: '+ans(q):'')+'   Puntos: '+(q.pts==null?'-':String(q.pts).replace('.',',')),{s:9,x:22,g:2.5})})});
+y+=4;T('Referencia curricular: Real Decreto 217/2022 (LOMLOE) y Orden de 30 de mayo de 2023 por la que se desarrolla el currículo de ESO en Andalucía (Matemáticas, 1.º ESO).',{s:8});
+return d}
+const fname=()=>'informe-unidad10-'+(document.getElementById('nm').value.trim()||'Sin nombre').replace(/[^\wáéíóúñÁÉÍÓÚÑ ]/g,'').trim().replace(/\s+/g,'-')+'.pdf';
+const prn=()=>{try{window.print()}catch(e){document.getElementById('pm').textContent='No se puede imprimir desde esta vista. Usa la opción de imprimir de tu navegador.'}};
+async function makePdf(){const pm=document.getElementById('pm');pm.textContent='Preparando el informe...';let d;
+try{d=buildPdf()}catch(e){pm.textContent='No se ha podido crear el PDF en esta vista. Usa "Imprimir / guardar como PDF" o consulta el detalle de abajo.';return}
+const fn2=fname();
+try{const D=window.claude&&claude.use?await claude.use('downloads'):null;if(D){await D.save({filename:fn2,data:d.output('arraybuffer')});pm.textContent='Informe listo.';return}}catch(e){if(e&&e.code=='declined'){pm.textContent='Descarga cancelada.';return}}
+try{const u=URL.createObjectURL(d.output('blob')),a=document.createElement('a');a.href=u;a.download=fn2;document.body.appendChild(a);a.click();a.remove();pm.innerHTML='Si el PDF no se ha descargado, <a href="'+u+'" target="_blank" rel="noopener">ábrelo aquí</a> o usa "Imprimir / guardar como PDF".'}catch(e){pm.textContent='Usa "Imprimir / guardar como PDF" para guardar el informe.'}}
+const stc=q=>q.pts===null?(q.tries?'w':'n'):q.pts==1?'a':q.pts==.5?'b':'z';
+const hs=x=>{let h=0;for(const c of x)h=(h*31+c.charCodeAt(0))%1679616;return h.toString(36)};
+const b64=x=>btoa(unescape(encodeURIComponent(x))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const ub64=x=>decodeURIComponent(escape(atob(x.replace(/-/g,'+').replace(/_/g,'/'))));
+function mkCode(){const cl=x=>String(x).replace(/[;|]/g,''),p=[seed,cur,cl(document.getElementById('nm').value.trim()),cl(document.getElementById('cs').value.trim()),St.flat().map(q=>stc(q)+(q.ans==null?'':cl(q.ans))).join(';')].join('|');return'U10B.'+b64(p)+'.'+hs(p)}
+function ldCode(txt){try{const m=txt.trim().replace(/\s+/g,'').match(/^U10B\.([\w-]+)\.([0-9a-z]+)$/);if(!m)throw 0;const p=ub64(m[1]);if(hs(p)!==m[2])throw 1;const a=p.split('|'),it=a[4].split(';');if(it.length!=B.length*10)throw 2;gen(+a[0]);let k=0;
+St.forEach(b=>b.forEach(q=>{const s=it[k++],c=s[0],v=s.slice(1);if(c=='n')return;q.ans=v;q.tries=c=='a'||c=='w'?1:2;if(c=='w'){q.msg='Casi. Repasa el recuadro "Recuerda" e inténtalo otra vez.';if(q.o)q.bad=[typeof q.o[0]=='number'?+v:v]}else{q.pts=c=='a'?1:c=='b'?.5:0;q.msg=c=='a'?'¡Correcto! +1':c=='b'?'¡Bien, a la segunda! +0,5':'La solución era '+(typeof ans=='function'?ans(q):f(q.a))+'. ¡Fíjate cómo se hace!'}}));
+document.getElementById('nm').value=a[2];document.getElementById('cs').value=a[3];cur=Math.min(+a[1],B.length);mode=null;draw();return''}catch(e){return'Código no válido, incompleto o de otra unidad. Revisa que lo has copiado entero.'}}
+const pnl=h=>{document.getElementById('pn').innerHTML=h};
+function svOpen(){const c=mkCode();pnl(`<div class="card"><h2>Tu código de progreso</h2><p>Copia este código y guárdalo. Para continuar, abre de nuevo el enlace, pulsa «Continuar con un código» y pégalo.</p><textarea id="cdt" readonly rows="5" style="width:100%">${c}</textarea><p><button class="go" onclick="cpCode()">Copiar código</button> <button class="go" onclick="pnl('')">Cerrar</button> <span class="msg good" id="cpm"></span></p><p class="sub">Longitud del código: ${c.length} caracteres</p></div>`)}
+function cpCode(){const t=document.getElementById('cdt'),m=document.getElementById('cpm');t.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}
+if(!ok&&navigator.clipboard)navigator.clipboard.writeText(t.value).then(()=>m.textContent='Copiado.',()=>m.textContent='Selecciona el texto y cópialo a mano.');else m.textContent=ok?'Copiado.':'Selecciona el texto y cópialo a mano.'}
+function ldOpen(){pnl(`<div class="card"><h2>Continuar con un código</h2><p>Pega aquí tu código de progreso:</p><textarea id="cdi" rows="4" style="width:100%"></textarea><p><button class="go" onclick="ldGo()">Cargar</button> <button class="go" onclick="pnl('')">Cerrar</button></p><p class="msg wrong" id="ldm" role="status"></p></div>`)}
+function ldGo(){const m=ldCode(document.getElementById('cdi').value);if(m)document.getElementById('ldm').textContent=m;else pnl('')}
+start();
+</script></body></html>
+
+</body></html>
