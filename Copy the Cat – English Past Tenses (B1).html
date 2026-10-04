@@ -1,0 +1,196 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Copy the Cat – English Past Tenses (B1)</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg1:#f9d5ec;--bg2:#d9c8ff;--card:#fff;--tx:#3a1f5c;--mut:#7d6a99;--pri:#8e44ff;--pk:#ff5fa8;--chip:#f3e6ff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#3b1550;--bg2:#241a5c;--card:#33244f;--tx:#f6ecff;--mut:#c5b3e0;--chip:#4a3470}}
+:root[data-theme="dark"]{--bg1:#3b1550;--bg2:#241a5c;--card:#33244f;--tx:#f6ecff;--mut:#c5b3e0;--chip:#4a3470}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:"Nunito","Trebuchet MS",system-ui,sans-serif;color:var(--tx);background:linear-gradient(160deg,var(--bg1),var(--bg2));padding:14px}
+.wrap{max-width:720px;margin:0 auto}
+.card{background:var(--card);border-radius:22px;padding:20px;box-shadow:0 8px 24px #6b21a833;margin-bottom:14px}
+h1{margin:0 0 4px;font-size:1.6rem}h2{margin:.2em 0}
+.top{display:flex;gap:12px;align-items:center}
+.bubble{background:var(--chip);border-radius:16px;padding:10px 14px;flex:1;font-weight:700}
+button{font:inherit;font-weight:800;border:0;border-radius:14px;padding:12px 18px;cursor:pointer;background:linear-gradient(90deg,var(--pri),var(--pk));color:#fff;margin:4px 4px 4px 0}
+button.alt{background:var(--chip);color:var(--tx)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.opt{display:block;width:100%;text-align:left;background:var(--chip);color:var(--tx);font-size:1.05rem;border:3px solid transparent}
+.opt.sel{background:var(--pk);color:#fff;border-color:var(--pri)}
+input{font:inherit;padding:10px;border-radius:12px;border:2px solid var(--chip);width:100%;margin:4px 0 8px;background:var(--card);color:var(--tx)}
+.chips span{display:inline-block;background:var(--chip);border-radius:20px;padding:4px 10px;margin:3px;font-size:.9rem}
+.bar{height:10px;background:var(--chip);border-radius:9px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pri),var(--pk));transition:width .3s}
+.q{font-size:1.25rem;font-weight:800;margin:10px 0}
+.big{font-size:3rem;font-weight:900;color:var(--pri)}
+.small{color:var(--mut);font-size:.85rem}
+.err{padding:6px 0;border-bottom:1px solid var(--chip);font-size:.92rem}
+.wobble{animation:w .5s}@keyframes w{25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+</style></head><body><div class="wrap">
+<div class="card top">
+<svg id="cat" width="96" height="96" viewBox="0 0 100 100" aria-label="Copy the Cat">
+<polygon points="14,40 18,8 40,24" fill="#8d99ae"/><polygon points="86,40 82,8 60,24" fill="#8d99ae"/>
+<polygon points="20,34 22,16 34,26" fill="#ffc8dd"/><polygon points="80,34 78,16 66,26" fill="#ffc8dd"/>
+<circle cx="50" cy="56" r="38" fill="#8d99ae"/>
+<path d="M50 20 L42 44 L58 44Z" fill="#fff"/>
+<ellipse cx="50" cy="70" rx="22" ry="17" fill="#fff"/>
+<circle cx="36" cy="52" r="6" fill="#fff"/><circle cx="64" cy="52" r="6" fill="#fff"/>
+<circle cx="36" cy="53" r="3.5" fill="#222"/><circle cx="64" cy="53" r="3.5" fill="#222"/>
+<polygon points="46,62 54,62 50,67" fill="#ff8fab"/>
+<path id="mouth" d="M43 72 Q50 78 57 72" stroke="#444" stroke-width="2" fill="none"/>
+<g stroke="#555" stroke-width="1.5"><line x1="8" y1="62" x2="32" y2="66"/><line x1="8" y1="72" x2="32" y2="71"/><line x1="92" y1="62" x2="68" y2="66"/><line x1="92" y1="72" x2="68" y2="71"/></g></svg>
+<div><h1>Copy the Cat 🐾</h1><div class="small">English B1 · Irregular verbs &amp; Past Tenses</div></div>
+</div>
+<div class="card top"><div class="bubble" id="say">Meow! I'm Copy. Let's learn about animals!</div></div>
+<div style="margin:0 0 10px"><button class="alt" onclick="progress()">📋 Mi progreso</button></div>
+<div id="view"></div>
+</div>
+<script>
+const LV={
+1:{name:"Level 1 · Past Simple (irregular verbs)",rule:"Affirmative, negative (didn't + base verb) and questions (Did…?).",q:[
+["Last summer, Azahara ___ a wild fox near the river. 🦊",["saw","seen","seed"],0],
+["Oriol ___ his pet hamster a carrot yesterday. 🐹",["gived","gave","given"],1],
+["Hilario ___ the lion's roar from the café at the zoo. 🦁",["heared","hear","heard"],2],
+["Rosa ___ her dog to the vet last Monday. 🐶",["took","taked","taken"],0],
+["Carlos's parrot ___ away, leaving some colourful feathers behind. 🦜",["flied","flew","flown"],1],
+["Mery ___ a book about elephants at the market. 🐘",["buyed","boughten","bought"],2],
+["Ángela ___ bear paw prints in the snow. 🐻",["finded","found","founded"],1],
+["Yisus's grey and white kitten ___ under the sofa. 🐱",["hid","hided","hidden"],0],
+["The tiger ___ the deer with its powerful claws, but it escaped. 🐯",["catched","caught","cought"],1],
+["Hilario, Oriol and Julia ___ to the farm and fed the goats. 🐐",["goed","gone","went"],2],
+["Azahara didn't ___ the shark's fin above the water. 🦈",["saw","see","seen"],1],
+["Rosa didn't ___ her goldfish this morning. 🐠",["fed","feeded","feed"],2],
+["Daniel's monkey didn't ___ the branch with its paws. 🐒",["broke","break","breaked"],1],
+["Mery didn't ___ a word when the snake appeared. 🐍",["said","say","saying"],1],
+["Hilario didn't ___ that bats are mammals. 🦇",["knew","known","know"],2],
+["Did Ángela ___ the tiger's sharp claws? 🐅",["saw","see","seen"],1],
+["___ Antonio give the rabbit some water? 🐰",["Did","Does","Was"],0],
+["What did Rosa ___ at the zoo? 🦒",["bought","buyed","buy"],2],
+["Where did Mery ___ her lost cat, Patricia? 🐈",["found","find","finded"],1],
+["Did Mario's eagle ___ over the mountain? 🦅",["fly","flew","flied"],0]]},
+2:{name:"Level 2 · Past Continuous",rule:"was / were + verb-ing: affirmative, negative and questions.",q:[
+["At 8 pm, Azahara ___ her playful cat. 🐈",["was feeding","fed","were feeding"],0],
+["Oriol and Rosa ___ about wild animals when the teacher came in. 🐺",["was talking","were talking","talked"],1],
+["While Hilario ___ the parrot, it started to sing. 🦜",["watched","were watching","was watching"],2],
+["What ___ Nerea's kitten doing under the table? 🐱",["was","were","did"],0],
+["Mery ___ a documentary about whales when the lights went out. 🐋",["was watching","watched","were watching"],0],
+["The playful monkeys ___ in the trees while we were walking. 🐒",["was jumping","were jumping","jumped"],1],
+["Ángela ___ a horse when she heard the thunder. 🐴",["rode","were riding","was riding"],2],
+["It ___ heavily when Martina saw an eagle. 🦅",["rained","was raining","were raining"],1],
+["They ___ the zebras at five. They were at home. 🦓",["weren't watching","wasn't watching","didn't watching"],0],
+["When Antonio came in, Marina's kitten ___ on the sofa. 😺",["slept","were sleeping","was sleeping"],2],
+["Oriol ___ playing with his hamster when I called. 🐹",["wasn't","weren't","didn't"],0],
+["The lions ___ sleeping; they were hunting. 🦁",["wasn't","weren't","didn't"],1],
+["The tail of Sergio's dog ___ wagging because it was asleep. 🐕",["wasn't","weren't","didn't"],0],
+["The goldfish weren't ___ their fins at 9 pm. 🐠",["moving","moved","move"],0],
+["Valeria's kitten wasn't ___ its claws on the sofa. 😼",["using","used","use"],0],
+["___ Ángela taking photos of the graceful giraffes? 🦒",["Was","Were","Did"],0],
+["What ___ the wolves doing at midnight? 🐺",["was","were","did"],1],
+["___ the birds singing when you woke up? 🐦",["Was","Were","Did"],1],
+["Was Mery ___ the fox when it disappeared? 🦊",["chasing","chased","chase"],0],
+["Why ___ Hilario and Azahara running? 🏃",["was","were","did"],1]]},
+3:{name:"Level 3 · Past Simple or Past Continuous?",rule:"",q:[
+["At seven last night, Oriol ___ his hamster. 🐹",["fed","was feeding","were feeding"],1],
+["Yesterday, Rosa ___ her dog to the vet. 🐶",["took","was taking","were taking"],0],
+["Hilario ___ a fox while he was hiking. 🦊",["saw","was seeing","were seeing"],0],
+["While Mery ___ the parrot, Yisus cleaned the cage. 🦜",["fed","was feeding","were feeding"],1],
+["The wolves ___ in the forest when Daniel arrived. 🐺",["howled","was howling","were howling"],2],
+["Julia ___ her colourful scarf to the zoo last week. 🦓",["wore","was wearing","were wearing"],0],
+["Carolina's eagle ___ over the lake when it saw a fish. 🦅",["flew","was flying","were flying"],1],
+["When Azahara arrived, Mario's kittens ___ with a ball of wool. 🐱",["played","were playing","was playing"],1],
+["Sergio ___ the lion's roar because he was sleeping. 🦁",["didn't hear","wasn't hearing","weren't hearing"],0],
+["Valeria ___ any photos at the zoo yesterday. 📷",["didn't take","wasn't taking","weren't taking"],0],
+["Hilario ___ any fish for Martina's cat last Sunday. 🐟",["didn't buy","wasn't buying","weren't buying"],0],
+["When the owl landed, Azahara ___ the sky. She was reading. 🦉",["wasn't watching","didn't watch","weren't watching"],0],
+["The careless tigers ___ at Diego because they were eating. 🐅",["weren't looking","didn't look","wasn't looking"],0],
+["___ the zebras running when the lion appeared? 🦓",["Did","Were","Was"],1],
+["What ___ Esther doing when the eagle landed? 🦅",["did","was","were"],1],
+["___ Hanibal see the tiger's tail yesterday? 🐯",["Did","Were","Was"],0],
+["___ Ángela taking photos while the whales were jumping? 🐋",["Was","Did","Were"],0],
+["Where ___ Marina buy her goldfish last Saturday? 🐠",["did","was","were"],0],
+["Why ___ the wolves howling when Patricia arrived? 🐺",["were","did","was"],0],
+["The graceful deer ___ across the road when the car stopped. 🦌",["ran","was running","were running"],1]]}};
+const BANK={"Pets":["cat","kitten","dog","hamster","rabbit","parrot","goldfish","horse"],"Wild animals":["lion","tiger","wolf","bear","fox","giraffe","elephant","monkey","eagle","zebra","whale","deer"],
+"Body parts":["paw (pata)","claw (garra)","beak (pico)","feathers (plumas)","fin (aleta)","tail (cola)"],
+"Adjectives -ful":["careful","playful","colourful","beautiful","powerful","graceful","harmful"],
+"Adjectives -less":["fearless","harmless","careless","helpless","homeless","useless","endless"]};
+const CRIT=[
+["CE1 · 1.1","Comprender el sentido global y la información específica de textos escritos breves en inglés.",[1,3]],
+["CE2 · 2.2","Organizar y redactar enunciados con corrección gramatical y coherencia temporal.",[2,3]],
+["CE5 · 5.1","Comparar y contrastar estructuras gramaticales entre lenguas: pasado simple y continuo.",[1,2]],
+["CE5 · 5.3","Registrar y analizar progresos y dificultades de aprendizaje mediante la autoevaluación.",[1,2,3]]];
+let mode='home',lastFin=null,prev=null;const R={};let U={name:"",group:""},cur=0,i=0,sc=0,miss=[],Q=[],sel=null,ch=0;
+const $=id=>document.getElementById(id),V=$("view");
+const say=(t,m)=>{$("say").textContent=t;const c=$("cat");c.classList.remove("wobble");void c.offsetWidth;c.classList.add("wobble");$("mouth").setAttribute("d",m=="s"?"M43 76 Q50 70 57 76":"M43 72 Q50 78 57 72")};
+const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const grade=n=>n<5?"Insuficiente (IN)":n<6?"Suficiente (SU)":n<7?"Bien (BI)":n<9?"Notable (NT)":"Sobresaliente (SB)";
+const sh=a=>{for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a};
+const all=()=>R[1]&&R[2]&&R[3];
+function home(){mode='home';
+V.innerHTML=`<div class="card"><h2>👋 Welcome!</h2>
+<label class="small">Nombre y apellidos (aparecerán en el informe)</label><input id="n" value="${esc(U.name)}">
+<label class="small">Curso / grupo</label><input id="g" value="${esc(U.group)}">
+<div class="small">Para pasar cada nivel necesitas al menos 5/10 (10 de 20 aciertos). Los errores se muestran al final de cada nivel.</div>
+<p>${[1,2,3].map(l=>`<button ${l>1&&!R[l-1]?"disabled":""} onclick="go(${l})">${R[l]?"✅":l>1&&!R[l-1]?"🔒":"🐾"} ${LV[l].name}${R[l]?" · "+R[l].sc+"/10":""}</button>`).join("")}
+<button class="alt" ${all()?"":"disabled"} onclick="report()">📋 Informe final</button></p>
+<div id="msg" class="small">${all()?"":"El informe se genera al superar los tres niveles."}</div></div>
+<div class="card"><h2>🦁 Animal word bank</h2>${Object.entries(BANK).map(([k,v])=>`<b>${k}</b><div class="chips">${v.map(w=>`<span>${w}</span>`).join("")}</div>`).join("")}</div>`}
+function save(){if($("n")){U.name=$("n").value.trim();U.group=$("g").value.trim()}}
+function go(l){save();if(!U.name){$("msg").textContent="⚠️ Escribe tu nombre para empezar.";return}
+if(l>1&&!R[l-1])return;cur=l;i=0;sc=0;miss=[];sel=null;ch=0;
+Q=sh(LV[l].q.map(q=>{const o=sh(q[1].map((t,k)=>[t,k===q[2]]));return{t:q[0],o:o.map(x=>x[0]),c:o.findIndex(x=>x[1])}}));
+say("Level "+l+" — you can do it! 😸");show()}
+function show(){mode='q';const q=Q[i],L=LV[cur];
+V.innerHTML=`<div class="card"><b>${L.name}</b><div class="small">${L.rule}</div><div class="bar"><i style="width:${i*5}%"></i></div>
+<div class="small">Question ${i+1}/20</div><div class="q">${esc(q.t)}</div>
+${q.o.map((o,k)=>`<button class="opt${k===sel?" sel":""}" onclick="pick(${k})">${esc(o)}</button>`).join("")}
+<div class="small">${sel===null?"Elige una respuesta.":ch?"Respuesta final.":"Puedes cambiar tu respuesta una vez."}</div>
+<button ${sel===null?"disabled":""} onclick="next()">${i<19?"Next ➜":"Finish 🏁"}</button></div>`}
+function pick(k){if(sel===null)sel=k;else if(k!==sel&&!ch){sel=k;ch=1}else return;show()}
+function next(){const q=Q[i];if(sel===q.c)sc++;else miss.push(q.t.replace("___","["+q.o[q.c]+"]").replace(/[^\x20-\u00ff]/g,"").trim()+"  (tu respuesta: "+q.o[sel]+")");
+sel=null;ch=0;i++;if(i<20){say(["Keep going! 🐾","Purr-fect focus! 😺","Next one! 🐱"][i%3]);show()}else finish()}
+function finish(){const n=sc/2,ok=n>=5;if(ok)R[cur]={sc:n,miss:miss.slice()};
+say(ok?"Level passed! 🎉":"Almost! Review and try again 💪",ok?"s":"");
+lastFin={n:n,ok:ok,miss:miss.slice(),lv:cur};finView()}
+function finView(){mode='fin';const n=lastFin.n,ok=lastFin.ok,miss=lastFin.miss,cur=lastFin.lv;V.innerHTML=`<div class="card" style="text-align:center"><h2>${LV[cur].name}</h2><div class="big">${n}/10</div><p>${grade(n)} · ${ok?"✅ Nivel superado":"❌ Nivel no superado (mínimo 5/10)"}</p></div>
+<div class="card"><h2>Errores del nivel</h2>${miss.length?miss.map(m=>`<div class="err">❌ ${esc(m)}</div>`).join(""):"<p>Sin errores. ¡Enhorabuena! 🏆</p>"}
+<p>${ok?(cur<3?`<button onclick="go(${cur+1})">Siguiente nivel ➜</button>`:`<button onclick="report()">📋 Generar informe final</button>`):`<button onclick="go(${cur})">🔁 Repetir nivel</button>`}<button class="alt" onclick="home()">🏠 Inicio</button></p></div>`}
+function lines(){const L=[],d=new Date().toLocaleDateString("es-ES"),done=[1,2,3].filter(l=>R[l]),full=done.length==3,ip=(mode=="prog"&&prev=="q")?cur:0;
+const fin=done.length?Math.round(done.reduce((a,l)=>a+R[l].sc,0)/done.length*10)/10:null;
+L.push("# "+(full?"INFORME FINAL":"INFORME DE PROGRESO")+" - Copy the Cat (Inglés B1)","Alumno/a: "+(U.name||"-"),"Curso/grupo: "+(U.group||"-"),"Fecha: "+d,"","## Resultados");
+[1,2,3].forEach(l=>L.push(LV[l].name+": "+(R[l]?R[l].sc+"/10 - "+grade(R[l].sc):(ip==l?"en curso (pregunta "+(i+1)+" de 20)":"pendiente"))));
+L.push((full?"NOTA FINAL: ":"NOTA PROVISIONAL (niveles superados): ")+(fin===null?"-":fin+"/10 - "+grade(fin)),"","## Criterios de evaluación (LOMLOE · Andalucía, Lengua Extranjera)");
+CRIT.forEach(c=>{const ds=c[2].filter(l=>R[l]);L.push(c[0]+": "+c[1]);
+if(!ds.length){L.push("   Sin evaluar todavía");return}
+const v=Math.round(ds.reduce((a,l)=>a+R[l].sc,0)/ds.length*10)/10;
+L.push("   Grado (niveles "+ds.join(", ")+"): "+v+"/10 - "+grade(v))});
+L.push("","## Errores de los niveles superados");[1,2,3].forEach(l=>{L.push("Nivel "+l+":");if(!R[l])L.push("- Pendiente");else R[l].miss.length?R[l].miss.forEach(m=>L.push("- "+m)):L.push("- Sin errores")});
+L.push("","Escala: IN 0-4,9 · SU 5 · BI 6 · NT 7-8,9 · SB 9-10.");return L}
+function render(L){return L.map(l=>l.startsWith("# ")?`<h2>${esc(l.slice(2))}</h2>`:l.startsWith("## ")?`<h3 style="margin:.9em 0 .2em">${esc(l.slice(3))}</h3>`:`<div style="white-space:pre-wrap;font-size:.9rem">${esc(l)||"&nbsp;"}</div>`).join("")}
+function renderProg(){const f=all();
+V.innerHTML=`<div class="card">${render(lines())}
+<p>${f?'<button onclick="pdf()">⬇️ Descargar PDF</button>':""}<button class="alt" onclick="back()">↩️ Volver donde estaba</button></p><div id="msg" class="small"></div>
+<p class="small">${f?"<b>Classroom:</b> pega el enlace de esta página como material de la tarea; el alumnado adjunta el PDF en su entrega.":"Este es un informe parcial. El PDF se podrá descargar al superar los tres niveles."}</p></div>`}
+function progress(){if(mode=="prog")return;save();prev=mode;mode="prog";renderProg()}
+function report(){if(!all())return;save();prev="home";mode="prog";renderProg()}
+function back(){mode=prev||"home";prev=null;if(mode=="q")show();else if(mode=="fin"&&lastFin)finView();else home()}
+function wrap(s,n){const o=[];let l="";s.split(" ").forEach(w=>{if((l+" "+w).length>n){o.push(l);l=w}else l=l?l+" "+w:w});o.push(l);return o}
+function makePDF(L){const items=[];L.forEach(t=>{let f=1,sz=10.5,x=50,n=95;if(t.startsWith("# ")){f=2;sz=16;t=t.slice(2);n=60}else if(t.startsWith("## ")){f=2;sz=12.5;t=t.slice(3);n=80}
+wrap(t,n).forEach((w,k)=>items.push([w,f,sz,k?x+12:x]))});
+const pages=[];let y=800,cur=[];items.forEach(it=>{const h=it[2]+5;if(y-h<50){pages.push(cur);cur=[];y=800}y-=h;cur.push([it,y])});pages.push(cur);
+const enc=s=>s.replace(/[\u2018\u2019]/g,"'").replace(/[\u201c\u201d]/g,'"').replace(/[^\x20-\xff]/g,"").replace(/[\\()]/g,"\\$&");
+const objs=[];const add=s=>objs.push(s);add("<</Type/Catalog/Pages 2 0 R>>");add(null);add("<</Type/Font/Subtype/Type1/BaseFont/Helvetica/Encoding/WinAnsiEncoding>>");add("<</Type/Font/Subtype/Type1/BaseFont/Helvetica-Bold/Encoding/WinAnsiEncoding>>");
+const kids=[];pages.forEach(p=>{const s=p.map(([it,y])=>`BT /F${it[1]} ${it[2]} Tf ${it[3]} ${y.toFixed(1)} Td (${enc(it[0])}) Tj ET`).join("\n");
+add(`<</Type/Page/Parent 2 0 R/MediaBox[0 0 595 842]/Resources<</Font<</F1 3 0 R/F2 4 0 R>>>>/Contents ${objs.length+2} 0 R>>`);kids.push(objs.length);add(`<</Length ${s.length}>>\nstream\n${s}\nendstream`)});
+objs[1]=`<</Type/Pages/Kids[${kids.map(k=>k+" 0 R").join(" ")}]/Count ${kids.length}>>`;
+let out="%PDF-1.4\n";const off=[];objs.forEach((o,k)=>{off.push(out.length);out+=`${k+1} 0 obj\n${o}\nendobj\n`});
+const xr=out.length;out+=`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`+off.map(o=>String(o).padStart(10,"0")+" 00000 n \n").join("")+`trailer\n<</Size ${objs.length+1}/Root 1 0 R>>\nstartxref\n${xr}\n%%EOF`;
+const u=new Uint8Array(out.length);for(let k=0;k<out.length;k++)u[k]=out.charCodeAt(k)&255;return u}
+async function pdf(){const m=$("msg");try{const d=await claude.use("downloads");if(!d){m.textContent="La descarga no está disponible aquí.";return}
+await d.save({filename:"informe-"+U.name.replace(/[^\w]+/g,"-")+".pdf",data:makePDF(lines())});m.textContent="✅ PDF listo."}catch(e){m.textContent=e&&e.code=="declined"?"Descarga cancelada.":"No se pudo guardar el PDF."}}
+home();
+</script></body></html>
+
+</body></html>
