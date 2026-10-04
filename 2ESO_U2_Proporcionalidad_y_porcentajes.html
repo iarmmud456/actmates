@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Unidad 2. Proporcionalidad y porcentajes - 2.º ESO</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff6dc;--card:#fff;--ink:#1d2a5b;--soft:#5a668f;--ok:#1f9e89;--hi:#ffc93c;--bad:#e5533d;--line:#e8dcb5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a36;--card:#1e2650;--ink:#f4f1e6;--soft:#aab3da;--line:#34407a;--ok:#46d1bb}}
+:root[data-theme="dark"]{--bg:#141a36;--card:#1e2650;--ink:#f4f1e6;--soft:#aab3da;--line:#34407a;--ok:#46d1bb}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 17px/1.5 Fredoka,"Trebuchet MS",system-ui,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:clamp(26px,6vw,38px);line-height:1.1;margin:0 0 6px;font-weight:600}
+.sub{color:var(--soft);margin:0 0 16px}
+.name{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+input{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:12px;padding:8px 12px;min-width:0}
+input:focus,button:focus-visible,summary:focus-visible{outline:3px solid var(--hi);outline-offset:2px}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;padding:4px 2px 14px}
+.tab{flex:0 0 auto;border:2px solid var(--ink);background:var(--card);color:var(--ink);border-radius:14px;padding:8px 12px;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.tab[aria-selected=true]{background:var(--hi);color:#1d2a5b}
+.tab.done{border-color:var(--ok);box-shadow:0 4px 0 var(--ok)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+details{background:var(--card);border:2px dashed var(--hi);border-radius:14px;padding:10px 14px;margin-bottom:14px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+.q{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.q input{width:130px}
+.q .t{flex:1 1 100%}
+button.go{font:inherit;font-weight:600;background:var(--ink);color:var(--bg);border:0;border-radius:12px;padding:9px 16px;cursor:pointer}
+.msg{font-weight:600}.good{color:var(--ok)}.wrong{color:var(--bad)}
+.big{font-size:56px;font-weight:600;line-height:1}
+.row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)}
+.nav{display:flex;justify-content:space-between;margin-top:8px}
+sup{font-size:.7em}
+.crit{padding:8px 0;border-bottom:1px solid var(--line)}.crit small{color:var(--soft);display:block}h2{font-size:20px;margin:18px 0 6px}.bar{height:8px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:4px}.bar i{display:block;height:100%;background:var(--ok)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}.opts label{display:flex;gap:6px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:6px 12px;cursor:pointer;background:var(--card)}.q .opts input{width:auto;accent-color:var(--ok)}
+@media print{body{background:#fff;color:#000}main>.sub,.tabs,.go,#pm,.pbar,#pn{display:none!important}.card{break-inside:avoid;border-color:#999}main{max-width:none}}
+.opts input[type=radio]{width:auto;min-width:0;padding:0;accent-color:var(--ok)}
+textarea{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:12px;padding:8px;word-break:break-all}
+.fig{margin-top:8px;overflow-x:auto}.fig svg{display:block}
+</style></head><body><main>
+<h1>Unidad 2. Proporcionalidad y porcentajes</h1>
+<p class="sub"><b>Matemáticas · 2.º ESO</b>. 6 bloques, 10 ejercicios en cada uno (4 de ellos para elegir la respuesta correcta). Escribe solo el número (con signo − si es negativo), los decimales con coma (2,35) y las fracciones simplificadas como a/b (3/4). Los números cambian cada vez que empiezas de nuevo.</p>
+<div class="name"><label for="nm">Tu nombre:</label><input id="nm" placeholder="Nombre y apellidos" autocomplete="name"><label for="cs">Curso:</label><input id="cs" placeholder="p. ej. 2.º ESO B" size="12"></div>
+<div class="name pbar"><button class="go" onclick="svOpen()">Guardar mi progreso</button><button class="go" onclick="ldOpen()">Continuar con un código</button></div><div id="pn"></div>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div id="view"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const MR=Math.random.bind(Math);let rnd=MR,seed=0;const mul=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+const R=(a,b)=>Math.floor(rnd()*(b-a+1))+a,P=a=>a[R(0,a.length-1)],f=n=>n.toLocaleString('es-ES'),S=(b,e)=>`${b}<sup>${e}</sup>`;
+const gcd=(a,b)=>b?gcd(b,a%b):a,sh=a=>[...a].sort(()=>rnd()-.5);
+const ft=(n,d)=>d==1?''+n:`${n}/${d}`,rd=(n,d)=>{const g=gcd(n,d);return[n/g,d/g]},Q=(t,n,d,r)=>{const[x,y]=rd(n,d);return{t,a:x/y,s:ft(x,y),fr:[x,y],red:r}},ans=q=>q.s!=null?q.s:String(q.a);
+const dc=x=>String(+x.toFixed(6)).replace('.',','),Dd=(t,x)=>({t,a:+x.toFixed(6),s:dc(x),dec:1}),fx=(x,k)=>x.toFixed(k).replace('.',','),fs=([n,d])=>`${n}/${d}`,num=x=>+x.replace(',','.');
+const rs=()=>{const k=R(1,3);let t='';for(let i=0;i<k;i++)t+=R(0,9);if(t.endsWith('0'))t=t.slice(0,-1)+R(1,9);return t},dl=()=>{const e=R(1,9);let L;do{L=Array.from({length:4},()=>`${e},${rs()}`)}while(new Set(L.map(num)).size<4);return L};
+const isEx=d=>{d/=gcd(d,1);while(d%2==0)d/=2;while(d%5==0)d/=5;return d==1};
+const z=n=>n<0?'−'+(-n):''+n,nz=(a,b)=>{let x=0;while(!x)x=R(a,b);return x},sg=n=>n<0?'− '+(-n):'+ '+n;
+const sv=(w,h,c)=>`<svg viewBox="0 0 ${w} ${h}" width="${w}" style="max-width:100%;height:auto;color:var(--ink)" fill="none" stroke="currentColor" stroke-width="2" role="img" aria-label="Dibujo del problema">${c}</svg>`,
+tx=(x,y,s,c)=>`<text x="${x}" y="${y}" text-anchor="middle" style="fill:${c||'currentColor'}" stroke="none" font-size="14" font-family="Fredoka,sans-serif">${s}</text>`,
+bx=(x,y,w,h,s,u)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6" style="fill:${u?'var(--hi)':'var(--card)'}"/>`+tx(x+w/2,y+h/2+5,s,u&&'#1d2a5b'),
+bars=(p,tot,u=44)=>{let x=10;const W=p.reduce((s,a)=>s+a[0]*u,0);return sv(W+20,80,p.map(a=>{const r=bx(x,6,a[0]*u,34,a[1],a[2]);x+=a[0]*u;return r}).join('')+`<path d="M10 52h${W}M10 47v10M${W+10} 47v10"/>`+tx(W/2+10,74,tot))},
+ch=a=>sv(a.length*76+4,50,a.map((v,i)=>bx(4+i*76,8,56,34,v,i==a.length-1)).join('')+'<path d="'+a.slice(1).map((_,i)=>`M${60+i*76} 25h20`).join('')+'"/>'),
+tb=(l1,a,l2,b)=>sv(92+a.length*56,80,bx(4,6,80,30,l1)+bx(4,42,80,30,l2)+a.map((v,i)=>bx(88+i*56,6,52,30,v,v=='?')).join('')+b.map((v,i)=>bx(88+i*56,42,52,30,v,v=='?')).join('')),
+rc=(t,l)=>sv(230,110,`<rect x="45" y="22" width="165" height="70" rx="4" style="fill:var(--card)"/>`+tx(127,16,t)+tx(22,62,l)),
+gr=(a,c)=>sv(230,150,'<path d="M30 10V130H215"/>'+`<path d="M30 130L${30+a*20} 30" style="stroke:var(--bad)"/><circle cx="${30+a*20}" cy="30" r="5" style="fill:var(--hi)"/>`+tx(30+a*20+8,22,`(${a}, ${c})`)+tx(20,14,'y')+tx(214,148,'x')),
+gears=(a,b)=>sv(250,100,`<circle cx="55" cy="50" r="30" stroke-dasharray="5 3"/><circle cx="130" cy="50" r="44" stroke-dasharray="5 3"/>`+tx(55,55,a+' dientes')+tx(130,55,b+' dientes')),
+som=(h,s,T)=>sv(280,120,'<path d="M20 100V60L60 100Z M150 100V20L230 100Z" style="fill:var(--card)"/>'+tx(12,84,h+' m')+tx(40,114,s+' m')+tx(142,64,'?')+tx(190,114,T+' m'));
+const sel=(pool,ok)=>{let l,n;do{l=sh(pool).slice(0,4);n=l.filter(a=>a[1]==ok).length}while(!n);return[l.map((a,i)=>`(${'abcd'[i]}) ${a[0]}`).join('; '),n]};
+const B=[
+{n:'Razón y proporción',e:'📏',tip:'La razón entre a y b es el cociente a/b (las dos cantidades deben tener las mismas unidades). Una proporción es una igualdad de dos razones: a/b = c/d. Propiedad fundamental: el producto de los extremos es igual al de los medios (a·d = b·c). Para hallar un término desconocido: x = (b·c)/a. El reparto proporcional divide una cantidad en partes que mantienen una razón dada.',
+g:()=>{const gi=R(6,24),co=R(6,24),a=R(2,9),b=R(2,9),k=R(2,6),p=R(2,6),q=R(2,6),k3=R(2,5),t=R(2,9),m=R(2,6),E=P([20000,50000,100000,200000]),d=R(2,9),za=R(2,5),zb=R(2,5),k6=R(2,6),h=R(2,5),s=R(2,4),k7=R(2,6),A=R(1,9)*5,Bb=R(1,9)*5,mi=R(1,11)*5,hr=R(1,3),a10=R(2,6),b10=R(2,6),k10=R(2,6);
+return[Q(`En una clase hay ${gi} chicas y ${co} chicos. ¿Cuál es la razón chicas/chicos? (simplificada)`,gi,co,1),
+{t:`Halla x en la proporción ${a}/${b} = ${a*k}/x`,a:b*k},
+{t:`En la proporción ${p}/${q} = ${p*k3}/${q*k3}, ¿cuánto vale el producto de los extremos (${p} y ${q*k3})?`,a:p*q*k3},
+{t:`Halla la media proporcional x de ${t} y ${t*m*m}, es decir, ${t}/x = x/${t*m*m}.`,a:t*m},
+{...Dd(`En un mapa a escala 1:${f(E)}, la distancia entre dos ciudades es ${d} cm. ¿Cuántos km hay en realidad?`,d*E/100000),im:bars([[5,`${d} cm en el mapa`]],`escala 1 : ${f(E)}`,50)},
+{t:`Un zumo se prepara con ${za} partes de fruta por cada ${zb} de agua. Si se preparan ${(za+zb)*k6} litros, ¿cuántos litros de fruta lleva?`,a:za*k6,im:bars([[za,'fruta',1],[zb,'agua']],`${(za+zb)*k6} L en total`,40)},
+{t:`Un poste de ${h} m proyecta una sombra de ${s} m. En ese mismo momento, un árbol proyecta una sombra de ${s*k7} m. ¿Cuánto mide el árbol, en metros?`,a:h*k7,im:som(h,s,s*k7)},
+Q(`¿Cuál es la razón entre ${dc(A/100)} y ${dc(Bb/100)}? (fracción simplificada)`,A,Bb,1),
+Q(`¿Cuál es la razón entre ${mi} minutos y ${hr} ${hr==1?'hora':'horas'}? (simplificada, en las mismas unidades)`,mi,hr*60,1),
+{t:`Una fotografía de ${a10} cm × ${b10} cm se amplía manteniendo la proporción hasta que su ancho mide ${a10*k10} cm. ¿Cuánto mide de alto, en cm?`,a:b10*k10,im:rc(`${a10*k10} cm`,'?')}]}},
+{n:'Proporcionalidad directa',e:'↗️',tip:'Dos magnitudes son directamente proporcionales si al multiplicar una por un número, la otra queda multiplicada por el mismo número. El cociente y/x es siempre el mismo: la constante de proporcionalidad k (y = k·x). Se resuelve con regla de tres directa o reduciendo a la unidad. Su gráfica es una recta que pasa por el origen.',
+g:()=>{const k1=R(2,9),a=R(2,9),k=R(2,9),b=R(2,12),xs=sh([2,3,4,5,6,7]).slice(0,4),k3=R(2,9),a4=R(2,5),kk=R(2,6),b4=R(6,9),p=R(1,5),q=R(1,5),mm=R(2,9),ra=P([1.1,1.2,1.25,0.8,0.9]),e=R(2,9)*5,pr=P([5,7,8,12,15]),na=R(10,40),nb=R(41,90),[l8,n8]=sel([['el lado de un cuadrado y su perímetro',1],['el lado de un cuadrado y su área',0],['los kg de manzanas y lo que cuestan',1],['la edad de una persona y su altura',0],['los litros de gasolina y el precio pagado',1],['el nº de obreros y los días que tardan',0],['los km recorridos a velocidad constante y el tiempo',1],['el nº de páginas de un libro y su peso',1]],1),m5=R(2,6),r5=R(4,12),k9=R(2,5),x=R(5,20),y=R(5,20);
+return[{t:`Los kilos de manzanas y su precio son directamente proporcionales (ver tabla). ¿Cuánto cuesta 1 kg, en €?`,a:k1,im:tb('kg',[2,3,5],'€',[2*k1,3*k1,5*k1])},
+{t:`${a} entradas cuestan ${a*k} €. ¿Cuánto cuestan ${b==a?b+1:b} entradas?`,a:(b==a?b+1:b)*k},
+{t:`En la tabla, x e y son directamente proporcionales. ¿Qué número falta?`,a:xs[2]*k3,im:tb('x',xs,'y',[xs[0]*k3,xs[1]*k3,'?',xs[3]*k3])},
+{t:`La gráfica de una relación de proporcionalidad directa es la recta que pasa por el origen y por el punto (${a4}, ${a4*kk}). ¿Cuánto vale y cuando x = ${b4}?`,a:b4*kk,im:gr(a4,a4*kk)},
+{t:`Dos socios invierten ${p*100} € y ${q*100} € en un negocio y ganan ${(p+q)*mm*10} € en total. Si reparten la ganancia en proporción a lo invertido, ¿cuánto recibe el segundo, en €?`,a:q*mm*10,im:bars([[p,`A: ${p*100} €`],[q,`B: ${q*100} €`,1]],`ganancia: ${(p+q)*mm*10} €`,48)},
+Dd(`Un euro equivale a ${dc(ra)} dólares. ¿Cuántos dólares son ${e} €?`,e*ra),
+Dd(`${na} fotocopias cuestan ${dc(na*pr/100)} €. ¿Cuánto cuestan ${nb} fotocopias, en €?`,nb*pr/100),
+{t:`¿Cuántos de estos pares de magnitudes son directamente proporcionales? ${l8}`,a:n8},
+{t:`Un grifo echa ${m5*r5} litros en ${m5} minutos. ¿Cuántos minutos tarda en llenar un depósito de ${r5*m5*k9} litros?`,a:m5*k9,im:bars([[1,`${m5} min`],[k9,'x min',1]],`${m5*r5} L  →  ${r5*m5*k9} L (mismo caudal)`,60)},
+Q(`Dos magnitudes directamente proporcionales toman los valores x = ${x} e y = ${y}. ¿Cuál es la constante de proporcionalidad k = y/x? (fracción simplificada)`,y,x,1)]}},
+{n:'Proporcionalidad inversa',e:'↘️',tip:'Dos magnitudes son inversamente proporcionales si al multiplicar una por un número, la otra queda dividida por ese número. El producto x·y es siempre el mismo: la constante k (y = k/x). Regla de tres inversa: a más, menos. Ejemplos: obreros y días, velocidad y tiempo, nº de personas que pagan y lo que paga cada una.',
+g:()=>{const K=48,xs=sh([2,3,4,6,8,12,16,24]).slice(0,3),a2=R(2,6),k2=R(2,4),m2=R(2,6),k3=R(2,4),a2b=R(2,6),[v1,v2]=P([[60,90],[40,80],[80,120],[40,60]]),m3=R(2,5),[l4,n4]=sel([['el nº de obreros y los días que tardan en una obra',1],['la velocidad y el tiempo en recorrer un trayecto',1],['el nº de grifos y el tiempo en llenar un depósito',1],['los kg de pan y su precio',0],['el nº de amigos que pagan un regalo y lo que paga cada uno',1],['el lado de un cuadrado y su perímetro',0],['la edad y el peso de una persona',0],['el nº de pintores y el tiempo en pintar una casa',1]],1),K5=P([24,36,48,60,72,120]),[e1,e2]=P([[2,3],[3,5],[2,5],[3,4]]),m6=R(2,6),a7=R(1,3)*10,kk7=R(2,3),m7=R(2,6),n8=R(3,8),ex=R(2,5),pe=R(1,3),n9=P([2,3,4]),m9=R(2,6),n10=P([8,12]),n10b=P([2,4]),t10=R(2,6);
+const dv=[...Array(K5+1).keys()].filter(i=>i>1&&i<K5&&K5%i==0),x5=P(dv),g3=gcd(v1,v2),t1=(v2/g3)*m3,t2=t1*v1/v2,T6=(e1+e2)*m6,per2=n8*pe,per1=(n8+ex)*per2/n8;
+return[{t:`En la tabla, x e y son inversamente proporcionales. ¿Qué número falta?`,a:K/xs[2],im:tb('x',xs,'y',[K/xs[0],K/xs[1],'?'])},
+{t:`${a2} obreros terminan una obra en ${k2*m2} días. ¿Cuántos obreros hacen falta para terminarla en ${m2} días?`,a:a2*k2},
+{t:`Un tren a ${v1} km/h tarda ${t1} horas en cierto recorrido. ¿Cuántas horas tardaría a ${v2} km/h?`,a:t2,im:bars([[t1,`${t1} h`],[t2,'? h',1]],`${v1} km/h  →  ${v2} km/h (misma distancia)`,44)},
+{t:`¿Cuántos de estos pares de magnitudes son inversamente proporcionales? ${l4}`,a:n4},
+{t:`Dos magnitudes inversamente proporcionales cumplen y = ${K5}/x. ¿Cuánto vale y cuando x = ${x5}?`,a:K5/x5},
+{t:`Se reparten ${T6} caramelos entre dos hermanos de ${e1} y ${e2} años de forma inversamente proporcional a sus edades. ¿Cuántos caramelos recibe el de ${e1} años?`,a:e2*m6,im:bars([[e2,`${e1} años`,1],[e1,`${e2} años`]],`${T6} caramelos`,36)},
+{t:`Una rueda dentada de ${a7} dientes da ${kk7*m7} vueltas. ¿Cuántas vueltas dará otra de ${a7*kk7} dientes engranada con ella?`,a:m7,im:gears(a7,a7*kk7)},
+{t:`Un regalo se paga entre ${n8} amigos y cada uno aporta ${per1} €. Si se unen ${ex} amigos más, ¿cuánto aporta cada uno, en €?`,a:per2,im:bars([[n8,`${n8} amigos`],[ex,`+${ex}`,1]],`total = ${n8*per1} €`,36)},
+{t:`Un ciclista tarda ${n9*m9} horas en un recorrido. ¿Cuántas horas tardaría si fuera ${n9} veces más rápido?`,a:m9},
+{t:`Para llenar una piscina se usan ${n10} bombas iguales y se tarda ${t10} horas. Si solo funcionan ${n10b} bombas, ¿cuántas horas se tardará?`,a:n10*t10/n10b}]}},
+{n:'Proporcionalidad compuesta',e:'🔗',tip:'Intervienen tres o más magnitudes. Compara la magnitud que buscas con cada una de las otras, una por una: si es directa, la razón se mantiene; si es inversa, se invierte. Después multiplica las razones. También puedes reducir a la unidad. Ejemplo: más obreros → menos días (inversa); más obra → más días (directa).',
+g:()=>{const[a1,d1,c1,x1,y1]=[R(2,5),R(2,6),R(20,90),R(2,3),R(2,3)],[y2,u2,d2,c2,x2]=[R(2,3),R(1,3),R(2,6),R(20,60),R(2,3)],[y3,m3,a3,p3,x3]=[R(2,3),R(2,6),R(2,4),R(40,90),R(2,3)],[x4,y4,m4,a4,h4]=[R(2,3),R(2,3),R(2,4),R(2,4),R(2,5)],[y5,m5,n5,w5,x5]=[R(2,3),R(2,6),R(2,5),R(30,80),R(2,3)],[da,ha,db,hb,m6]=[R(2,6),R(2,6),R(2,6),R(2,6),R(10,40)],[x7,k7,m7,u7,a7]=[R(2,3),R(2,3),R(2,4),R(1,3),R(2,5)],[a8,d8,per]=[R(3,8),R(2,6),R(2,9)],[a9,y9,m9,c9,x9]=[R(2,5),R(2,3),R(2,5),R(30,90),R(2,3)],[a10,pg,c10,x10,y10]=[R(2,5),R(40,100),R(4,12),R(2,3),R(2,3)];
+return[{t:`${a1} máquinas fabrican ${c1} piezas en ${d1} horas. ¿Cuántas piezas fabricarán ${a1*x1} máquinas en ${d1*y1} horas?`,a:c1*x1*y1},
+{t:`${y2*u2} máquinas fabrican ${c2} piezas en ${d2} horas. ¿Cuántas máquinas hacen falta para fabricar ${c2*x2} piezas en ${d2*y2} horas?`,a:u2*x2},
+{t:`${a3} impresoras imprimen ${p3} páginas en ${y3*m3} minutos. ¿Cuántos minutos tardarán ${a3*y3} impresoras en imprimir ${p3*x3} páginas?`,a:m3*x3},
+{t:`${a4} obreros, trabajando ${h4} horas diarias, terminan una obra en ${x4*y4*m4} días. ¿Cuántos días tardarán ${a4*x4} obreros trabajando ${h4*y4} horas diarias?`,a:m4},
+{t:`${n5} personas gastan ${w5} litros de agua en ${y5*m5} días. ¿Cuántos días durarán ${w5*x5} litros para ${n5*y5} personas?`,a:m5*x5},
+{t:`Dos empleados cobran ${(da*ha+db*hb)*m6} € por un trabajo, en proporción a las horas trabajadas. Ana trabajó ${da} días de ${ha} horas y Luis ${db} días de ${hb} horas. ¿Cuánto cobra Ana, en €?`,a:da*ha*m6,im:bars([[da*ha,'Ana',1],[db*hb,'Luis']],`${(da*ha+db*hb)*m6} € en total`,8)},
+{t:`${a7} obreros trabajando ${x7*u7} horas diarias tardan ${k7*m7} días. ¿Cuántas horas diarias deben trabajar ${a7*x7} obreros para terminar en ${m7} días?`,a:u7*k7,im:tb('obreros',[a7,a7*x7],'días',[k7*m7,m7])},
+{t:`${a8} obreros construyen ${a8*d8*per} m de acera en ${d8} días. ¿Cuántos metros construye cada obrero en un día?`,a:per},
+{t:`${a9} grifos llenan una piscina de ${c9} m³ en ${y9*m9} horas. ¿Cuántos grifos hacen falta para llenar una de ${c9*x9} m³ en ${m9} horas?`,a:a9*x9*y9,im:bars([[3,`${c9} m³ · ${y9*m9} h`],[3,`${c9*x9} m³ · ${m9} h`,1]],`${a9} grifos  →  ? grifos`,45)},
+{t:`${a10} cuadernos de ${pg} páginas cuestan ${c10} €. ¿Cuánto cuestan ${a10*x10} cuadernos de ${pg*y10} páginas, en €?`,a:c10*x10*y10,im:tb('cuadernos',[a10,a10*x10],'páginas',[pg,pg*y10])}]}},
+{n:'Porcentajes',e:'％',tip:'El a % de una cantidad C es C·a/100. Aumento del a %: se multiplica por 1 + a/100. Disminución del a %: se multiplica por 1 − a/100 (índice de variación). Para hallar el total conociendo una parte: total = parte·100/a. Los porcentajes sucesivos se multiplican, no se suman. Tasa de variación = (final − inicial)/inicial · 100.',
+g:()=>{const pa=P([10,15,20,25,30,40,60,75]),b1=20*R(2,30),P2=R(2,20)*10,a2=P([5,10,15,20,25]),P3=R(2,16)*10,a3=P([10,15,20,25,30]),y4=P([20,25,40,50,80,125,200,250]),x4=R(2,y4-1),pa5=P([10,15,20,25,30,40,60,75]),T5=20*R(2,30),inc=R(0,1),p6=P([5,8,12,15,18,35,40]),a7=R(2,15)*20,p7=P([10,20,25,30,40,50,60]),P8=R(2,12)*50,d1=P([10,20,25,30]),d2=P([10,20,50]),N9=20*R(3,12),a9=R(2,8)*5,b9=R(2,8)*5,O=20*R(2,10),p10=P([10,20,25,50]);
+return[{t:`Calcula el ${pa} % de ${b1}.`,a:pa*b1/100},
+Dd(`Una camiseta cuesta ${P2} € y su precio sube un ${a2} %. ¿Cuál es el nuevo precio, en €?`,P2*(100+a2)/100),
+{...Dd(`Unas zapatillas cuestan ${P3} € y tienen una rebaja del ${a3} %. ¿Cuánto hay que pagar, en €?`,P3*(100-a3)/100),im:bars([[100-a3,'pagas',1],[a3,`rebaja ${a3} %`]],`precio: ${P3} € (100 %)`,3)},
+Dd(`¿Qué porcentaje de ${y4} es ${x4}?`,x4/y4*100),
+{t:`El ${pa5} % de una cantidad es ${pa5*T5/100}. ¿Cuál es la cantidad?`,a:T5},
+Dd(`Para ${inc?'aumentar':'disminuir'} una cantidad un ${p6} %, ¿por qué número hay que multiplicarla? (índice de variación)`,inc?1+p6/100:1-p6/100),
+{t:`El precio de un móvil pasa de ${a7} € a ${a7+a7*p7/100} €. ¿Qué porcentaje ha aumentado?`,a:p7},
+Dd(`Un abrigo cuesta ${P8} €. Se rebaja un ${d1} % y, sobre el precio rebajado, un ${d2} % más. ¿Cuánto cuesta al final, en €?`,P8*(100-d1)*(100-d2)/10000),
+{t:`En una encuesta a ${N9} alumnos, el ${a9} % prefiere fútbol, el ${b9} % baloncesto y el resto otros deportes. ¿Cuántos alumnos prefieren otros deportes?`,a:N9*(100-a9-b9)/100,im:bars([[a9,`${a9} %`],[b9,`${b9} %`],[100-a9-b9,'otros ?',1]],`${N9} alumnos = 100 %`,4)},
+{t:`Tras subir un ${p10} %, una bicicleta cuesta ${O*(100+p10)/100} €. ¿Cuánto costaba antes de la subida, en €?`,a:O}]}},
+{n:'Problemas de aplicación',e:'🧩',tip:'Lee el enunciado, mira el dibujo y decide qué tipo de proporcionalidad o porcentaje aparece (directa, inversa, aumento, descuento, IVA, interés…). Calcula paso a paso y comprueba que el resultado tiene sentido (¿puede un precio con rebaja ser mayor que el original?). Interés simple: I = C·r·t/100. IVA: se multiplica por 1 + IVA/100.',
+g:()=>{const B1=R(2,30)*10,C2=100*R(5,40),r2=P([2,3,4,5]),t2=R(2,5),E3=P([50,100,200]),h3=10*R(1,6),pe=P([50,60,70]),ne=R(4,9),nt=R(5,10),p5=P([2000,4000,8000]),r5=P([5,10,20]),l6=R(4,9),k6=R(2,6),k7=R(2,4),pr=R(8,20),ph=R(8,15),ex=P([2,4,6,8]),A1=R(30,60),df=R(1,6),vv=R(1,3),t10=R(1,4);
+return[{...Dd(`Una lavadora cuesta ${B1} € sin IVA. Con un IVA del 21 %, ¿cuánto hay que pagar, en €?`,B1*1.21),im:bars([[100,`base: ${B1} €`],[21,'IVA',1]],'precio final = ?',2.4)},
+{t:`Depositas ${C2} € en un banco al ${r2} % de interés simple anual. ¿Cuántos euros de intereses ganas en ${t2} años?`,a:C2*r2*t2/100,im:ch([`${C2} €`,`+${C2*r2/100} €`,`× ${t2}`,'?'])},
+{t:`Un edificio de ${h3} m de altura se reproduce en una maqueta a escala 1:${E3}. ¿Cuántos centímetros mide la maqueta?`,a:h3*100/E3,im:bars([[2,`edificio: ${h3} m`],[1,'maqueta: ?',1]],`escala 1 : ${E3}`,70)},
+{...Dd(`La nota final es el ${pe} % del examen y el ${100-pe} % de los trabajos. Si sacas un ${ne} en el examen y un ${nt} en los trabajos, ¿cuál es tu nota final?`,(pe*ne+(100-pe)*nt)/100),im:bars([[pe,`examen ${ne}`],[100-pe,`trabajos ${nt}`]],'nota final = ?',3.2)},
+{t:`Una población de ${p5} habitantes crece un ${r5} % cada año. ¿Cuántos habitantes tendrá dentro de 2 años?`,a:p5*(100+r5)**2/10000,im:ch([p5,'× '+dc(1+r5/100),'× '+dc(1+r5/100),'?'])},
+{t:`Un coche consume ${l6} litros cada 100 km. ¿Cuántos km puede recorrer con ${l6*k6} litros?`,a:100*k6,im:bars([[1,`${l6} L`],[k6,`${l6*k6} L → ? km`,1]],`${l6} L → 100 km`,60)},
+{t:`En una tienda hay una oferta de 3×2 (llevas 3 y pagas 2). Compras ${3*k7} camisetas de ${pr} € cada una. ¿Cuántos euros pagas?`,a:2*k7*pr,im:bars([[3,'3 camisetas'],[2,'pagas 2',1]],'oferta 3×2',50)},
+{t:`Un trabajador cobra ${ph} € por hora. Trabaja 40 horas normales y ${ex} horas extra que se pagan un 50 % más. ¿Cuántos euros cobra en total?`,a:ph*40+ph*3*ex/2},
+{...Dd(`Un paquete de 500 g cuesta ${dc(A1*.05)} € y otro de 1,5 kg cuesta ${dc((A1-df)*.15)} €. ¿Cuántos euros más barato sale el kilo en el paquete más económico?`,df/10),im:bars([[2,`500 g: ${dc(A1*.05)} €`],[2,`1,5 kg: ${dc((A1-df)*.15)} €`]],'¿cuál sale más barato por kg?',90)},
+{t:`En un mapa a escala 1 : 1 000 000, una ruta mide ${3*vv*t10} cm. Un coche la recorre a ${30*vv} km/h. ¿Cuántas horas tarda?`,a:t10,im:bars([[4,`${3*vv*t10} cm en el mapa`]],'escala 1 : 1 000 000',60)}]}}
+];
+const mkO=q=>{if(q.o)return sh(q.o);const a=q.a;let c;
+if(q.fr){const[n,d]=q.fr;c=[[n+1,d],[n,d+1],[n+1,d+1],[d,n],[n-1,d],[n,d-1],[n+2,d],[n,d+2],[2*n,d]].filter(([x,y])=>x>=1&&y>=1&&Math.abs(x/y-a)>1e-9).map(([x,y])=>ft(x,y))}
+else if(q.dec){const u=Math.pow(10,-((String(q.s).split(',')[1]||'').length));c=[a+u,a-u,a+10*u,a-10*u,a*10,a/10,a*100,a/100,a+1,a-1,a+2*u,a+100*u].filter(v=>v>=0&&Math.abs(v-a)>1e-9).map(dc)}
+else c=[-a,a+1,a-1,a+2,a-2,a+10,a-10,a+3,a+5,a+100,a+7].filter(v=>v!=a).map(String);
+return sh([ans(q),...sh([...new Set(c)]).slice(0,3)])};
+const O=(q,i)=>`<div class="opts" role="radiogroup" aria-label="Opciones ${i+1}">`+q.o.map(v=>`<label><input type="radio" name="o${i}" value="${v}" ${q.pts!==null||q.bad.includes(v)?'disabled':''}${q.pts!==null&&q.pts>0&&v==ans(q)?' checked':''}>${v}</label>`).join('')+'</div>';
+let St,cur=0,mode=null;
+function gen(sd){seed=sd;rnd=mul(sd);St=B.map(b=>b.g().slice(0,10).map((q,i)=>({...q,tries:0,pts:null,msg:'',bad:[],o:[1,3,6,8].includes(i)?mkO(q):null})));
+}
+function start(){gen((MR()*4294967296)>>>0);cur=0;mode=null;draw()}
+function draw(){
+document.getElementById('tabs').innerHTML=B.map((b,i)=>`<button class="tab${St[i].every(q=>q.pts!==null)?' done':''}" role="tab" aria-selected="${cur==i}" onclick="cur=${i};draw()">${b.e} ${b.n}</button>`).join('')+`<button class="tab" role="tab" aria-selected="${cur==B.length}" onclick="cur=B.length;draw()">🏆 Mi nota</button>`;
+const v=document.getElementById('view');
+if(cur==B.length)return report(v);
+const b=B[cur];
+v.innerHTML=`<details open><summary>💡 Recuerda</summary><p>${b.tip}</p></details>`+St[cur].map((q,i)=>`<div class="card"><div class="q"><div class="t"><b>${i+1}.</b> ${q.t}${q.im?`<div class="fig">${q.im}</div>`:''}</div>
+${q.o?O(q,i):`<input id="i${i}" inputmode="text" autocomplete="off" aria-label="Respuesta ${i+1}" ${q.pts!==null?'disabled':''} onkeydown="if(event.key=='Enter')chk(${i})">`}<button class="go" onclick="chk(${i})" ${q.pts!==null?'disabled':''}>Comprobar</button><span class="msg ${q.pts===null?'wrong':'good'}">${q.msg}</span></div></div>`).join('')+
+`<div class="nav"><button class="go" ${cur==0?'disabled':''} onclick="cur--;draw()">Anterior</button><button class="go" onclick="cur++;draw()">${cur==B.length-1?'Ver mi nota':'Siguiente'}</button></div>`}
+const pa=r=>{r=String(r).replace(/[−–]/g,'-').replace(/\s+/g,'').replace(',','.');if(/^-?\d+\/-?\d+$/.test(r)){const[n,d]=r.split('/').map(Number);return d?n/d:NaN}return/^-?\d*\.?\d+$/.test(r)?+r:NaN};
+function chk(i){const q=St[cur][i];if(q.pts!==null)return;const raw=q.o?((document.querySelector('input[name=o'+i+']:checked')||{}).value||''):document.getElementById('i'+i).value.trim();
+if(raw==='')return;const v=pa(raw);if(isNaN(v)){q.msg='Escribe un número, por ejemplo 2,35 (sin puntos de millar).';draw();return}
+const ok=q.red?raw.replace(/\s/g,'')===q.s:Math.abs(v-q.a)<1e-9;q.tries++;q.ans=raw;if(q.o&&!ok)q.bad.push(raw);
+if(ok){q.pts=q.tries==1?1:.5;q.msg=q.tries==1?'¡Correcto! +1':'¡Bien, a la segunda! +0,5'}
+else if(q.tries==1)q.msg='Casi. Repasa el recuadro "Recuerda" e inténtalo otra vez.';
+else{q.pts=0;q.msg='La solución era '+ans(q)+'. ¡Fíjate cómo se hace!'}
+draw();if(q.pts===null){const e=document.getElementById('i'+i);e&&e.focus()}else for(let k=i+1;k<10;k++){const e=document.getElementById('i'+k);if(e&&!e.disabled){e.focus();break}}}
+const C=[{s:'A.5 Razonamiento proporcional: comparación de magnitudes, razón y proporción',c:['1.2','1.3','7.1']},
+{s:'A.5 Razonamiento proporcional: proporcionalidad directa',c:['1.2','1.3','2.1']},
+{s:'A.5 Razonamiento proporcional: proporcionalidad inversa',c:['1.2','1.3','2.1']},
+{s:'A.5 Razonamiento proporcional: proporcionalidad compuesta',c:['1.2','1.3','2.1']},
+{s:'A.5 Razonamiento proporcional: porcentajes, aumentos y disminuciones',c:['1.2','1.3','2.1']},
+{s:'A.5 Razonamiento proporcional y A.6 Educación financiera: problemas de aplicación',c:['1.1','1.2','1.3','2.2','7.2']}];
+const CR={'1.1':'Iniciarse en la interpretación de problemas matemáticos sencillos, reconociendo los datos, estableciendo relaciones básicas entre ellos y comprendiendo las preguntas formuladas.','1.2':'Aplicar herramientas y estrategias apropiadas que contribuyan a la resolución de problemas.','1.3':'Obtener soluciones matemáticas de un problema, activando los conocimientos necesarios.','2.1':'Comprobar la corrección matemática de las soluciones de un problema.','2.2':'Comprobar la validez de las soluciones de un problema, comprobando su coherencia en el contexto planteado.','7.1':'Representar conceptos, procedimientos, información y resultados matemáticos, visualizando ideas y estructurando razonamientos.','7.2':'Elaborar representaciones matemáticas que ayuden en la búsqueda de estrategias de resolución de una situación problematizada.'};
+const cual=n=>n<5?'Insuficiente':n<6?'Suficiente':n<7?'Bien':n<9?'Notable':'Sobresaliente';
+const bp=i=>St[i].reduce((s,q)=>s+(q.pts||0),0),fn=x=>x.toFixed(1).replace('.',','),nota=()=>St.flat().reduce((s,q)=>s+(q.pts||0),0)/(B.length*10)*10;
+const crit=()=>Object.keys(CR).filter(k=>C.some(c=>c.c.includes(k))).map(k=>{const bs=C.map((c,i)=>c.c.includes(k)?i:-1).filter(i=>i>=0);return{k,t:CR[k],p:Math.round(bs.reduce((s,i)=>s+bp(i),0)/(10*bs.length)*100)}});
+const pl=s=>String(s).replace(/<sup>(.*?)<\/sup>/g,'^$1').replace(/<[^>]+>/g,'').replace(/√/g,'raiz de ').replace(/∛/g,'raiz cubica de ').replace(/−/g,'-').replace(/€/g,' euros').replace(/→/g,'->').replace(/[^\x00-\xFF]/g,'');
+const det=()=>{const sol=q=>typeof ans=='function'?ans(q):q.a,nm=document.getElementById('nm').value.trim()||'Sin nombre',cs=document.getElementById('cs').value.trim()||'sin indicar';
+return`<div class="card" id="det"><h2>Detalle de los ejercicios</h2><p class="sub">Alumno/a: ${nm} · Curso: ${cs} · Fecha: ${new Date().toLocaleDateString('es-ES')}</p>`+B.map((b,i)=>`<p><b>${b.e} ${b.n}</b> (${fn(bp(i))} / 10)</p>`+St[i].map((q,j)=>`<div class="crit"><b>${j+1}.</b> ${q.t}<small>Respuesta: ${q.ans==null?'sin responder':q.ans}${mode=='con'?' · Solución: '+sol(q):''} · Puntos: ${q.pts==null?'-':String(q.pts).replace('.',',')}</small></div>`).join('')).join('')+`</div>`};
+function gate(v){v.innerHTML=`<div class="card"><h2>Antes de ver tu nota</h2><p>Elige qué informe quieres generar:</p>
+<div class="opts" role="radiogroup" aria-label="Tipo de informe" style="flex-direction:column;align-items:stretch"><label><input type="radio" name="md" value="sin"> Informe con resultados, sin soluciones</label>
+<label><input type="radio" name="md" value="con"> Informe con resultados y con soluciones (hace falta el código)</label></div>
+<p><label for="cd">Código (solo para el informe con soluciones):</label> <input id="cd" type="password" autocomplete="off" size="14"></p>
+<p><button class="go" onclick="setMode()">Ver mi nota y generar el informe</button></p><p class="msg wrong" id="gm" role="status"></p></div>`}
+function setMode(){const m=(document.querySelector('input[name=md]:checked')||{}).value,g=document.getElementById('gm');
+if(!m){g.textContent='Elige una de las dos opciones.';return}
+if(m=='con'&&document.getElementById('cd').value.trim().toLowerCase()!='revelar'){g.textContent='Código incorrecto.';return}
+mode=m;draw()}
+function report(v){if(!mode)return gate(v);const n=nota(),pend=St.flat().filter(q=>q.pts===null).length,nm=document.getElementById('nm').value.trim()||'Sin nombre';
+v.innerHTML=`<div class="card"><p class="sub">Informe de ${nm}${document.getElementById('cs').value.trim()?' · '+document.getElementById('cs').value.trim():''}</p><div class="big">${fn(n)}<span style="font-size:24px"> / 10</span></div><p><b>${cual(n)}</b>${pend?` · Te quedan ${pend} ejercicios sin responder.`:''}</p>
+<h2>Saberes básicos</h2>`+B.map((b,i)=>`<div class="crit"><div class="row" style="border:0;padding:0"><span>${b.e} ${b.n}</span><b>${fn(bp(i))} / 10</b></div><small>${C[i].s}</small></div>`).join('')+
+`<h2>Criterios de evaluación</h2>`+crit().map(c=>`<div class="crit"><div class="row" style="border:0;padding:0"><span><b>${c.k}</b></span><b>${c.p} %</b></div><small>${c.t}</small><div class="bar"><i style="width:${c.p}%"></i></div></div>`).join('')+
+`<p><button class="go" onclick="makePdf()">Descargar informe en PDF</button> <button class="go" onclick="prn()">Imprimir / guardar como PDF</button> <button class="go" onclick="mode=null;draw()">Cambiar tipo de informe</button> <button class="go" style="background:var(--hi);color:#1d2a5b" onclick="start()">Empezar de nuevo</button></p><p class="msg" id="pm" role="status"></p></div>`+det()}
+function buildPdf(){
+const nm=document.getElementById('nm').value.trim()||'Sin nombre',n=nota(),d=new window.jspdf.jsPDF({unit:'mm',format:'a4'});let y=18;
+const T=(t,o={})=>{d.setFont('helvetica',o.b?'bold':'normal');d.setFontSize(o.s||10);d.splitTextToSize(pl(t),o.w||180).forEach(l=>{if(y>280){d.addPage();y=18}d.text(l,o.x||15,y);y+=(o.s||10)*.45});y+=o.g==null?1.5:o.g};
+T('Informe de evaluación'+(mode=='con'?' (con soluciones)':''),{b:1,s:18,g:2});T('Unidad 2. Proporcionalidad y porcentajes · Matemáticas · 2.º ESO',{b:1,s:12});
+T('Alumno/a: '+nm+'     Curso: '+(document.getElementById('cs').value.trim()||'sin indicar')+'     Fecha: '+new Date().toLocaleDateString('es-ES'));
+T('Calificación: '+fn(n)+' / 10 ('+cual(n)+')',{b:1,s:14,g:3});
+T('Calificación = puntos obtenidos ('+B.length*10+' máx.) / '+B.length*10+' x 10. Acierto a la primera: 1 punto; a la segunda: 0,5; fallo: 0.',{s:8,g:4});
+T('Saberes básicos trabajados',{b:1,s:13});B.forEach((b,i)=>{T(b.n+': '+fn(bp(i))+' / 10',{b:1});T(C[i].s+'. Criterios: '+C[i].c.join(', '),{s:9,x:20,w:175,g:2.5})});
+y+=2;T('Criterios de evaluación (grado de logro)',{b:1,s:13});crit().forEach(c=>{T(c.k+' ('+c.p+' %)',{b:1});T(c.t,{s:9,x:20,w:175,g:2.5})});
+y+=2;T('Detalle de los ejercicios',{b:1,s:13});
+B.forEach((b,i)=>{T(b.n,{b:1,g:1});St[i].forEach((q,j)=>{T((j+1)+'. '+q.t,{x:18,w:177,g:.5});T('Respuesta: '+(q.ans==null?'sin responder':q.ans)+(mode=='con'?'   Solución: '+ans(q):'')+'   Puntos: '+(q.pts==null?'-':String(q.pts).replace('.',',')),{s:9,x:22,g:2.5})})});
+y+=4;T('Referencia curricular: Real Decreto 217/2022 (LOMLOE) y Orden de 30 de mayo de 2023 por la que se desarrolla el currículo de ESO en Andalucía (Matemáticas, 2.º ESO).',{s:8});
+return d}
+const fname=()=>'informe-2eso-proporcionalidad-'+(document.getElementById('nm').value.trim()||'Sin nombre').replace(/[^\wáéíóúñÁÉÍÓÚÑ ]/g,'').trim().replace(/\s+/g,'-')+'.pdf';
+const prn=()=>{try{window.print()}catch(e){document.getElementById('pm').textContent='No se puede imprimir desde esta vista. Usa la opción de imprimir de tu navegador.'}};
+async function makePdf(){const pm=document.getElementById('pm');pm.textContent='Preparando el informe...';let d;
+try{d=buildPdf()}catch(e){pm.textContent='No se ha podido crear el PDF en esta vista. Usa "Imprimir / guardar como PDF" o consulta el detalle de abajo.';return}
+const fn2=fname();
+try{const D=window.claude&&claude.use?await claude.use('downloads'):null;if(D){await D.save({filename:fn2,data:d.output('arraybuffer')});pm.textContent='Informe listo.';return}}catch(e){if(e&&e.code=='declined'){pm.textContent='Descarga cancelada.';return}}
+try{const u=URL.createObjectURL(d.output('blob')),a=document.createElement('a');a.href=u;a.download=fn2;document.body.appendChild(a);a.click();a.remove();pm.innerHTML='Si el PDF no se ha descargado, <a href="'+u+'" target="_blank" rel="noopener">ábrelo aquí</a> o usa "Imprimir / guardar como PDF".'}catch(e){pm.textContent='Usa "Imprimir / guardar como PDF" para guardar el informe.'}}
+const stc=q=>q.pts===null?(q.tries?'w':'n'):q.pts==1?'a':q.pts==.5?'b':'z';
+const hs=x=>{let h=0;for(const c of x)h=(h*31+c.charCodeAt(0))%1679616;return h.toString(36)};
+const b64=x=>btoa(unescape(encodeURIComponent(x))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const ub64=x=>decodeURIComponent(escape(atob(x.replace(/-/g,'+').replace(/_/g,'/'))));
+function mkCode(){const cl=x=>String(x).replace(/[;|]/g,''),p=[seed,cur,cl(document.getElementById('nm').value.trim()),cl(document.getElementById('cs').value.trim()),St.flat().map(q=>stc(q)+(q.ans==null?'':cl(q.ans))).join(';')].join('|');return'P2.'+b64(p)+'.'+hs(p)}
+function ldCode(txt){try{const m=txt.trim().replace(/\s+/g,'').match(/^P2\.([\w-]+)\.([0-9a-z]+)$/);if(!m)throw 0;const p=ub64(m[1]);if(hs(p)!==m[2])throw 1;const a=p.split('|'),it=a[4].split(';');if(it.length!=B.length*10)throw 2;gen(+a[0]);let k=0;
+St.forEach(b=>b.forEach(q=>{const s=it[k++],c=s[0],v=s.slice(1);if(c=='n')return;q.ans=v;q.tries=c=='a'||c=='w'?1:2;if(c=='w'){q.msg='Casi. Repasa el recuadro "Recuerda" e inténtalo otra vez.';if(q.o)q.bad=[typeof q.o[0]=='number'?+v:v]}else{q.pts=c=='a'?1:c=='b'?.5:0;q.msg=c=='a'?'¡Correcto! +1':c=='b'?'¡Bien, a la segunda! +0,5':'La solución era '+(typeof ans=='function'?ans(q):f(q.a))+'. ¡Fíjate cómo se hace!'}}));
+document.getElementById('nm').value=a[2];document.getElementById('cs').value=a[3];cur=Math.min(+a[1],B.length);mode=null;draw();return''}catch(e){return'Código no válido, incompleto o de otra unidad. Revisa que lo has copiado entero.'}}
+const pnl=h=>{document.getElementById('pn').innerHTML=h};
+function svOpen(){const c=mkCode();pnl(`<div class="card"><h2>Tu código de progreso</h2><p>Copia este código y guárdalo. Para continuar, abre de nuevo el enlace, pulsa «Continuar con un código» y pégalo.</p><textarea id="cdt" readonly rows="5" style="width:100%">${c}</textarea><p><button class="go" onclick="cpCode()">Copiar código</button> <button class="go" onclick="pnl('')">Cerrar</button> <span class="msg good" id="cpm"></span></p><p class="sub">Longitud del código: ${c.length} caracteres</p></div>`)}
+function cpCode(){const t=document.getElementById('cdt'),m=document.getElementById('cpm');t.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}
+if(!ok&&navigator.clipboard)navigator.clipboard.writeText(t.value).then(()=>m.textContent='Copiado.',()=>m.textContent='Selecciona el texto y cópialo a mano.');else m.textContent=ok?'Copiado.':'Selecciona el texto y cópialo a mano.'}
+function ldOpen(){pnl(`<div class="card"><h2>Continuar con un código</h2><p>Pega aquí tu código de progreso:</p><textarea id="cdi" rows="4" style="width:100%"></textarea><p><button class="go" onclick="ldGo()">Cargar</button> <button class="go" onclick="pnl('')">Cerrar</button></p><p class="msg wrong" id="ldm" role="status"></p></div>`)}
+function ldGo(){const m=ldCode(document.getElementById('cdi').value);if(m)document.getElementById('ldm').textContent=m;else pnl('')}
+start();
+</script></body></html>
