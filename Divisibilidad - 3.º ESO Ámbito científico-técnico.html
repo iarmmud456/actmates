@@ -1,0 +1,374 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Divisibilidad - 3.º ESO Ámbito científico-técnico</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff6dc;--card:#fff;--ink:#1d2a5b;--soft:#5a668f;--ok:#1f9e89;--hi:#ffc93c;--bad:#e5533d;--line:#e8dcb5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a36;--card:#1e2650;--ink:#f4f1e6;--soft:#aab3da;--line:#34407a;--ok:#46d1bb}}
+:root[data-theme="dark"]{--bg:#141a36;--card:#1e2650;--ink:#f4f1e6;--soft:#aab3da;--line:#34407a;--ok:#46d1bb}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 17px/1.5 Fredoka,"Trebuchet MS",system-ui,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:clamp(26px,6vw,38px);line-height:1.1;margin:0 0 6px;font-weight:600}
+.sub{color:var(--soft);margin:0 0 16px}
+.name{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+input{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:12px;padding:8px 12px;min-width:0}
+input:focus,button:focus-visible,summary:focus-visible{outline:3px solid var(--hi);outline-offset:2px}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;padding:4px 2px 14px}
+.tab{flex:0 0 auto;border:2px solid var(--ink);background:var(--card);color:var(--ink);border-radius:14px;padding:8px 12px;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 4px 0 var(--ink)}
+.tab[aria-selected=true]{background:var(--hi);color:#1d2a5b}
+.tab.done{border-color:var(--ok);box-shadow:0 4px 0 var(--ok)}
+.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+details{background:var(--card);border:2px dashed var(--hi);border-radius:14px;padding:10px 14px;margin-bottom:14px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+.q{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.q input{width:130px}
+.q .t{flex:1 1 100%}
+button.go{font:inherit;font-weight:600;background:var(--ink);color:var(--bg);border:0;border-radius:12px;padding:9px 16px;cursor:pointer}
+.msg{font-weight:600}.good{color:var(--ok)}.wrong{color:var(--bad)}
+.big{font-size:56px;font-weight:600;line-height:1}
+.row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line)}
+.nav{display:flex;justify-content:space-between;margin-top:8px}
+sup{font-size:.7em}
+.crit{padding:8px 0;border-bottom:1px solid var(--line)}.crit small{color:var(--soft);display:block}h2{font-size:20px;margin:18px 0 6px}.bar{height:8px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:4px}.bar i{display:block;height:100%;background:var(--ok)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}.opts label{display:flex;gap:6px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:6px 12px;cursor:pointer;background:var(--card)}.q .opts input{width:auto;accent-color:var(--ok)}
+@media print{body{background:#fff;color:#000}main>.sub,.tabs,.go,#pm,.pbar,#pn,#av,.hb{display:none!important}.card{break-inside:avoid;border-color:#999}main{max-width:none}}
+.opts input[type=radio]{width:auto;min-width:0;padding:0;accent-color:var(--ok)}
+textarea{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:12px;padding:8px;word-break:break-all}
+.gr{flex:1 1 100%}.gr svg{display:block}.gt{fill:var(--ink);font:12px Fredoka,"Trebuchet MS",sans-serif}.gl{stroke:var(--line);stroke-width:1}.gs{fill:var(--hi);stroke:var(--ink);stroke-width:2}.gc{fill:var(--card);stroke:var(--ink);stroke-width:2}.gp{fill:var(--ok);stroke:var(--ink);stroke-width:1}
+.avbar{display:flex;gap:10px;align-items:center;background:var(--bg);padding:6px 0;margin-bottom:6px}.bub{flex:1;background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:8px 12px;font-size:15px;line-height:1.35}.hint{background:var(--card);border:2px dashed var(--hi);border-radius:12px;padding:6px 10px;font-size:15px}.avh{fill:var(--hi);stroke:var(--ink);stroke-width:2.5}.av1{fill:var(--ink)}.av2{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round}.av3{fill:var(--ink);stroke:var(--ink);stroke-width:2}.hb{background:var(--hi)!important;color:#1d2a5b!important}
+.hintc{display:flex;gap:10px;align-items:center}.hav svg{width:46px;height:auto;display:block}
+@keyframes pop{0%{transform:scale(.6) rotate(-8deg)}60%{transform:scale(1.15) rotate(6deg)}100%{transform:none}}.hav.pop svg{animation:pop .45s ease-out}@media(prefers-reduced-motion:reduce){.hav.pop svg{animation:none}}
+
+body{transition:background .4s;border-top:10px solid var(--hi)}
+.card{box-shadow:0 4px 0 var(--line)}
+.tab::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--hi);border:1.5px solid var(--ink);margin-right:6px}
+.ban{display:flex;gap:12px;align-items:center;background:var(--hi);color:#1d2a5b;border-radius:16px;padding:10px 16px;margin-bottom:14px;font-size:22px;font-weight:600;border:2px solid var(--ink)}
+.ban span{font-size:34px;line-height:1}.ban small{display:block;font-size:13px;font-weight:500;opacity:.8}
+.rhero{display:flex;flex-wrap:wrap;align-items:center;gap:14px;border-radius:18px;padding:16px;color:#1d2a5b;border:2px solid #1d2a5b;background:linear-gradient(120deg,#ff7eb6,#ffc93c 40%,#6fd68a 70%,#5bb8ff)}
+.rav svg{width:100px;height:auto;display:block}
+.rtx{flex:1 1 180px;min-width:0}.rk{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}.rn{font-size:26px;font-weight:600;line-height:1.15;word-break:break-word}.rc{font-size:14px}.rs{font-size:22px;margin-top:4px}
+.rg{margin-left:auto;text-align:center;background:#fff;color:#1d2a5b;border:3px solid #1d2a5b;border-radius:50%;width:124px;height:124px;display:flex;flex-direction:column;justify-content:center;align-items:center;line-height:1.1}
+.rg .big{font-size:42px}.rg b{font-size:13px}
+.rmsg{margin:14px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}.chip{flex:1 1 90px;border-radius:14px;padding:8px 10px;font-weight:600;color:#1d2a5b;text-align:center;font-size:13px;border:2px solid #1d2a5b}.chip b{display:block;font-size:24px;line-height:1.1}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.bc{border:2px solid var(--line);border-left:10px solid var(--c);border-radius:14px;padding:10px 12px;background:var(--card)}
+.bc .row{border:0;padding:0;align-items:center}.pill{background:var(--c);color:#1d2a5b;border-radius:999px;padding:2px 12px;font-weight:600;white-space:nowrap}.bc small{color:var(--soft);display:block;margin-top:4px;font-size:12px;line-height:1.3}
+.bh{color:#1d2a5b;border-radius:10px;padding:4px 12px;margin:14px 0 4px}
+@media print{*{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{border-top:0}.ban{display:none}}
+.pr{display:none}@media print{.pr{display:block}}</style></head><body><main>
+<h1>Divisibilidad</h1>
+<p class="sub"><b>Ámbito científico-técnico · 3.º ESO</b>. 5 bloques, 10 ejercicios en cada uno (4 de ellos para elegir la respuesta correcta). Escribe solo el número, sin puntos de millar (con signo − si es negativo; decimales con coma). Los números cambian cada vez que empiezas de nuevo.</p>
+<div class="name"><label for="nm">Tu nombre:</label><input id="nm" placeholder="Nombre y apellidos" autocomplete="name"><label for="cs">Curso:</label><input id="cs" placeholder="p. ej. 3.º ESO B" size="12"></div>
+<div class="name pbar"><button class="go" onclick="svOpen()">Guardar mi progreso</button><button class="go" onclick="ldOpen()">Continuar con un código</button></div><div id="av" class="avbar" aria-live="polite"><div id="ava"></div><div class="bub"><span id="avt"></span><div><button class="go" onclick="speak(PRES,this)">🔊 Escuchar la presentación</button> <label for="vz" style="font-size:14px">Voz:</label> <select id="vz" onchange="setVz(this.value)" aria-label="Elegir voz" style="font:inherit;font-size:14px;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:10px;padding:4px 8px;max-width:210px"></select></div></div></div>
+<div id="pn"></div>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div id="view"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const MR=Math.random.bind(Math);let rnd=MR,seed=0;const mul=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+const R=(a,b)=>Math.floor(rnd()*(b-a+1))+a,P=a=>a[R(0,a.length-1)],f=n=>n.toLocaleString('es-ES'),S=(b,e)=>`${b}<sup>${e}</sup>`;
+const gcd=(a,b)=>b?gcd(b,a%b):a,sh=a=>[...a].sort(()=>rnd()-.5);
+const ft=(n,d)=>d==1?''+n:`${n}/${d}`,rd=(n,d)=>{const g=gcd(n,d);return[n/g,d/g]},Q=(t,n,d,r)=>{const[x,y]=rd(n,d);return{t,a:x/y,s:ft(x,y),fr:[x,y],red:r}},ans=q=>q.s!=null?q.s:String(q.a);
+const dc=x=>String(+x.toFixed(6)).replace('.',','),Dd=(t,x)=>({t,a:+x.toFixed(6),s:dc(x),dec:1}),fx=(x,k)=>x.toFixed(k).replace('.',','),fs=([n,d])=>`${n}/${d}`,num=x=>+x.replace(',','.');
+const rs=()=>{const k=R(1,3);let t='';for(let i=0;i<k;i++)t+=R(0,9);if(t.endsWith('0'))t=t.slice(0,-1)+R(1,9);return t},dl=()=>{const e=R(1,9);let L;do{L=Array.from({length:4},()=>`${e},${rs()}`)}while(new Set(L.map(num)).size<4);return L};
+const isEx=d=>{d/=gcd(d,1);while(d%2==0)d/=2;while(d%5==0)d/=5;return d==1};
+const z=n=>n<0?'−'+(-n):''+n,nz=(a,b)=>{let x=0;while(!x)x=R(a,b);return x},sg=n=>n<0?'− '+(-n):'+ '+n;
+const SV=(w,h,i)=>`<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Ilustración" style="max-width:${w}px;width:100%;height:auto">${i}</svg>`;
+const sqImg=(side,area)=>SV(240,170,`<rect class="gs" x="60" y="30" width="120" height="120"/><text class="gt" x="120" y="22" text-anchor="middle">${side}</text><text class="gt" x="120" y="96" text-anchor="middle" style="font-weight:600">${area}</text>`);
+const cubeImg=l=>SV(240,195,`<polygon class="gs" points="60,70 150,70 150,160 60,160"/><polygon class="gs" style="opacity:.75" points="60,70 90,40 180,40 150,70"/><polygon class="gs" style="opacity:.55" points="150,70 180,40 180,130 150,160"/><text class="gt" x="120" y="184" text-anchor="middle">${l}</text>`);
+const grid=n=>{const c=Math.min(26,190/n),w=c*n;return SV(w+20,w+20,Array.from({length:n*n},(_,i)=>`<rect class="gs" x="${10+(i%n)*c}" y="${10+Math.floor(i/n)*c}" width="${c}" height="${c}"/>`).join(''))};
+const dobl=(b,st)=>{let g='';for(let s=0;s<=st;s++){const y=22+s*30;g+=`<text class="gt" x="8" y="${y+4}">Hora ${s}</text>`+Array.from({length:b**s},(_,j)=>`<circle class="gp" cx="${80+j*15}" cy="${y}" r="6"/>`).join('')}return SV(230,30*st+40,g)};
+const calcImg=t=>SV(220,140,`<rect class="gc" x="30" y="8" width="160" height="124" rx="12"/><rect class="gs" x="42" y="20" width="136" height="36" rx="4"/><text class="gt" x="170" y="46" text-anchor="end" style="font-size:22px;font-weight:700">${t}</text>`+Array.from({length:12},(_,i)=>`<circle class="gp" cx="${58+(i%4)*36}" cy="${80+Math.floor(i/4)*18}" r="6"/>`).join(''));
+const pref=()=>SV(300,170,`<text class="gt" x="150" y="14" text-anchor="middle" style="font-weight:600">Prefijos del Sistema Internacional</text>`+[['kilo (k)','10³ = 1000'],['hecto (h)','10² = 100'],['deca (da)','10¹ = 10'],['unidad','10⁰ = 1'],['deci (d)','10⁻¹ = 0,1'],['centi (c)','10⁻² = 0,01'],['mili (m)','10⁻³ = 0,001']].map((q,i)=>`<line class="gl" x1="20" x2="280" y1="${26+i*20}" y2="${26+i*20}"/><text class="gt" x="30" y="${42+i*20}">${q[0]}</text><text class="gt" x="150" y="${42+i*20}">${q[1]}</text>`).join(''));
+const PALT='Tabla de prefijos: kilo 10^3=1000, hecto 10^2=100, deca 10^1=10, unidad 10^0=1, deci 10^-1=0,1, centi 10^-2=0,01, mili 10^-3=0,001';
+const mon=(c,p)=>{const a=Math.abs(c);return((a==1&&p>0)?'':a)+(p==0?'':p==1?'x':`x<sup>${p}</sup>`)},pol=cs=>{let t='';for(let p=cs.length-1;p>=0;p--){const c=cs[p];if(!c)continue;t+=(t?(c<0?' − ':' + '):(c<0?'−':''))+mon(c,p)}return t||'0'},ev=(cs,x)=>cs.reduce((s,c,p)=>s+c*x**p,0),rp=d=>Array.from({length:d+1},(_,p)=>p==d?nz(-6,6):(R(0,2)?nz(-6,6):0)),cf=()=>{let x;do x=nz(-9,9);while(Math.abs(x)==1);return x};
+const rec=(t,sd)=>SV(260,150,`<rect class="gs" x="40" y="30" width="190" height="90"/><text class="gt" x="135" y="22" text-anchor="middle">${t}</text><text class="gt" x="36" y="80" text-anchor="end">${sd}</text>`);
+const areaImg=k=>SV(250,190,`<rect class="gs" x="40" y="30" width="110" height="110"/><rect class="gs" x="150" y="30" width="55" height="110" style="opacity:.7"/><rect class="gs" x="40" y="140" width="110" height="45" style="opacity:.7"/><rect class="gs" x="150" y="140" width="55" height="45" style="opacity:.5"/><text class="gt" x="95" y="24" text-anchor="middle">x</text><text class="gt" x="178" y="24" text-anchor="middle">${k}</text><text class="gt" x="34" y="90" text-anchor="end">x</text><text class="gt" x="34" y="166" text-anchor="end">${k}</text><text class="gt" x="95" y="90" text-anchor="middle" style="font-weight:600">x²</text><text class="gt" x="178" y="90" text-anchor="middle">?</text><text class="gt" x="95" y="168" text-anchor="middle">?</text><text class="gt" x="178" y="168" text-anchor="middle">?</text>`);
+const lab=w=>w==0?'el término independiente':w==1?'el coeficiente de x':`el coeficiente de x<sup>${w}</sup>`;
+const SL='x<sup>2</sup>y',NS=['xy<sup>2</sup>','x<sup>2</sup>','x<sup>2</sup>y<sup>2</sup>','xy','x<sup>3</sup>y','y<sup>2</sup>'];
+const lin=(a,b)=>`${a}x ${sg(b)}`;
+const gcdN=(a,b)=>b?gcdN(b,a%b):a,lcmN=(a,b)=>a/gcdN(a,b)*b,isPr=n=>{if(n<2)return false;for(let i=2;i*i<=n;i++)if(n%i==0)return false;return true},divsOf=n=>{const d=[];for(let i=1;i<=n;i++)if(n%i==0)d.push(i);return d},facOf=n=>{const o={};for(let p=2;n>1;p++)while(n%p==0){o[p]=(o[p]||0)+1;n/=p}return o},piN=n=>{let c=0;for(let i=2;i<=n;i++)if(isPr(i))c++;return c},nxP=n=>{let p=n+1;while(!isPr(p))p++;return p},pvP=n=>{let p=n-1;while(!isPr(p))p--;return p},cop=()=>{let x,y;do{x=R(2,9);y=R(2,9)}while(gcdN(x,y)!=1||x==y);return[x,y]};
+const grid30=k=>SV(250,190,Array.from({length:30},(_,i)=>{const n=i+1,x=10+(i%6)*38,y=10+Math.floor(i/6)*34;return`<rect class="${n%k==0?'gs':'gc'}" x="${x}" y="${y}" width="34" height="30" rx="4"/><text class="gt" x="${x+17}" y="${y+20}" text-anchor="middle">${n}</text>`}).join(''));
+const criba=N=>{const c=10,r=Math.ceil(N/c);return SV(c*34+16,r*30+16,Array.from({length:N},(_,i)=>{const n=i+1,x=8+(i%c)*34,y=8+Math.floor(i/c)*30,cr=n==1||[2,3,5].some(p=>n%p==0&&n!=p);return`<rect class="${cr?'gc':'gs'}" x="${x}" y="${y}" width="30" height="26" rx="4"${cr?' style="opacity:.5"':''}/><text class="gt" x="${x+15}" y="${y+18}" text-anchor="middle">${n}</text>${cr?`<line x1="${x+4}" y1="${y+22}" x2="${x+26}" y2="${y+4}" style="stroke:var(--ink);stroke-width:2"/>`:''}`}).join(''))};
+const venn=(a,b)=>{const da=divsOf(a),db=divsOf(b),l=da.filter(x=>!db.includes(x)),m=da.filter(x=>db.includes(x)),r=db.filter(x=>!da.includes(x)),col=(arr,x)=>{const ls=[];for(let i=0;i<arr.length;i+=2)ls.push(arr.slice(i,i+2).join(', '));return ls.map((t,i)=>`<text class="gt" x="${x}" y="${94-(ls.length-1)*8+i*16}" text-anchor="middle">${t}</text>`).join('')};
+return SV(300,190,`<circle cx="115" cy="100" r="72" class="gs" style="opacity:.55"/><circle cx="185" cy="100" r="72" class="gp" style="opacity:.55"/><text class="gt" x="80" y="14" text-anchor="middle" style="font-weight:600">Divisores de ${a}</text><text class="gt" x="220" y="14" text-anchor="middle" style="font-weight:600">Divisores de ${b}</text>`+col(l,78)+col(m,150)+col(r,222))};
+const arbol=(n,p,h)=>{const x=p[0]*p[1],y=p[2]*p[3],lf=p.map((v,i)=>i==h?'?':v),nd=(cx,cy,t,c)=>`<circle cx="${cx}" cy="${cy}" r="19" class="${c}"/><text class="gt" x="${cx}" y="${cy+4}" text-anchor="middle" style="font-weight:600">${t}</text>`,ln=(a,b,c,d)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" style="stroke:var(--ink);stroke-width:2"/>`;
+return SV(280,200,ln(140,34,75,84)+ln(140,34,205,84)+ln(75,104,45,154)+ln(75,104,105,154)+ln(205,104,175,154)+ln(205,104,235,154)+nd(140,26,n,'gs')+nd(75,94,x,'gs')+nd(205,94,y,'gs')+[45,105,175,235].map((cx,i)=>nd(cx,164,lf[i],i==h?'gc':'gp')).join(''))};
+const mkN=()=>{const e=[R(1,3),R(0,2),R(0,1),R(0,1)],ps=[2,3,5,7];return{N:ps.reduce((s,p,i)=>s*p**e[i],1),e,ps}};
+const DH={2:'Un número es divisible por 2 si termina en cifra par.',3:'Un número es divisible por 3 si la suma de sus cifras es múltiplo de 3.',5:'Un número es divisible por 5 si termina en 0 o en 5.',9:'Un número es divisible por 9 si la suma de sus cifras es múltiplo de 9.'};
+const B=[
+{n:'Múltiplos y divisores',e:'✖️',tip:'Un múltiplo de a se obtiene multiplicando a por un número natural (a, 2a, 3a…). Un divisor de a es un número que lo divide de forma exacta (resto 0). Si b es múltiplo de a, entonces a es divisor de b. Criterios de divisibilidad: por 2, si acaba en cifra par; por 3, si la suma de sus cifras es múltiplo de 3; por 5, si acaba en 0 o 5; por 9, si la suma de sus cifras es múltiplo de 9; por 10, si acaba en 0.',T:[
+()=>{const N=P([12,18,20,24,28,30,36,40,42,45,48,60,72]);return{t:`¿Cuántos divisores tiene el número ${N}?`,a:divsOf(N).length,hh:'Busca los números que dividen a ese número de forma exacta, empezando por el 1 y por él mismo. Ve probando en orden y fíjate en que los divisores van por parejas.'}},
+()=>{const k=R(3,9),m=k*R(5,12);return{t:`¿Qué múltiplo de ${k} está entre ${m-k+2} y ${m+k-2}?`,a:m,hh:'Los múltiplos de un número se obtienen multiplicándolo por 1, 2, 3… Busca cuál cae dentro del intervalo.'}},
+()=>{const j=R(3,9),M=R(60,200);return{t:`¿Cuántos múltiplos de ${j} hay menores o iguales que ${M}? (no cuentes el 0)`,a:Math.floor(M/j),hh:'Piensa cuántas veces cabe ese número en el límite: la división entera te lo dice.'}},
+()=>{const k=P([3,4,5,6,7]);return{t:`En el cuadro de la figura están coloreados los múltiplos de un mismo número. ¿De qué número son múltiplos?`,a:k,g:grid30(k),alt:'Cuadro del 1 al 30 con los múltiplos de '+k+' coloreados',hh:'Mira los números coloreados: ¿qué diferencia hay entre uno y el siguiente? Fíjate también en cuál es el primero.'}},
+()=>{const k=R(6,15),N=R(50,150);return{t:`¿Cuál es el menor múltiplo de ${k} que es mayor que ${N}?`,a:(Math.floor(N/k)+1)*k,hh:'Divide el número entre ese valor para ver cuántas veces cabe; el siguiente múltiplo es el que buscas.'}},
+()=>{const N=P([24,30,36,40,42,45,48,50,56,60,63,70,72,90]);return{t:`¿Cuál es el mayor divisor de ${N} que es menor que ${N}?`,a:N/Math.min(...Object.keys(facOf(N)).map(Number)),hh:'Los divisores van por parejas: si d divide al número, también lo divide el cociente. Piensa en el divisor más pequeño distinto de 1 y en su pareja.'}},
+()=>{const N=P([12,18,20,24,28,30,36]);return{t:`¿Cuánto suman todos los divisores de ${N}?`,a:divsOf(N).reduce((x,y)=>x+y,0),hh:'Escribe todos los divisores (incluidos el 1 y el propio número) y súmalos. Compruébalos por parejas para no olvidar ninguno.'}},
+()=>{const d=P([2,3,5,9]),L=Array.from({length:6},()=>R(100,999));return{t:`¿Cuántos de estos números son divisibles por ${d}? ${L.join(' ; ')}`,a:L.filter(x=>x%d==0).length,hh:DH[d]+' Aplícalo a cada número.'}},
+()=>{let a,b;do{a=R(1,9);b=R(1,9)}while((a+b)%9==0);return{t:`¿Qué cifra hay que escribir en lugar de ? para que el número ${a}?${b} sea divisible por 9?`,a:(9-(a+b)%9)%9,hh:'Un número es divisible por 9 si la suma de sus cifras es múltiplo de 9. ¿Cuánto falta para llegar al siguiente múltiplo de 9?'}},
+()=>{const a=R(3,12),q=R(5,15);return{t:`Sabemos que ${a*q} es múltiplo de ${a}. ¿Por qué número hay que multiplicar ${a} para obtener ${a*q}?`,a:q,hh:'Si un número es múltiplo de otro, sale de multiplicarlo por un número natural. Para averiguarlo, haz la operación inversa.'}}]},
+{n:'MCD y MCM',e:'🔗',tip:'El m.c.d. de dos números es el mayor número que divide a los dos. El m.c.m. es el menor múltiplo común distinto de cero. Con la descomposición en factores primos: el m.c.d. se forma con los factores comunes elevados al menor exponente; el m.c.m., con los comunes y no comunes elevados al mayor exponente. Se cumple a · b = m.c.d. · m.c.m. Dos números son primos entre sí si su m.c.d. es 1.',T:[
+()=>{const g=R(2,12),x=R(2,9),y=R(2,9);return{t:`Calcula el m.c.d. de ${g*x} y ${g*y}.`,a:gcdN(g*x,g*y),hh:'El m.c.d. es el mayor número que divide a los dos. Escribe los divisores de cada uno y busca el mayor que tengan en común, o usa la descomposición en factores primos.'}},
+()=>{const a=R(4,15),b=a+R(1,8);return{t:`Calcula el m.c.m. de ${a} y ${b}.`,a:lcmN(a,b),hh:'El m.c.m. es el menor múltiplo común distinto de cero. Escribe los primeros múltiplos de cada uno hasta encontrar el primero que se repite.'}},
+()=>{const p=P([[12,18],[16,24],[18,30],[20,30],[24,36],[28,42],[30,45]]);return{t:`En el diagrama están los divisores de ${p[0]} y de ${p[1]}. Según el diagrama, ¿cuál es el máximo común divisor?`,a:gcdN(p[0],p[1]),g:venn(p[0],p[1]),alt:'Diagrama de los divisores de '+p[0]+' y de '+p[1]+'. Divisores comunes: '+divsOf(p[0]).filter(x=>p[1]%x==0).join(', '),hh:'Los divisores comunes están en la zona donde se cruzan los dos círculos. Elige el mayor de ellos.'}},
+()=>{const g=R(2,6),[x,y]=cop();return{t:`El m.c.d. de dos números es ${g} y su producto es ${g*x*g*y}. ¿Cuánto vale su m.c.m.?`,a:g*x*y,hh:'Recuerda la relación entre el producto de dos números, su m.c.d. y su m.c.m.'}},
+()=>{const g=R(2,9),x=R(2,6),y=R(2,6);return{t:`¿Cuántos divisores comunes tienen ${g*x} y ${g*y}?`,a:divsOf(gcdN(g*x,g*y)).length,hh:'Todos los divisores comunes de dos números son divisores de su m.c.d. Calcula el m.c.d. y cuenta sus divisores.'}},
+()=>{const p=P([[4,6],[6,8],[6,9],[4,10],[8,12],[6,10],[9,12]]),M=R(100,250);return{t:`¿Cuántos múltiplos comunes de ${p[0]} y ${p[1]} hay menores que ${M} (sin contar el 0)?`,a:Math.floor((M-1)/lcmN(p[0],p[1])),hh:'Los múltiplos comunes de dos números son los múltiplos de su m.c.m. Averigua cuántos caben antes del límite.'}},
+()=>{const Cp=[[8,9],[7,10],[9,16],[11,15],[14,25],[21,22]],Np=[[6,9],[8,12],[10,15],[14,21],[12,18],[20,30]],k=R(1,3),L=sh([...sh(Cp).slice(0,k),...sh(Np).slice(0,4-k)]);return{t:`¿Cuántos de estos pares de números son primos entre sí (su m.c.d. es 1)? ${L.map(x=>'('+x[0]+', '+x[1]+')').join(' ; ')}`,a:k,hh:'Dos números son primos entre sí si no tienen ningún divisor común aparte del 1. Comprueba cada pareja.'}},
+()=>{const p=P([[4,6],[6,8],[3,5],[6,9],[4,10],[5,6],[8,12]]),ml=(n)=>Array.from({length:8},(_,i)=>n*(i+1)).join(', ');return{t:`Múltiplos de ${p[0]}: ${ml(p[0])}. Múltiplos de ${p[1]}: ${ml(p[1])}. ¿Cuál es el primer múltiplo que aparece en las dos listas?`,a:lcmN(p[0],p[1]),hh:'Recorre la primera lista de menor a mayor y comprueba si el número aparece también en la segunda.'}},
+()=>{const g=R(2,9),[x,y]=cop();return{t:`Para simplificar la fracción ${g*x}/${g*y} hasta que sea irreducible, ¿entre qué número hay que dividir el numerador y el denominador?`,a:g,hh:'Una fracción es irreducible cuando numerador y denominador no tienen divisores comunes. ¿Qué número divide a los dos y es el mayor posible?'}},
+()=>{const a=R(4,9),b=a+R(1,5);return{t:`Para sumar 1/${a} + 1/${b} se usa como denominador común el menor posible. ¿Cuál es?`,a:lcmN(a,b),hh:'El denominador común más pequeño es el menor múltiplo que comparten los dos denominadores.'}}]},
+{n:'Primos y compuestos',e:'🔐',tip:'Un número primo solo tiene dos divisores: el 1 y él mismo (2, 3, 5, 7, 11…). Un número compuesto tiene más de dos divisores. El 1 no es primo ni compuesto. El único primo par es el 2. Para saber si un número es primo, se prueba a dividirlo entre los primos menores o iguales que su raíz cuadrada. La criba de Eratóstenes tacha los múltiplos de cada primo.',T:[
+()=>{const a=R(10,40),b=a+R(10,20);let c=0;for(let i=a;i<=b;i++)if(isPr(i))c++;return{t:`¿Cuántos números primos hay entre ${a} y ${b}, ambos incluidos?`,a:c,hh:'Revisa uno a uno los números del intervalo y descarta los que tengan algún divisor aparte del 1 y de sí mismos. Empieza descartando los pares y los acabados en 5.'}},
+()=>{const n=R(20,90);return{t:`¿Cuál es el menor número primo mayor que ${n}?`,a:nxP(n),hh:'Prueba con los números siguientes, uno a uno, y comprueba si tienen algún divisor aparte del 1 y de sí mismos.'}},
+()=>{const N=P([30,40,48]);return{t:`En la criba de Eratóstenes de la figura se han tachado el 1 y los múltiplos de 2, 3 y 5 (sin tachar el 2, el 3 ni el 5). ¿Cuántos números quedan sin tachar?`,a:piN(N),g:criba(N),alt:'Criba de Eratóstenes hasta '+N+' con tachados el 1 y los múltiplos de 2, 3 y 5',hh:'Cuenta los números que quedan con color en la figura. Esos números no tienen más divisores que el 1 y ellos mismos.'}},
+()=>{const L=[];while(L.length<6){const x=R(4,60);if(!L.includes(x))L.push(x)}return{t:`¿Cuántos de estos números son primos? ${L.join(', ')}`,a:L.filter(isPr).length,hh:'Un número primo solo tiene dos divisores. Descarta los pares (salvo el 2), los acabados en 5 y los múltiplos de 3, y comprueba el resto.'}},
+()=>{const Cm=sh([4,6,8,9,10,12,14,15,16,18,21,25,27,33,35]).slice(0,R(1,4)),Pn=sh([2,3,5,7,11,13,17,19,23]).slice(0,R(1,3)),one=R(0,1)?[1]:[],L=sh([...Cm,...Pn,...one]);return{t:`¿Cuántos de estos números son compuestos? ${L.join(', ')}`,a:Cm.length,hh:'Un número compuesto tiene más de dos divisores. Cuidado con el 1: no es primo ni compuesto.'}},
+()=>{const N=P([10,20,30,40]);return{t:`¿Cuántos números primos impares hay menores que ${N}?`,a:piN(N-1)-1,hh:'Escribe los primos menores que ese número y quita el único primo que es par.'}},
+()=>{const n=R(30,100);return{t:`¿Cuál es el mayor número primo menor que ${n}?`,a:pvP(n),hh:'Ve bajando desde el número anterior y comprueba si cada uno tiene algún divisor aparte del 1 y de sí mismo.'}},
+()=>{const p=P([23,29,31,53,61,73,83,89,113]),q=nxP(p);return{t:`Los números primos consecutivos ${p} y ${q} tienen números compuestos entre ellos. ¿Cuántos números compuestos hay entre los dos?`,a:q-p-1,hh:'Entre dos primos consecutivos no hay ningún otro primo, así que todos los números intermedios son compuestos. Cuéntalos.'}},
+()=>{const n=R(60,200),r=Math.floor(Math.sqrt(n));return{t:`Para comprobar si ${n} es primo se prueba a dividirlo entre los primos menores o iguales que su raíz cuadrada. ¿Cuál es el mayor primo que hay que probar?`,a:isPr(r)?r:pvP(r),hh:'Calcula aproximadamente la raíz cuadrada del número y busca el mayor primo que no la supere.'}},
+()=>{const N=P([10,15,20,25,30]);let s=0;for(let i=2;i<=N;i++)if(isPr(i))s+=i;return{t:`¿Cuánto suman todos los números primos menores o iguales que ${N}?`,a:s,hh:'Escribe los primos hasta ese número y súmalos. Recuerda que el 1 no es primo.'}}]},
+{n:'Factores primos',e:'🌳',tip:'Descomponer un número en factores primos es escribirlo como producto de números primos: 60 = 2² · 3 · 5. Se divide entre 2 mientras se pueda, luego entre 3, 5, 7… hasta llegar a 1. El número de divisores es el producto de (exponente + 1) de cada factor. Un número es cuadrado perfecto si todos los exponentes son pares.',T:[
+()=>{const e=[R(1,3),R(0,2),R(0,2)],ps=[2,3,5],N=ps.reduce((s,p,i)=>s*p**e[i],1),i=P([0,1,2].filter(x=>e[x]>0));return{t:`${f(N)} = 2<sup>a</sup> · 3<sup>b</sup> · 5<sup>c</sup>. ¿Cuánto vale el exponente del ${ps[i]}?`,a:e[i],hh:'Divide el número entre ese primo todas las veces que puedas y cuenta cuántas veces lo has conseguido.'}},
+()=>{const {N}=mkN();return{t:`¿Cuántos factores primos distintos tiene el número ${f(N)}?`,a:Object.keys(facOf(N)).length,hh:'Descompón el número en factores primos y cuenta cuántos primos diferentes aparecen (sin contar las repeticiones).'}},
+()=>{const {N}=mkN();return{t:`¿Cuál es el mayor factor primo de ${f(N)}?`,a:Math.max(...Object.keys(facOf(N)).map(Number)),hh:'Descompón el número en factores primos y fíjate en el mayor de los primos que aparecen.'}},
+()=>{const p=sh([2,3,5,7]),h=R(0,3),n=p[0]*p[1]*p[2]*p[3];return{t:`El árbol de factores de ${n} termina en cuatro números primos (figura). ¿Qué número primo falta?`,a:p[h],g:arbol(n,p,h),alt:'Árbol de factores de '+n+' con hojas '+p.join(', '),hh:'Cada número del árbol es el producto de los dos que salen de él. Usa los números que ves para averiguar el que falta.'}},
+()=>{const a=R(2,4),b=R(1,3),q=P([5,7]);return{t:`Calcula 2<sup>${a}</sup> · 3<sup>${b}</sup> · ${q}.`,a:2**a*3**b*q,hh:'Calcula primero cada potencia y después multiplica los resultados.'}},
+()=>{const a=R(1,4),b=R(1,3);return{t:`Si N = 2<sup>${a}</sup> · 3<sup>${b}</sup>, ¿cuántos divisores tiene N?`,a:(a+1)*(b+1),hh:'El número de divisores sale de sumar 1 a cada exponente y multiplicar los resultados.'}},
+()=>{const N=P([12,18,20,24,28,45,48,50,72,75,98,108]),o=Object.entries(facOf(N)).filter(([p,e])=>e%2).reduce((s,[p])=>s*p,1);return{t:`¿Cuál es el menor número por el que hay que multiplicar ${N} para obtener un cuadrado perfecto?`,a:o,hh:'Descompón el número en factores primos: un cuadrado perfecto tiene todos los exponentes pares. ¿Qué factores tienen exponente impar?'}},
+()=>{const {N}=mkN();return{t:`¿Cuánto suman los factores primos distintos de ${f(N)}?`,a:Object.keys(facOf(N)).map(Number).reduce((x,y)=>x+y,0),hh:'Descompón el número en factores primos y suma cada primo una sola vez, aunque se repita.'}},
+()=>{const {N}=mkN();return{t:`En la descomposición en factores primos de ${f(N)}, contando las repeticiones, ¿cuántos factores primos hay en total?`,a:Object.values(facOf(N)).reduce((x,y)=>x+y,0),hh:'Descompón el número y cuenta todos los factores, sumando también las veces que se repite cada primo.'}},
+()=>{const a1=R(1,3),b1=R(0,2),a2=R(1,3),b2=R(0,2),m=R(0,1);return{t:`Dados A = 2<sup>${a1}</sup> · 3<sup>${b1}</sup> y B = 2<sup>${a2}</sup> · 3<sup>${b2}</sup>, ¿cuánto vale su ${m?'m.c.m.':'m.c.d.'}?`,a:m?2**Math.max(a1,a2)*3**Math.max(b1,b2):2**Math.min(a1,a2)*3**Math.min(b1,b2),hh:m?'El m.c.m. toma todos los factores, comunes y no comunes, con el mayor exponente. Después calcula el número.':'El m.c.d. toma solo los factores comunes con el menor exponente. Después calcula el número.'}}]},
+{n:'Problemas de aplicación',e:'🛒',tip:'Lee el problema y decide qué necesitas: si hay que repartir o dividir en partes iguales lo más grandes posible, usa el m.c.d.; si hay que ver cuándo vuelven a coincidir sucesos que se repiten, usa el m.c.m.; si hay que contar formas de agrupar, piensa en los divisores. Comprueba que la solución tiene sentido en el contexto.',T:[
+()=>{const a=R(4,12),b=a+R(1,8);return{t:`Dos faros emiten un destello cada ${a} y cada ${b} segundos. Si acaban de coincidir, ¿cuántos segundos pasarán hasta que vuelvan a coincidir?`,a:lcmN(a,b),hh:'Los destellos coinciden en los múltiplos comunes de los dos tiempos. Busca el menor de ellos.'}},
+()=>{const gg=R(2,9),x=R(2,9),y=R(2,9);return{t:`María tiene ${gg*x} lápices y ${gg*y} gomas. Quiere hacer el mayor número posible de lotes iguales sin que sobre nada. ¿Cuántos lotes puede hacer?`,a:gcdN(gg*x,gg*y),hh:'El número de lotes debe dividir a los dos totales a la vez, y tiene que ser lo mayor posible.'}},
+()=>{const gg=R(2,9),x=R(2,9),y=R(2,9);return{t:`Un suelo rectangular se cubre con baldosas cuadradas lo más grandes posible, sin cortar ninguna (figura). ¿Cuánto mide el lado de cada baldosa, en dm?`,a:gcdN(gg*x*2,gg*y*2),g:rec((gg*x*2)+' dm',(gg*y*2)+' dm'),alt:'Suelo rectangular de '+(gg*x*2)+' dm por '+(gg*y*2)+' dm',hh:'El lado de la baldosa tiene que caber un número exacto de veces en el largo y en el ancho, y ser lo mayor posible.'}},
+()=>{const N=P([12,18,20,24,30,36,40,42,48]);return{t:`En una clase de ${N} alumnos se quieren formar grupos iguales con más de 1 alumno por grupo y con más de 1 grupo, sin que sobre nadie. ¿De cuántas formas distintas se puede hacer?`,a:divsOf(N).length-2,hh:'El tamaño del grupo tiene que dividir al número de alumnos. Cuenta los divisores y descarta los dos casos que no valen.'}},
+()=>{const n=R(100,240),pl=P([40,45,50,55]);return{t:`Un colegio organiza una excursión con ${n} alumnos. Cada autobús tiene ${pl} plazas. ¿Cuántos autobuses hacen falta como mínimo?`,a:Math.ceil(n/pl),hh:'Divide los alumnos entre las plazas. Si sobran alumnos, hace falta un autobús más.'}},
+()=>{let N;do N=R(30,100);while(N%7==0);return{t:`Un viaje dura ${N} días. Si lo organizamos en semanas completas de 7 días, ¿cuántos días sobran?`,a:N%7,hh:'Divide el número de días entre 7: el resto de la división es lo que sobra.'}},
+()=>{const p=P([[12,18],[15,20],[16,24],[18,24],[20,30],[24,36],[10,25]]);return{t:`Dos ruedas dentadas con ${p[0]} y ${p[1]} dientes están engranadas. Si parten de la posición inicial, ¿cuántas vueltas completas da la primera hasta que las dos vuelvan a estar a la vez en la posición inicial?`,a:lcmN(p[0],p[1])/p[0],hh:'Las ruedas vuelven a coincidir cuando han pasado un número de dientes que es múltiplo de los dos. Busca el menor y averigua cuántas vueltas son para la primera.'}},
+()=>{const N=P([20,25,30,40]);return{t:`En un equipo los dorsales van del 1 al ${N}. ¿Cuántos jugadores tienen un dorsal que es un número primo?`,a:piN(N),hh:'Escribe los números del 1 al último dorsal y cuenta cuáles son primos. Recuerda que el 1 no lo es.'}},
+()=>{const A=P([24,30,36,48,60]);return{t:`Se quiere dibujar un rectángulo de ${A} cm² de área con lados que midan un número entero de cm. ¿Cuántos rectángulos distintos se pueden dibujar? (uno de 3 por 8 es el mismo que uno de 8 por 3)`,a:Math.ceil(divsOf(A).length/2),hh:'El largo y el ancho son dos divisores del área cuyo producto es el área. Cuenta las parejas de divisores sin repetir.'}},
+()=>{const gg=R(2,9),[x,y]=cop();return{t:`Se tienen dos cuerdas de ${gg*x} m y de ${gg*y} m. Se cortan en trozos iguales, lo más largos posible, sin que sobre nada. ¿Cuántos trozos salen en total?`,a:x+y,hh:'Primero halla la longitud máxima del trozo (m.c.d.). Después calcula cuántos trozos salen de cada cuerda y súmalos.'}}]}
+];
+const mkO=q=>{if(q.o)return sh(q.o);const a=q.a;let c;
+if(q.fr){const[n,d]=q.fr;c=[[n+1,d],[n,d+1],[n+1,d+1],[d,n],[n-1,d],[n,d-1],[n+2,d],[n,d+2],[2*n,d]].filter(([x,y])=>x>=1&&y>=1&&Math.abs(x/y-a)>1e-9).map(([x,y])=>ft(x,y))}
+else if(q.dec){const u=Math.pow(10,-((String(q.s).split(',')[1]||'').length));c=[a+u,a-u,a+10*u,a-10*u,a*10,a/10,a*100,a/100,a+1,a-1,a+2*u,a+100*u].filter(v=>v>=0&&Math.abs(v-a)>1e-9).map(dc)}
+else c=[-a,a+1,a-1,a+2,a-2,a+10,a-10,a+3,a+5,a+100,a+7].filter(v=>v!=a).map(String);
+return sh([ans(q),...sh([...new Set(c)]).slice(0,3)])};
+const O=(q,i)=>`<div class="opts" role="radiogroup" aria-label="Opciones ${i+1}">`+q.o.map(v=>`<label><input type="radio" name="o${i}" value="${v}" ${q.pts!==null||q.bad.includes(v)?'disabled':''}${q.pts!==null&&q.pts>0&&v==ans(q)?' checked':''}>${v}</label>`).join('')+'</div>';
+let St,cur=0,mode=null,lc=0;
+function gen0(sd){seed=sd;rnd=mul(sd);St=B.map(b=>sh(b.T).slice(0,10).map(fn=>fn()).map((q,i)=>({...q,tries:0,pts:null,msg:'',bad:[],o:[1,3,6,8].includes(i)?mkO(q):null})));
+}
+function gen(sd){gen0(sd);St.forEach(b=>b.forEach(q=>{q.h=q.hh||hintFor(q.t);q.hu=0}))}
+function start(){AV=newAv();gen((MR()*4294967296)>>>0);cur=0;mode=null;draw();say(PRES,'cheer')}
+function draw(){theme(cur);if(cur<B.length)lastCur=cur;
+document.getElementById('tabs').innerHTML=B.map((b,i)=>`<button style="--hi:${TH[i].h}" class="tab${St[i].every(q=>q.pts!==null)?' done':''}" role="tab" aria-selected="${cur==i}" onclick="cur=${i};draw()">${b.e} ${b.n}</button>`).join('')+`<button style="--hi:${TH[7].h}" class="tab" role="tab" aria-selected="${cur==B.length}" onclick="cur=B.length;draw()">🏆 Mi nota</button>`;
+const v=document.getElementById('view');
+if(cur==B.length)return report(v);
+const b=B[cur];
+v.innerHTML=`<div class="ban"><span>${b.e}</span><div><small>Bloque ${cur+1} de ${B.length}</small>${b.n}</div></div><details open><summary>💡 Recuerda</summary><p>${b.tip}</p></details>`+St[cur].map((q,i)=>`<div class="card"><div class="q"><div class="t"><b>${i+1}.</b> ${q.t}</div>${q.g?`<div class="gr">${q.g}</div>`:''}
+${q.o?O(q,i):`<input id="i${i}" inputmode="text" autocomplete="off" aria-label="Respuesta ${i+1}" ${q.pts!==null?'disabled':''} onkeydown="if(event.key=='Enter')chk(${i})">`}<button class="go" onclick="chk(${i})" ${q.pts!==null?'disabled':''}>Comprobar</button><span class="msg ${q.pts===null?'wrong':'good'}">${q.msg}</span>${hb(q,i)}</div></div>`).join('')+
+`<div class="nav"><button class="go" ${cur==0?'disabled':''} onclick="cur--;draw()">Anterior</button><button class="go" onclick="cur++;draw()">${cur==B.length-1?'Ver mi nota':'Siguiente'}</button></div>`}
+const pa=r=>{r=String(r).replace(/[−–]/g,'-').replace(/\s+/g,'').replace(',','.');if(/^-?\d+\/-?\d+$/.test(r)){const[n,d]=r.split('/').map(Number);return d?n/d:NaN}return/^-?\d*\.?\d+$/.test(r)?+r:NaN};
+function chk(i){const q=St[cur][i];if(q.pts!==null)return;const raw=q.o?((document.querySelector('input[name=o'+i+']:checked')||{}).value||''):document.getElementById('i'+i).value.trim();
+if(raw==='')return;const v=pa(raw);if(isNaN(v)){q.msg='Escribe un número, por ejemplo 2,35 (sin puntos de millar).';draw();return}
+const ok=q.red?raw.replace(/\s/g,'')===q.s:Math.abs(v-q.a)<1e-9;q.tries++;q.ans=raw;if(q.o&&!ok)q.bad.push(raw);
+if(ok){q.pts=pen(q.tries==1?1:.5,q);q.msg=okm(q)}
+else if(q.tries==1)q.msg='Casi. Repasa el recuadro "Recuerda" e inténtalo otra vez.';
+else{q.pts=0;q.msg='La solución era '+ans(q)+'. ¡Fíjate cómo se hace!'}
+draw();if(q.pts===null){const e=document.getElementById('i'+i);e&&e.focus()}else for(let k=i+1;k<10;k++){const e=document.getElementById('i'+k);if(e&&!e.disabled){e.focus();break}}}
+const C=[{s:'A. Sentido numérico: múltiplos y divisores de un número natural; criterios de divisibilidad',c:['ACT.3.6.4','ACT.3.2.1','ACT.3.9.1']},
+{s:'A. Sentido numérico: máximo común divisor y mínimo común múltiplo de dos números',c:['ACT.3.6.4','ACT.3.2.2','ACT.3.1.2']},
+{s:'A. Sentido numérico: números primos y compuestos',c:['ACT.3.6.4','ACT.3.8.1','ACT.3.9.1']},
+{s:'A. Sentido numérico: descomposición en factores primos',c:['ACT.3.6.4','ACT.3.2.1','ACT.3.9.1']},
+{s:'A. Sentido numérico: resolución de problemas de divisibilidad (m.c.d., m.c.m. y divisores)',c:['ACT.3.6.1','ACT.3.6.4','ACT.3.1.2','ACT.3.8.1']}];
+const CR={'ACT.3.1.2':'Comprobar la validez de las soluciones a un problema desde un punto de vista lógico-matemático y elaborar las respuestas evaluando su alcance, repercusión y coherencia en su contexto.','ACT.3.2.1':'Reconocer y usar las relaciones entre los conocimientos y experiencias matemáticas formando un todo coherente.','ACT.3.2.2':'Realizar conexiones entre diferentes procesos matemáticos aplicando conocimientos y experiencias.','ACT.3.6.1':'Interpretar y comprender problemas matemáticos de la vida cotidiana y fenómenos fisicoquímicos, organizando los datos dados, estableciendo relaciones entre ellos, comprendiendo las preguntas formuladas y explicarlos en términos básicos de los principios, teorías y leyes científicas.','ACT.3.6.4':'Resolver problemas matemáticos y fisicoquímicos movilizando los conocimientos necesarios, aplicando las teorías y leyes científicas, razonando los procedimientos, expresando adecuadamente los resultados y aceptando el error como parte del proceso.','ACT.3.8.1':'Analizar problemas cotidianos o dar explicación a procesos naturales, utilizando conocimientos, organizando datos e información aportados, a través del razonamiento lógico, el pensamiento computacional o recursos digitales.','ACT.3.9.1':'Analizar conceptos y procesos relacionados con los saberes de Biología y Geología, Física y Química y Matemáticas interpretando información en diferentes formatos (modelos, gráficos, tablas, diagramas, fórmulas, esquemas, símbolos, páginas web, etc.), manteniendo una actitud crítica, obteniendo conclusiones fundamentadas y usando adecuadamente los datos para la resolución de un problema.'};
+const cual=n=>n<5?'Insuficiente':n<6?'Suficiente':n<7?'Bien':n<9?'Notable':'Sobresaliente';
+const bp=i=>St[i].reduce((s,q)=>s+(q.pts||0),0),fn=x=>x.toFixed(1).replace('.',','),nota=()=>St.flat().reduce((s,q)=>s+(q.pts||0),0)/(B.length*10)*10;
+const crit=()=>Object.keys(CR).filter(k=>C.some(c=>c.c.includes(k))).map(k=>{const bs=C.map((c,i)=>c.c.includes(k)?i:-1).filter(i=>i>=0);return{k,t:CR[k],p:Math.round(bs.reduce((s,i)=>s+bp(i),0)/(10*bs.length)*100)}});
+const pl=s=>String(s).replace(/<sup>(.*?)<\/sup>/g,'^$1').replace(/<[^>]+>/g,'').replace(/√/g,'raiz de ').replace(/−/g,'-').replace(/€/g,' euros').replace(/→/g,'->').replace(/[^\x00-\xFF]/g,'');
+const det=()=>{const sol=q=>typeof ans=='function'?ans(q):q.a,nm=document.getElementById('nm').value.trim()||'Sin nombre',cs=document.getElementById('cs').value.trim()||'sin indicar';
+return`<div class="card" id="det"><h2>📋 Detalle de los ejercicios</h2><p class="sub">Alumno/a: ${nm} · Curso: ${cs} · Fecha: ${new Date().toLocaleDateString('es-ES')} · Pistas usadas: ${St.flat().filter(q=>q.hu).length}</p>`+B.map((b,i)=>`<p class="bh" style="background:${TH[i].h}"><b>${b.e} ${b.n}</b> (${fn(bp(i))} / 10)</p>`+St[i].map((q,j)=>`<div class="crit"><b>${mk(q)} ${j+1}.</b> ${q.t}${q.alt?` <i>[${q.alt}]</i>`:''}<small>Respuesta: ${q.ans==null?'sin responder':q.ans}${mode=='con'?' · Solución: '+sol(q):''} · Puntos: ${q.pts==null?'-':String(q.pts).replace('.',',')}${q.hu?' · Pista usada (−0,25)':''}</small></div>`).join('')).join('')+`</div>`};
+function gate(v){v.innerHTML=`<div class="card"><h2>Antes de ver tu nota</h2><p>Elige qué informe quieres generar:</p>
+<div class="opts" role="radiogroup" aria-label="Tipo de informe" style="flex-direction:column;align-items:stretch"><label><input type="radio" name="md" value="sin"> Informe con resultados, sin soluciones</label>
+<label><input type="radio" name="md" value="con"> Informe con resultados y con soluciones (hace falta el código)</label></div>
+<p><label for="cd">Código (solo para el informe con soluciones):</label> <input id="cd" type="password" autocomplete="off" size="14"></p>
+<p><button class="go" onclick="setMode()">Ver mi nota y generar el informe</button></p>${St.flat().some(q=>q.pts===null)?'<p>Aún tienes ejercicios sin responder.</p><p><button class="go" style="background:var(--hi);color:#1d2a5b" onclick="resume()">▶ Seguir por donde iba</button></p>':''}<p class="msg wrong" id="gm" role="status"></p></div>`}
+function setMode(){const m=(document.querySelector('input[name=md]:checked')||{}).value,g=document.getElementById('gm');
+if(!m){g.textContent='Elige una de las dos opciones.';return}
+if(m=='con'&&document.getElementById('cd').value.trim().toLowerCase()!='revelar'){g.textContent='Código incorrecto.';return}
+mode=m;draw()}
+function report(v){if(!mode)return gate(v);
+const n=nota(),fl=St.flat(),pend=fl.filter(q=>q.pts===null).length,nm=document.getElementById('nm').value.trim()||'Sin nombre',cs=document.getElementById('cs').value.trim(),
+A=fl.filter(q=>q.pts>0&&q.tries==1).length,Bc=fl.filter(q=>q.pts>0&&q.tries>1).length,Z=fl.filter(q=>q.pts===0).length,H=fl.filter(q=>q.hu).length,sr=Math.round(n/2),mood=n>=9?'star':n>=7?'cheer':n>=5?'happy':'hi';
+const chip=(l,x,c)=>`<div class="chip" style="background:${c}"><b>${x}</b>${l}</div>`;
+v.innerHTML=`<div class="card"><div class="rhero"><div class="rav">${avSvg(mood)}</div><div class="rtx"><div class="rk">Informe de evaluación${mode=='con'?' · con soluciones':''}</div><div class="rn">${nm}</div><div class="rc">${cs?cs+' · ':''}${new Date().toLocaleDateString('es-ES')}</div><div class="rs" aria-label="${sr} estrellas de 5">${'⭐'.repeat(sr)}${'☆'.repeat(5-sr)}</div></div>
+<div class="rg"><div class="big">${fn(n)}</div><div>/ 10</div><b>${cual(n)}</b></div></div>
+<div class="hintc rmsg"><div class="hav">${avSvg('wink')}</div><div class="bub"><b>Chip dice:</b> ${amsg(n)}${pend?`<br>Te quedan ${pend} ejercicios sin responder.`:''}</div></div>
+<div class="chips">${chip('A la 1.ª',A,'#6fd68a')}${chip('A la 2.ª',Bc,'#5bb8ff')}${chip('Fallos',Z,'#ff8f7a')}${chip('Sin responder',pend,'#e3e3e3')}${chip('Pistas',H,'#ffc93c')}</div>
+<h2>🎨 Saberes básicos</h2><div class="bgrid">`+B.map((b,i)=>`<div class="bc" style="--c:${TH[i].h}"><div class="row"><span>${b.e} <b>${b.n}</b></span><span class="pill">${fn(bp(i))} / 10</span></div><div class="bar"><i style="width:${bp(i)*10}%;background:${TH[i].h}"></i></div><small>${C[i].s}</small></div>`).join('')+`</div>
+<h2>🎯 Criterios de evaluación</h2>`+crit().map((c,j)=>`<div class="crit"><div class="row" style="border:0;padding:0"><span><b>${c.k}</b></span><b>${c.p} %</b></div><small>${c.t}</small><div class="bar" style="height:12px"><i style="width:${c.p}%;background:${TH[j%7].h}"></i></div></div>`).join('')+
+`<p>${pend?'<button class="go" style="background:var(--hi);color:#1d2a5b" onclick="resume()">▶ Seguir por donde iba</button> ':''}<button class="go" onclick="makePdf()">Descargar informe en PDF</button> <button class="go" onclick="prn()">Imprimir / guardar como PDF</button> <button class="go" onclick="mode=null;draw()">Cambiar tipo de informe</button> <button class="go" style="background:var(--hi);color:#1d2a5b" onclick="start()">Empezar de nuevo</button></p><p class="msg" id="pm" role="status"></p></div>`+'<div class="pr">'+det()+'</div>'}
+function buildPdf(){
+const nm=document.getElementById('nm').value.trim()||'Sin nombre',cs=document.getElementById('cs').value.trim()||'sin indicar',n=nota(),d=new window.jspdf.jsPDF({unit:'mm',format:'a4'}),fl=St.flat();
+const KK=[29,42,91],GY=[90,90,90],A=fl.filter(q=>q.pts>0&&q.tries==1).length,Bc=fl.filter(q=>q.pts>0&&q.tries>1).length,Z=fl.filter(q=>q.pts===0).length,Pn=fl.filter(q=>q.pts===null).length,H=fl.filter(q=>q.hu).length,sr=Math.round(n/2),mood=n>=9?'star':n>=7?'cheer':n>=5?'happy':'hi';
+let y=16;try{d.setLineCap('round');d.setLineJoin('round')}catch(e){}
+const GR=['#ff7eb6','#ffc93c','#6fd68a','#5bb8ff'],lerp=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t)),gc=t=>{const q=Math.min(2.999,t*3),i=Math.floor(q);return lerp(rgb(GR[i]),rgb(GR[i+1]),q-i)};
+const band=(y0,h)=>{const N=70,w=210/N;for(let i=0;i<N;i++){d.setFillColor(...gc(i/(N-1)));d.rect(i*w,y0,w+.3,h,'F')}};
+const ck=h=>{if(y+h>282){d.addPage();y=16}};
+const T=(t,o={})=>{d.setFont('helvetica',o.b?'bold':'normal');d.setFontSize(o.s||10);d.setTextColor(...(o.c||[30,30,30]));d.splitTextToSize(pl(t),o.w||180).forEach(l=>{if(y>280){d.addPage();y=16}d.text(l,o.x||15,y);y+=(o.s||10)*.45});y+=o.g==null?1.5:o.g};
+const H2=(t,col)=>{ck(16);d.setFillColor(...rgb(col));d.setDrawColor(...KK);d.setLineWidth(.4);d.roundedRect(15,y-5,180,9,2.5,2.5,'FD');d.setTextColor(...KK);d.setFont('helvetica','bold');d.setFontSize(12);d.text(pl(t),19,y+1);y+=11};
+// cabecera
+band(0,54);pdfAv(d,12,7,36,mood);
+y=17;T('Informe de evaluación'+(mode=='con'?' (con soluciones)':''),{b:1,s:16,x:54,w:108,c:KK,g:1});T(nm,{b:1,s:13,x:54,w:108,c:KK,g:1});T('Curso: '+cs+'  ·  Fecha: '+new Date().toLocaleDateString('es-ES'),{s:9.5,x:54,w:108,c:KK,g:1});T('Divisibilidad · Ámbito científico-técnico · 3.º ESO',{s:9,x:54,w:108,c:KK});
+d.setFillColor(255,255,255);d.setDrawColor(...KK);d.setLineWidth(1.2);d.circle(182,27,18,'FD');d.setTextColor(...KK);d.setFont('helvetica','bold');d.setFontSize(26);d.text(fn(n),182,29,{align:'center'});d.setFontSize(10);d.text('/ 10',182,35,{align:'center'});d.setFontSize(8);d.text(pl(cual(n)),182,40,{align:'center'});
+// estrellas y nota
+y=64;for(let i=0;i<5;i++){const cx=21+i*10;d.setFillColor(...rgb(i<sr?'#ffc93c':'#e3e3e3'));d.setDrawColor(...KK);d.setLineWidth(.4);poly(d,stp(0,0).map(q=>[cx+q[0]*.8,y+q[1]*.8]),'FD',true)}
+d.setTextColor(...KK);d.setFont('helvetica','bold');d.setFontSize(15);d.text(pl(cual(n)),76,y+2);
+// globo de Chip
+y=74;d.setFillColor(255,246,220);d.setDrawColor(...KK);d.setLineWidth(.6);d.roundedRect(15,y,180,25,4,4,'FD');pdfAv(d,18,y+2,17,'wink');y+=8;T('Chip dice: '+amsg(n)+(Pn?' Te quedan '+Pn+' ejercicios sin responder.':''),{s:10.5,x:39,w:152,c:KK});
+y=104;
+// estadísticas
+[['A la 1.ª',A,'#6fd68a'],['A la 2.ª',Bc,'#5bb8ff'],['Fallos',Z,'#ff8f7a'],['Sin responder',Pn,'#e3e3e3'],['Pistas',H,'#ffc93c']].forEach((c,i)=>{const x=15+i*37;d.setFillColor(...rgb(c[2]));d.setDrawColor(...KK);d.setLineWidth(.5);d.roundedRect(x,y,34,19,3,3,'FD');d.setTextColor(...KK);d.setFont('helvetica','bold');d.setFontSize(15);d.text(String(c[1]),x+17,y+9,{align:'center'});d.setFontSize(8);d.text(pl(c[0]),x+17,y+15,{align:'center'})});
+y+=26;T('Calificación = puntos obtenidos (50 máx.) / 50 x 10. Acierto a la primera: 1 punto; a la segunda: 0,5; fallo: 0. Usar una pista resta 0,25 puntos en ese ejercicio.',{s:8,c:GY,g:5});
+// saberes
+H2('Saberes básicos trabajados','#ffc93c');
+B.forEach((b,i)=>{ck(24);const col=TH[i].h;d.setFillColor(...rgb(col));d.setDrawColor(...KK);d.setLineWidth(.5);d.circle(19,y-1,3.4,'FD');d.setTextColor(...KK);d.setFont('helvetica','bold');d.setFontSize(8);d.text(String(i+1),19,y+.3,{align:'center'});d.setFontSize(10.5);d.text(pl(b.n),26,y);d.text(fn(bp(i))+' / 10',195,y,{align:'right'});y+=3.5;
+d.setFillColor(236,236,236);d.roundedRect(26,y,169,3.4,1.7,1.7,'F');const w=169*bp(i)/10;if(w>1){d.setFillColor(...rgb(col));d.roundedRect(26,y,w,3.4,1.7,1.7,'F')}y+=7;T(C[i].s+'. Criterios: '+C[i].c.join(', '),{s:8,x:26,w:169,c:GY,g:3})});
+// criterios
+y+=2;H2('Criterios de evaluación (grado de logro)','#5bb8ff');
+crit().forEach((c,j)=>{ck(20);T(c.k+' ('+c.p+' %)',{b:1,c:KK,g:.5});T(c.t,{s:8.5,w:180,c:GY,g:1});d.setFillColor(236,236,236);d.roundedRect(15,y,180,3.4,1.7,1.7,'F');const w=180*c.p/100;if(w>1){d.setFillColor(...rgb(TH[j%7].h));d.roundedRect(15,y,w,3.4,1.7,1.7,'F')}y+=8});
+// detalle
+y+=2;H2('Detalle de los ejercicios','#ff7eb6');
+B.forEach((b,i)=>{ck(30);d.setFillColor(...rgb(TH[i].h));d.roundedRect(15,y-4.2,180,7,2,2,'F');d.setTextColor(...KK);d.setFont('helvetica','bold');d.setFontSize(10);d.text(pl(b.n)+'  ('+fn(bp(i))+' / 10)',18,y+.4);y+=7;
+St[i].forEach((q,j)=>{ck(16);d.setFillColor(...rgb(q.pts==null?'#bdbdbd':q.pts>0?'#2eb872':'#e5533d'));d.circle(18,y-1.2,1.8,'F');
+T((j+1)+'. '+q.t+(q.alt?' ['+q.alt+']':''),{x:22,w:172,g:.5});T('Respuesta: '+(q.ans==null?'sin responder':q.ans)+(mode=='con'?'   Solución: '+ans(q):'')+'   Puntos: '+(q.pts==null?'-':String(q.pts).replace('.',','))+(q.hu?'   Pista usada (-0,25)':''),{s:9,x:26,w:168,c:GY,g:2.5})});y+=2});
+y+=3;T('Criterios de evaluación del Ámbito científico-técnico (Diversificación 3.º ESO) según la Programación didáctica del Departamento de Matemáticas (IES Ntra. Sra. de la Cabeza, curso 2026-27).',{s:8,c:GY});
+// pie y franjas en todas las páginas
+const pn=d.getNumberOfPages();for(let i=1;i<=pn;i++){d.setPage(i);if(i>1)band(0,4);band(292,5);d.setFont('helvetica','normal');d.setFontSize(8);d.setTextColor(...GY);d.text(pl('Chip · Divisibilidad · 3.º ESO · '+nm),15,289);d.text('Pág. '+i+' / '+pn,195,289,{align:'right'})}
+return d}
+const fname=()=>'informe-3eso-divisibilidad-'+(document.getElementById('nm').value.trim()||'Sin nombre').replace(/[^\wáéíóúñÁÉÍÓÚÑ ]/g,'').trim().replace(/\s+/g,'-')+'.pdf';
+const prn=()=>{try{window.print()}catch(e){document.getElementById('pm').textContent='No se puede imprimir desde esta vista. Usa la opción de imprimir de tu navegador.'}};
+async function makePdf(){const pm=document.getElementById('pm');pm.textContent='Preparando el informe...';let d;
+try{d=buildPdf()}catch(e){pm.textContent='No se ha podido crear el PDF en esta vista. Usa "Imprimir / guardar como PDF" o consulta el detalle de abajo.';return}
+const fn2=fname();
+try{const D=window.claude&&claude.use?await claude.use('downloads'):null;if(D){await D.save({filename:fn2,data:d.output('arraybuffer')});pm.textContent='Informe listo.';return}}catch(e){if(e&&e.code=='declined'){pm.textContent='Descarga cancelada.';return}}
+try{const u=URL.createObjectURL(d.output('blob')),a=document.createElement('a');a.href=u;a.download=fn2;document.body.appendChild(a);a.click();a.remove();pm.innerHTML='Si el PDF no se ha descargado, <a href="'+u+'" target="_blank" rel="noopener">ábrelo aquí</a> o usa "Imprimir / guardar como PDF".'}catch(e){pm.textContent='Usa "Imprimir / guardar como PDF" para guardar el informe.'}}
+const f2=x=>String(x).replace('.',','),pen=(x,q)=>Math.max(0,x-(q.hu?.25:0)),okm=q=>(q.tries==1?'¡Correcto! ':'¡Bien, a la segunda! ')+'+'+f2(q.pts)+(q.hu?' (pista: −0,25)':'');let hl=null;
+const K='#1d2a5b',rgb=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
+const qp=(a,b,c,d,e,f,n)=>{n=n||8;return Array.from({length:n+1},(_,i)=>{const t=i/n,u=1-t;return[u*u*a+2*u*t*c+t*t*e,u*u*b+2*u*t*d+t*t*f]})};
+const stp=(x,y)=>Array.from({length:10},(_,i)=>{const t=-Math.PI/2+i*Math.PI/5,r=i%2?2.4:5.6;return[x+r*Math.cos(t),y+r*Math.sin(t)]});
+const pk=a=>a[Math.floor(MR()*a.length)];
+const newAv=()=>({c:pk(['#ffc93c','#ff8f7a','#6fd68a','#5bb8ff','#c58bff','#ff7eb6','#4fd1d1','#ffa94d']),s:pk([0,1,2]),a:pk([0,1,2,3]),x:pk([0,1,2,3]),k:pk(['#ff9aa2','#ff6f91','#ffb3c1'])});
+let AV=newAv();
+const avPrims=(m,o)=>{o=o||AV;const L=[],rx=[16,8,21][o.s];
+const ln=(x1,y1,x2,y2,sw,st)=>L.push({t:'line',x1,y1,x2,y2,sw,st});
+if(o.a==0){ln(29,4,29,12,2.5,K);L.push({t:'circ',x:29,y:4,r:3,f:K,st:K,sw:2})}
+else if(o.a==1){ln(20,5,21,12,2.5,K);ln(38,5,37,12,2.5,K);L.push({t:'circ',x:20,y:5,r:3,f:'#ff5d8f',st:K,sw:1.5},{t:'circ',x:38,y:5,r:3,f:'#ff5d8f',st:K,sw:1.5})}
+else if(o.a==2)L.push({t:'poly',p:stp(29,7),f:'#ffe066',st:K,sw:1.5});
+else L.push({t:'poly',p:[[20,13],[22,4],[26,10],[29,3],[32,10],[36,4],[38,13]],f:'#ffe066',st:K,sw:1.5});
+L.push({t:'rect',x:6,y:12,w:46,h:42,r:rx,f:o.c,st:K,sw:2.5});
+if(o.x==3)L.push({t:'path',p:qp(6,30,6,8,29,8).concat(qp(29,8,52,8,52,30)),st:K,sw:3},{t:'rect',x:2,y:26,w:7,h:14,r:3,f:'#ff5d8f',st:K,sw:2},{t:'rect',x:49,y:26,w:7,h:14,r:3,f:'#ff5d8f',st:K,sw:2});
+L.push({t:'circ',x:13,y:34,r:3,f:o.k,sw:0},{t:'circ',x:45,y:34,r:3,f:o.k,sw:0});
+const dot=x=>L.push({t:'circ',x,y:24,r:3.5,f:K}),arc=x=>L.push({t:'path',p:qp(x-4,26,x,19,x+4,26),st:K,sw:2.5}),star=x=>L.push({t:'poly',p:stp(x,24),f:K});
+if(m=='cheer'||m=='happy'){arc(21);arc(37)}else if(m=='wink'){dot(21);arc(37)}else if(m=='star'){star(21);star(37)}else{dot(21);dot(37)}
+if(m=='cheer'||m=='star')L.push({t:'poly',p:qp(19,36,29,48,39,36),f:K,st:K,sw:2});else L.push({t:'path',p:qp(20,36,29,45,38,36),st:K,sw:2.5});
+if(o.x==1){L.push({t:'circ',x:21,y:24,r:7,st:K,sw:2},{t:'circ',x:37,y:24,r:7,st:K,sw:2});ln(28,24,30,24,2,K)}
+if(o.x==2)L.push({t:'poly',p:[[47,13],[56,7],[56,19]],f:'#ff5d8f',st:K,sw:1.5},{t:'poly',p:[[47,13],[39,7],[39,19]],f:'#ff5d8f',st:K,sw:1.5},{t:'circ',x:47,y:13,r:2.5,f:'#ff5d8f',st:K,sw:1.5});
+return L};
+const avSvg=m=>{const pts=p=>p.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' ');
+return`<svg viewBox="0 0 58 64" width="56" height="62" role="img" aria-label="Chip, tu ayudante">`+avPrims(m).map(p=>{const a=`fill="${p.f||'none'}" stroke="${p.st||'none'}" stroke-width="${p.sw||0}" stroke-linecap="round" stroke-linejoin="round"`;
+return p.t=='rect'?`<rect x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" rx="${p.r}" ${a}/>`:p.t=='circ'?`<circle cx="${p.x}" cy="${p.y}" r="${p.r}" ${a}/>`:p.t=='line'?`<line x1="${p.x1}" y1="${p.y1}" x2="${p.x2}" y2="${p.y2}" ${a}/>`:p.t=='poly'?`<polygon points="${pts(p.p)}" ${a}/>`:`<polyline points="${pts(p.p)}" ${a}/>`}).join('')+'</svg>'};
+const poly=(d,pts,sty,closed)=>{const dl=[];for(let i=1;i<pts.length;i++)dl.push([pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]]);d.lines(dl,pts[0][0],pts[0][1],[1,1],sty,closed)};
+const pdfAv=(d,X,Y,S,m)=>{const k=S/58;avPrims(m).forEach(p=>{const fl=p.f&&p.f!='none',sk=p.st&&p.st!='none'&&p.sw,sty=fl&&sk?'FD':fl?'F':'S';if(!fl&&!sk)return;if(fl)d.setFillColor(...rgb(p.f));if(sk){d.setDrawColor(...rgb(p.st));d.setLineWidth(p.sw*k)}
+if(p.t=='rect')d.roundedRect(X+p.x*k,Y+p.y*k,p.w*k,p.h*k,p.r*k,p.r*k,sty);else if(p.t=='circ')d.circle(X+p.x*k,Y+p.y*k,p.r*k,sty);else if(p.t=='line')d.line(X+p.x1*k,Y+p.y1*k,X+p.x2*k,Y+p.y2*k);else poly(d,p.p.map(q=>[X+q[0]*k,Y+q[1]*k]),p.t=='poly'?sty:'S',p.t=='poly')})};
+const TH=[
+{b:'#fff6dc',h:'#ffc93c',l:'#e8dcb5',o:'#1f9e89',db:'#141a36',dl:'#34407a'},
+{b:'#e3f2ff',h:'#5bb8ff',l:'#b9d9f0',o:'#1f8a70',db:'#10233b',dl:'#2c4a73'},
+{b:'#f1e6ff',h:'#c58bff',l:'#d9c4f2',o:'#2a9d8f',db:'#21183d',dl:'#4a3a7a'},
+{b:'#e2f8e7',h:'#6fd68a',l:'#bde2c4',o:'#1b8f5a',db:'#112a1f',dl:'#2f5a45'},
+{b:'#ffe8e2',h:'#ff8f7a',l:'#f1c3b8',o:'#1f9e89',db:'#301a1d',dl:'#6a3a3f'},
+{b:'#e0f7f7',h:'#4fd1d1',l:'#b3dfdf',o:'#1a8a8a',db:'#0f2a2c',dl:'#2a5a5c'},
+{b:'#ffeed2',h:'#ffa94d',l:'#efd1a4',o:'#2e9e6b',db:'#2e2314',dl:'#66502c'},
+{b:'#fde6f2',h:'#ff7eb6',l:'#f1c1da',o:'#1f9e89',db:'#2f1a2b',dl:'#6a3a5a'}];
+function theme(i){const t=TH[Math.min(i,TH.length-1)];let e=document.getElementById('th');if(!e){e=document.createElement('style');e.id='th';document.head.appendChild(e)}
+const dk=`--bg:${t.db};--hi:${t.h};--line:${t.dl};--ok:#46d1bb`;
+e.textContent=`:root{--bg:${t.b};--hi:${t.h};--line:${t.l};--ok:${t.o}}@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){${dk}}}:root[data-theme="dark"]{${dk}}`}
+const mk=q=>q.pts==null?'⬜':q.pts>0?'✅':'❌';
+const amsg=n=>n>=9?'¡Increíble! Dominas la divisibilidad. ¡Eres una estrella!':n>=7?'¡Muy bien! Estás muy cerca de la cima. Repasa los fallos y llegarás arriba del todo.':n>=5?'¡Aprobado! Buen trabajo. Mira el detalle de los ejercicios y repasa lo que se te resistió.':'No te desanimes. Repasa los recuadros «Recuerda», usa las pistas y vuelve a intentarlo. ¡Tú puedes!';
+const say=(t,m)=>{const a=document.getElementById('ava'),b=document.getElementById('avt');if(a)a.innerHTML=avSvg(m||'hi');if(b)b.textContent=t};
+const HT=[[/^Calcula el valor numérico/,'Sustituye la x por el número en todos los términos, respetando los signos, y calcula: primero las potencias, luego los productos y al final las sumas y restas.'],
+[/^La expresión «/,'Sustituye x por el valor que te dan y calcula: primero el producto y después la suma.'],
+[/^Un taxi cobra/,'La x representa los kilómetros: sustituye x por el valor y calcula la tarifa.'],
+[/perímetro si x = \d+\?$/,'El perímetro es la suma de todos los lados. Escribe la suma de los lados con x, simplifica y sustituye x por su valor.'],
+[/grado del monomio/,'El grado de un monomio es la suma de los exponentes de todas sus letras.'],
+[/coeficiente del monomio/,'El coeficiente es el número que multiplica a la parte literal. Fíjate también en su signo.'],
+[/son semejantes a/,'Dos monomios son semejantes si tienen exactamente la misma parte literal (las mismas letras con los mismos exponentes); el coeficiente puede ser distinto.'],
+[/^Simplifica/,'Los monomios semejantes se suman sumando sus coeficientes y dejando la misma parte literal.'],
+[/^Al multiplicar \(/,'Al multiplicar monomios se multiplican los coeficientes entre sí y se suman los exponentes de la misma letra.'],
+[/^Al dividir \(/,'Al dividir monomios se dividen los coeficientes y se restan los exponentes de la misma letra.'],
+[/¿cuál es su grado\?/,'El grado de un polinomio es el mayor exponente de x entre los términos que tienen coeficiente distinto de cero.'],
+[/término independiente\?$/,'El término independiente es el que no lleva x. Fíjate bien en su signo.'],
+[/¿cuánto vale P\(/,'Sustituye la x por el número en cada término y calcula respetando la prioridad: potencias, productos y luego sumas y restas.'],
+[/son de grado/,'Fíjate solo en el mayor exponente de x de cada polinomio.'],
+[/términos tiene/,'Cuenta los monomios que están separados por + o −.'],
+[/en P\(x\) \+ Q\(x\)/,'Para sumar polinomios se suman los coeficientes de los términos del mismo grado. Mira solo el grado que te piden.'],
+[/en P\(x\) − Q\(x\)/,'Al restar, cambia el signo de todos los términos del segundo polinomio y suma los de igual grado. Mira solo el grado que te piden.'],
+[/^Desarrolla \(x \+ \d+\)\(x \+ \d+\)\./,'Multiplica cada término del primer paréntesis por cada término del segundo y agrupa los términos con x.'],
+[/^Desarrolla \(\d+x \+ \d+\)\(\d+x \+ \d+\)/,'Multiplica cada término del primer paréntesis por cada término del segundo y agrupa los términos con x.'],
+[/^Desarrolla \d+x ·/,'Multiplica el monomio por cada término del paréntesis: coeficiente por coeficiente y suma los exponentes de x.'],
+[/\) : \(x \+ \d+\) = x \+ \?/,'Prueba a multiplicar (x + a) por (x + ?) y comprueba que sale el dividendo. Piensa qué producto y qué suma deben cumplir los números.'],
+[/cuadrado de lado x \+ \d+ dividido/,'Mira las cuatro partes de la figura: hay un cuadrado de lado x, un cuadrado pequeño y dos rectángulos iguales. ¿Cuáles de ellos tienen x y cuántos hay?'],
+[/^Desarrolla \(x \+ \d+\)<sup>2/,'El cuadrado de una suma es: cuadrado del primero, más el doble producto del primero por el segundo, más el cuadrado del segundo.'],
+[/^Desarrolla \(x − \d+\)<sup>2/,'El cuadrado de una diferencia es: cuadrado del primero, menos el doble producto, más el cuadrado del segundo.'],
+[/^Desarrolla \(x \+ \d+\)\(x − \d+\)/,'Es una suma por diferencia: es igual al cuadrado del primero menos el cuadrado del segundo.'],
+[/usando una identidad notable/,'Escribe el número (o los números) como suma o resta de un número redondo y otro pequeño, y aplica la identidad notable que corresponda.'],
+[/jardín rectangular/,'El área de un rectángulo es base por altura. Sustituye x por su valor en cada lado y multiplica.'],
+[/Compro \d+ camisetas/,'Escribe el coste de cada tipo de prenda (cantidad por precio), súmalos y sustituye x por su valor.'],
+[/cuadrado de lado x \+ \d+ dm/,'El área de un cuadrado es lado por lado. Calcula primero cuánto mide el lado cuando x toma ese valor.'],
+[/su madre/,'Escribe la suma de las dos edades como una expresión con x, simplifícala y sustituye x.'],
+[/^Un triángulo tiene lados/,'El perímetro es la suma de los tres lados. Agrupa los monomios semejantes y sustituye x por su valor.']];
+const hintFor=t=>{const h=HT.find(x=>x[0].test(t));return h?h[1]:'Lee con calma el enunciado, repasa el recuadro «Recuerda» y resuélvelo paso a paso.'};
+let lastCur=0,lm='cheer';function resume(){let t=lastCur;if(!St[t].some(q=>q.pts===null))t=St.findIndex(b=>b.some(q=>q.pts===null));if(t<0)return;cur=t;draw();const k=St[t].findIndex(q=>q.pts===null),e=document.getElementById('i'+k)||document.querySelector('input[name=o'+k+']');if(e){e.scrollIntoView({block:'center'});e.focus()}}function hint(i){const q=St[cur][i];if(q.hu||q.pts!==null)return;q.hu=1;const ms=['wink','star','happy','cheer'].filter(x=>x!=lm);q.hm=lm=ms[Math.floor(MR()*ms.length)];hl=q;draw();hl=null;const a=document.getElementById('ava');if(a)a.innerHTML=avSvg(q.hm)}
+const hb=(q,i)=>q.hu?`<div class="t hintc"><div class="hav${q===hl?' pop':''}">${avSvg(q.hm||'wink')}</div><div class="bub"><b>Chip te da una pista:</b> ${q.h}<div><button class="go" onclick="speak(St[cur][${i}].h,this)">🔊 Escuchar la pista</button></div></div></div>`:q.pts===null?`<button class="go hb" onclick="hint(${i})">💡 Pedir pista (−0,25 puntos)</button>`:'';
+const PRES='¡Hola! Soy Chip, tu ayudante de repaso. Escribe tu nombre y tu curso y empezamos. En cada ejercicio puedes pedirme una pista, y si quieres te la leo en voz alta. Pero ojo: si usas una pista, ese ejercicio tendrá una penalización del 25 % de su valor, es decir, 0,25 puntos menos. Y la respuesta tendrás que encontrarla tú. ¡Mucho ánimo!';
+let VC=[],VK='chip_voz2';
+const FM=/m[oó]nica|paulina|helena|sabina|laura|elvira|dalia|salome|lola|esperanza|marisol|female|mujer|mar[ií]a|luc[ií]a|elena|ximena|valentina|camila/i,ML=/pablo|diego|jorge|raul|carlos|enrique|alvaro|alonso|jaime|andr[eé]s|gonzalo|tom[aá]s|male|hombre/i;
+const vsc=v=>(/natural|neural|online|premium|enhanced|mejorada/i.test(v.name)?40:0)+(/google/i.test(v.name)?20:0)+(/^es-(ES|MX|US)/i.test(v.lang)?3:0)-(/desktop|espeak|compact|novelty/i.test(v.name)?25:0);
+const gv=()=>{try{return localStorage.getItem(VK)=='P'?'P':'L'}catch(e){return'L'}};
+function loadVoices(){const ss=window.speechSynthesis,sel=document.getElementById('vz');if(ss)VC=((ss.getVoices&&ss.getVoices())||[]).filter(v=>/^es/i.test(v.lang)).sort((a,b)=>vsc(b)-vsc(a));
+if(sel){const c=gv();sel.innerHTML=`<option value="L"${c=='L'?' selected':''}>Voz de Laura</option><option value="P"${c=='P'?' selected':''}>Voz de Pablo</option>`}}
+const pickVoice=()=>{if(!VC.length)loadVoices();if(!VC.length)return null;const L=gv()=='L',rx=L?/laura/i:/pablo/i,mine=L?FM:ML,other=L?ML:FM;
+return VC.find(v=>rx.test(v.name))||VC.find(v=>mine.test(v.name))||VC.find(v=>!other.test(v.name))||VC[0]};
+function setVz(n){try{localStorage.setItem(VK,n)}catch(e){}speak(n=='P'?'¡Hola! Soy Chip, y esta es la voz de Pablo.':'¡Hola! Soy Chip, y esta es la voz de Laura.',null)}
+try{window.speechSynthesis.onvoiceschanged=loadVoices}catch(e){}
+function speak(text,btn){const ss=window.speechSynthesis;if(!ss||typeof SpeechSynthesisUtterance=='undefined'){if(btn)btn.textContent='🔇 La voz no está disponible aquí';return}
+if(btn&&btn.dataset.on=='1'){ss.cancel();return}
+ss.cancel();document.querySelectorAll('[data-on="1"]').forEach(x=>{x.dataset.on='0';x.textContent=x.dataset.t});
+const fin=()=>{if(btn){btn.dataset.on='0';btn.textContent=btn.dataset.t}};if(btn){btn.dataset.t=btn.dataset.t||btn.textContent;btn.dataset.on='1';btn.textContent='⏹ Parar'}
+const v=pickVoice(),fr=(text.match(/[^.!?…]+[.!?…]*/g)||[text]).map(x=>x.trim()).filter(Boolean).flatMap(x=>x.length>95?(x.match(/[^,;:]+[,;:]?/g)||[x]).reduce((r,p)=>{const l=r[r.length-1];if(l&&l.length+p.length<70)r[r.length-1]=l+p;else r.push(p);return r},[]).map(y=>y.trim()):[x]);
+fr.forEach((t,i)=>{const u=new SpeechSynthesisUtterance(t);u.lang=v?v.lang:'es-ES';if(v)u.voice=v;const ex=/!\s*$/.test(t),qs=/\?\s*$/.test(t);u.pitch=Math.min(2,(gv()=='P'?1.5:1.8)+MR()*.15+(ex?.1:0)+(qs?.12:0));u.rate=1.1+MR()*.06+(ex?.04:0);u.volume=1;if(i==fr.length-1){u.onend=fin;u.onerror=fin}else u.onerror=fin;ss.speak(u)})}
+const stc=q=>q.pts===null?(q.tries?'w':'n'):q.pts>0?(q.tries==1?'a':'b'):'z';
+const hs=x=>{let h=0;for(const c of x)h=(h*31+c.charCodeAt(0))%1679616;return h.toString(36)};
+const b64=x=>btoa(unescape(encodeURIComponent(x))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const ub64=x=>decodeURIComponent(escape(atob(x.replace(/-/g,'+').replace(/_/g,'/'))));
+function mkCode(){const cl=x=>String(x).replace(/[;|]/g,''),p=[seed,cur,cl(document.getElementById('nm').value.trim()),cl(document.getElementById('cs').value.trim()),St.flat().map(q=>(q.hu?'h':'')+stc(q)+(q.ans==null?'':cl(q.ans))).join(';')].join('|');return'D3.'+b64(p)+'.'+hs(p)}
+function ldCode(txt){try{const m=txt.trim().replace(/\s+/g,'').match(/^D3\.([\w-]+)\.([0-9a-z]+)$/);if(!m)throw 0;const p=ub64(m[1]);if(hs(p)!==m[2])throw 1;const a=p.split('|'),it=a[4].split(';');if(it.length!=B.length*10)throw 2;gen(+a[0]);let k=0;
+St.forEach(b=>b.forEach(q=>{let s=it[k++];if(s[0]=='h'){q.hu=1;s=s.slice(1)}const c=s[0],v=s.slice(1);if(c=='n')return;q.ans=v;q.tries=c=='a'||c=='w'?1:2;if(c=='w'){q.msg='Casi. Repasa el recuadro "Recuerda" e inténtalo otra vez.';if(q.o)q.bad=[typeof q.o[0]=='number'?+v:v]}else{q.pts=c=='a'?pen(1,q):c=='b'?pen(.5,q):0;q.msg=c!='z'?okm(q):'La solución era '+(typeof ans=='function'?ans(q):f(q.a))+'. ¡Fíjate cómo se hace!'}}));
+document.getElementById('nm').value=a[2];document.getElementById('cs').value=a[3];cur=Math.min(+a[1],B.length);mode=null;draw();return''}catch(e){return'Código no válido, incompleto o de otra unidad. Revisa que lo has copiado entero.'}}
+const pnl=h=>{document.getElementById('pn').innerHTML=h};
+function svOpen(){const c=mkCode();pnl(`<div class="card"><h2>Tu código de progreso</h2><p>Copia este código y guárdalo. Para continuar, abre de nuevo el enlace, pulsa «Continuar con un código» y pégalo.</p><textarea id="cdt" readonly rows="5" style="width:100%">${c}</textarea><p><button class="go" onclick="cpCode()">Copiar código</button> <button class="go" onclick="pnl('')">Cerrar</button> <span class="msg good" id="cpm"></span></p><p class="sub">Longitud del código: ${c.length} caracteres</p></div>`)}
+function cpCode(){const t=document.getElementById('cdt'),m=document.getElementById('cpm');t.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}
+if(!ok&&navigator.clipboard)navigator.clipboard.writeText(t.value).then(()=>m.textContent='Copiado.',()=>m.textContent='Selecciona el texto y cópialo a mano.');else m.textContent=ok?'Copiado.':'Selecciona el texto y cópialo a mano.'}
+function ldOpen(){pnl(`<div class="card"><h2>Continuar con un código</h2><p>Pega aquí tu código de progreso:</p><textarea id="cdi" rows="4" style="width:100%"></textarea><p><button class="go" onclick="ldGo()">Cargar</button> <button class="go" onclick="pnl('')">Cerrar</button></p><p class="msg wrong" id="ldm" role="status"></p></div>`)}
+function ldGo(){const m=ldCode(document.getElementById('cdi').value);if(m)document.getElementById('ldm').textContent=m;else pnl('')}
+start();
+say(PRES,'cheer');
+loadVoices();
+</script></body></html>
