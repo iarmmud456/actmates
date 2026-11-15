@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario de Matemáticas: Divisibilidad, m.c.d. y m.c.m.</title>
+    <!-- Tailwind CSS vía CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuente Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Iconos FontAwesome vía CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Librería jsPDF 2.5.1 vía CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between antialiased selection:bg-blue-100 selection:text-blue-900">
+
+    <!-- ===================================================================== -->
+    <!-- CABECERA FIJA SUPERIOR                                                -->
+    <!-- ===================================================================== -->
+    <header class="bg-slate-900 text-white border-b-4 border-blue-600 shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:px-6">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <!-- Identidad de la prueba -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white text-lg shadow-inner flex-shrink-0">
+                        <i class="fa-solid fa-divide"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-base sm:text-lg font-extrabold leading-tight tracking-tight">
+                            Cuestionario de Matemáticas: Divisibilidad, m.c.d. y m.c.m.
+                        </h1>
+                        <p class="text-xs text-slate-300 hidden sm:block">
+                            Evaluación Interactiva &bull; 5 Bloques Temáticos &bull; 40 Preguntas
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Datos del alumno y Cronómetro en vivo (visible durante el examen) -->
+                <div id="header-active-bar" class="hidden flex items-center space-x-3 sm:space-x-4">
+                    <div class="hidden md:flex items-center space-x-2 bg-slate-800 border border-slate-700 px-3.5 py-1.5 rounded-xl text-xs">
+                        <i class="fa-solid fa-user-graduate text-blue-400"></i>
+                        <span id="header-student-info" class="font-semibold text-slate-100">--</span>
+                    </div>
+                    <div class="bg-slate-800 border border-slate-700 px-3.5 py-1.5 rounded-xl flex items-center space-x-2 text-amber-400 font-mono text-sm shadow-inner" title="Cronómetro en vivo">
+                        <i class="fa-regular fa-clock"></i>
+                        <span id="header-timer" class="font-bold tracking-wider">00:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra de progreso global en cabecera (visible durante el examen) -->
+            <div id="header-progress-wrapper" class="hidden mt-3 pt-2.5 border-t border-slate-800">
+                <div class="flex items-center justify-between text-[11px] text-slate-300 mb-1">
+                    <span>Progreso de respuestas completadas</span>
+                    <span id="header-progress-label" class="font-bold text-blue-300">0 de 40 (0%)</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                    <div id="header-progress-bar" class="bg-gradient-to-r from-blue-500 to-emerald-400 h-2 rounded-full transition-all duration-300" style="width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- CONTENEDOR PRINCIPAL DE VISTAS                                        -->
+    <!-- ===================================================================== -->
+    <main class="max-w-7xl mx-auto px-4 py-6 sm:px-6 flex-grow w-full">
+
+        <!-- ================================================================= -->
+        <!-- PANTALLA 1: IDENTIFICACIÓN INICIAL CON VALIDACIÓN ESTRICTA        -->
+        <!-- ================================================================= -->
+        <section id="view-register" class="max-w-3xl mx-auto my-4 sm:my-8">
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+                <!-- Banner superior de bienvenida -->
+                <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 px-6 py-8 sm:px-10 text-white">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-200 border border-blue-400/30 mb-3">
+                                <i class="fa-solid fa-calculator mr-1.5"></i> Matemáticas &bull; Aritmética y Teoría de Números
+                            </span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                                Identificación del Alumno/a
+                            </h2>
+                            <p class="text-slate-300 text-sm mt-1.5">
+                                Introduce tus datos académicos obligatorios para generar tu sesión personalizada.
+                            </p>
+                        </div>
+                        <div class="w-16 h-16 rounded-2xl bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-3xl text-blue-300 flex-shrink-0">
+                            <i class="fa-solid fa-id-badge"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulario de identificación -->
+                <form id="identification-form" novalidate onsubmit="handleStartQuiz(event)" class="p-6 sm:p-10 space-y-6">
+                    <!-- Mensaje de alerta general si hay campos inválidos -->
+                    <div id="validation-summary" class="hidden bg-red-50 border-l-4 border-red-600 p-4 rounded-r-xl flex items-start space-x-3" role="alert">
+                        <i class="fa-solid fa-circle-exclamation text-red-600 mt-0.5 text-base"></i>
+                        <div class="text-sm text-red-800">
+                            <p class="font-bold">Por favor, completa todos los campos obligatorios</p>
+                            <p class="text-xs mt-0.5">Es imprescindible indicar tu nombre completo, curso/grupo y centro educativo antes de iniciar la prueba.</p>
+                        </div>
+                    </div>
+
+                    <!-- Campo 1: Nombre completo del alumno/a -->
+                    <div>
+                        <label for="input-student-name" class="block text-sm font-bold text-slate-700 mb-1.5">
+                            Nombre completo del alumno/a <span class="text-red-600">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                            <input
+                                type="text"
+                                id="input-student-name"
+                                name="studentName"
+                                autocomplete="name"
+                                placeholder="Ej. Alejandro Ruiz Navarro"
+                                oninput="clearInputError('input-student-name', 'err-student-name')"
+                                class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition"
+                            >
+                        </div>
+                        <p id="err-student-name" class="hidden text-xs font-semibold text-red-600 mt-1.5 flex items-center">
+                            <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> El nombre completo del alumno/a no puede estar vacío.
+                        </p>
+                    </div>
+
+                    <!-- Campos 2 y 3 en cuadrícula responsiva -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <!-- Campo 2: Curso / Grupo -->
+                        <div>
+                            <label for="input-student-group" class="block text-sm font-bold text-slate-700 mb-1.5">
+                                Curso / Grupo <span class="text-red-600">*</span>
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none">
+                                    <i class="fa-solid fa-users-rectangle"></i>
+                                </span>
+                                <input
+                                    type="text"
+                                    id="input-student-group"
+                                    name="studentGroup"
+                                    placeholder="Ej. 1.º ESO A, 2.º ESO B..."
+                                    oninput="clearInputError('input-student-group', 'err-student-group')"
+                                    class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition"
+                                >
+                            </div>
+                            <p id="err-student-group" class="hidden text-xs font-semibold text-red-600 mt-1.5 flex items-center">
+                                <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> Debes indicar tu curso y grupo.
+                            </p>
+                        </div>
+
+                        <!-- Campo 3: Centro Educativo -->
+                        <div>
+                            <label for="input-student-school" class="block text-sm font-bold text-slate-700 mb-1.5">
+                                Centro Educativo <span class="text-red-600">*</span>
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none">
+                                    <i class="fa-solid fa-school"></i>
+                                </span>
+                                <input
+                                    type="text"
+                                    id="input-student-school"
+                                    name="studentSchool"
+                                    placeholder="Ej. IES Virgen de la Cabeza"
+                                    oninput="clearInputError('input-student-school', 'err-student-school')"
+                                    class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition"
+                                >
+                            </div>
+                            <p id="err-student-school" class="hidden text-xs font-semibold text-red-600 mt-1.5 flex items-center">
+                                <i class="fa-solid fa-triangle-exclamation mr-1.5"></i> El nombre del centro educativo es obligatorio.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta informativa previa de estructura de la prueba -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
+                        <div class="flex items-center space-x-2 text-slate-900 font-bold text-sm">
+                            <i class="fa-solid fa-circle-info text-blue-600 text-base"></i>
+                            <span>Información y Estructura de la Prueba</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-700">
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200 flex items-start space-x-3">
+                                <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-list-ol"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-900">40 Preguntas en 5 Bloques</p>
+                                    <p class="text-slate-500 mt-0.5">8 preguntas por bloque temático. Calificación sobre 10 puntos.</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200 flex items-start space-x-3">
+                                <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-shuffle"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-900">Aleatorización Completa</p>
+                                    <p class="text-slate-500 mt-0.5">Orden aleatorio de las 40 preguntas y sus opciones A, B, C y D.</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200 flex items-start space-x-3">
+                                <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-stopwatch"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-900">Cronómetro en Vivo</p>
+                                    <p class="text-slate-500 mt-0.5">Registro automático del tiempo empleado y navegación libre.</p>
+                                </div>
+                            </div>
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200 flex items-start space-x-3">
+                                <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-slate-900">Informe Académico en PDF</p>
+                                    <p class="text-slate-500 mt-0.5">Certificado descargable con desglose por bloques y soluciones.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-200 text-xs text-slate-600">
+                            <p class="font-bold text-slate-800 mb-1.5">Bloques temáticos evaluados (8 preguntas por bloque):</p>
+                            <ul class="space-y-1 text-slate-600">
+                                <li><span class="font-semibold text-blue-700">Bloque 1:</span> Múltiplos, divisores y criterios de divisibilidad</li>
+                                <li><span class="font-semibold text-blue-700">Bloque 2:</span> Números primos y compuestos</li>
+                                <li><span class="font-semibold text-blue-700">Bloque 3:</span> Descomposición de un número en factores primos</li>
+                                <li><span class="font-semibold text-blue-700">Bloque 4:</span> Máximo Común Divisor (m.c.d.) y Mínimo Común Múltiplo (m.c.m.)</li>
+                                <li><span class="font-semibold text-blue-700">Bloque 5:</span> Problemas de aplicación de divisibilidad, m.c.d. y m.c.m.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-blue-600/25 transition-all flex items-center justify-center space-x-2.5 text-base cursor-pointer"
+                    >
+                        <span>Comenzar Prueba de 40 Preguntas</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- PANTALLA 2: INTERFAZ DEL CUESTIONARIO Y NAVEGADOR DE 40 CASILLAS  -->
+        <!-- ================================================================= -->
+        <section id="view-quiz" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+            <!-- ÁREA PRINCIPAL DE PREGUNTA (8 columnas en escritorio) -->
+            <div class="lg:col-span-8 space-y-5">
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden">
+                    <!-- Cabecera de tarjeta con número de pregunta y badge de bloque -->
+                    <div class="bg-slate-50 px-5 py-4 sm:px-8 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2.5">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span id="q-number-badge" class="bg-blue-600 text-white font-bold text-xs px-3.5 py-1.5 rounded-full tracking-wide shadow-xs">
+                                Pregunta 1 de 40
+                            </span>
+                            <span id="q-block-badge" class="bg-indigo-50 text-indigo-800 border border-indigo-200 font-semibold text-xs px-3 py-1 rounded-full">
+                                Bloque 1
+                            </span>
+                        </div>
+                        <span id="q-answer-status" class="bg-slate-200 text-slate-700 font-semibold text-xs px-3 py-1 rounded-full">
+                            Sin responder
+                        </span>
+                    </div>
+
+                    <!-- Cuerpo del enunciado y las 4 opciones -->
+                    <div class="p-5 sm:p-8">
+                        <h2 id="q-statement-text" class="text-lg sm:text-xl font-bold text-slate-900 leading-relaxed mb-6">
+                            --
+                        </h2>
+
+                        <!-- Contenedor de opciones A, B, C, D -->
+                        <div id="q-options-container" class="space-y-3" role="radiogroup" aria-labelledby="q-statement-text">
+                            <!-- Generado dinámicamente por JS -->
+                        </div>
+
+                        <!-- Ayuda y botón explícito "Borrar respuesta" -->
+                        <div class="mt-5 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 min-h-[36px]">
+                            <p class="text-xs text-slate-500">
+                                <i class="fa-regular fa-lightbulb text-amber-500 mr-1"></i> Pulsa de nuevo sobre la opción seleccionada si deseas desmarcarla.
+                            </p>
+                            <button
+                                id="btn-erase-answer"
+                                type="button"
+                                onclick="eraseCurrentAnswer()"
+                                class="hidden text-xs font-semibold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-1.5 rounded-lg transition flex items-center space-x-1.5 cursor-pointer"
+                            >
+                                <i class="fa-solid fa-eraser"></i>
+                                <span>Borrar respuesta</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Barra de navegación inferior -->
+                    <div class="bg-slate-50 px-5 py-4 sm:px-8 border-t border-slate-200 flex items-center justify-between gap-3">
+                        <button
+                            id="btn-prev"
+                            type="button"
+                            onclick="stepQuestion(-1)"
+                            class="px-4 py-2.5 bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold rounded-xl text-sm transition flex items-center space-x-2 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                        >
+                            <span>&larr; Anterior</span>
+                        </button>
+
+                        <button
+                            id="btn-next"
+                            type="button"
+                            onclick="stepQuestion(1)"
+                            class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm shadow transition flex items-center space-x-2 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                        >
+                            <span>Siguiente &rarr;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL LATERAL FIJO: NAVEGADOR NUMÉRICO DE 40 CASILLAS (4 columnas) -->
+            <aside class="lg:col-span-4 lg:sticky lg:top-28">
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-5 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <h3 class="font-bold text-slate-900 text-sm flex items-center space-x-2">
+                            <i class="fa-solid fa-grid-2 text-blue-600"></i>
+                            <span>Navegador Numérico</span>
+                        </h3>
+                        <span class="text-xs font-semibold text-slate-500">40 preguntas</span>
+                    </div>
+
+                    <!-- Contadores dinámicos en tiempo real -->
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5 text-center">
+                            <span class="block text-[11px] font-bold uppercase tracking-wide text-emerald-700">Respondidas</span>
+                            <span id="nav-answered-label" class="text-base sm:text-lg font-extrabold text-emerald-800">0 / 40</span>
+                        </div>
+                        <div class="bg-slate-100 border border-slate-200 rounded-xl p-2.5 text-center">
+                            <span class="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Pendientes</span>
+                            <span id="nav-pending-label" class="text-base sm:text-lg font-extrabold text-slate-800">40</span>
+                        </div>
+                    </div>
+
+                    <!-- Cuadrícula de 40 casillas numeradas (1 a 40) -->
+                    <div id="navigator-40-grid" class="grid grid-cols-5 sm:grid-cols-8 lg:grid-cols-5 gap-1.5 p-1">
+                        <!-- 40 casillas generadas por JS -->
+                    </div>
+
+                    <!-- Leyenda de código de colores -->
+                    <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-600">
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-3.5 h-3.5 rounded bg-white ring-2 ring-blue-600 inline-block"></span>
+                            <span>Actual</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-3.5 h-3.5 rounded bg-emerald-600 inline-block"></span>
+                            <span>Respondida</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <span class="w-3.5 h-3.5 rounded bg-slate-100 border border-slate-300 inline-block"></span>
+                            <span>Pendiente</span>
+                        </div>
+                    </div>
+
+                    <!-- Botón destacado Finalizar y Entregar Prueba -->
+                    <button
+                        type="button"
+                        onclick="showConfirmSubmitModal()"
+                        class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 px-4 rounded-xl text-sm shadow-md transition flex items-center justify-center space-x-2 cursor-pointer"
+                    >
+                        <i class="fa-solid fa-flag-checkered text-emerald-400"></i>
+                        <span>Finalizar y Entregar Prueba</span>
+                    </button>
+                </div>
+            </aside>
+
+        </section>
+
+        <!-- ================================================================= -->
+        <!-- PANTALLA 3: RESULTADOS, DESGLOSE E INFORME ACADÉMICO PDF          -->
+        <!-- ================================================================= -->
+        <section id="view-results" class="hidden space-y-6 max-w-6xl mx-auto">
+
+            <!-- Tarjeta Principal de Calificación -->
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+                <div class="bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-900 p-6 sm:p-8 text-white">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+                        <div class="space-y-1.5">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-200 border border-blue-400/30">
+                                    <i class="fa-solid fa-award mr-1.5"></i> Prueba Evaluada
+                                </span>
+                                <span id="res-qualitative-pill" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500 text-white">
+                                    --
+                                </span>
+                            </div>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                                Resultados: Divisibilidad, m.c.d. y m.c.m.
+                            </h2>
+                            <p id="res-student-subtitle" class="text-xs sm:text-sm text-slate-300">
+                                Alumno/a: -- | Curso/Grupo: -- | Centro: --
+                            </p>
+                        </div>
+
+                        <!-- Botones de descarga PDF y Nuevo Intento -->
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button
+                                type="button"
+                                onclick="downloadAcademicPdfReport()"
+                                class="px-5 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg shadow-red-600/25 transition flex items-center justify-center space-x-2 text-sm cursor-pointer"
+                            >
+                                <i class="fa-solid fa-file-pdf text-lg"></i>
+                                <span>Descargar Informe Académico en PDF</span>
+                            </button>
+                            <button
+                                type="button"
+                                onclick="restartNewAttempt()"
+                                class="px-5 py-3.5 bg-white/10 hover:bg-white/20 border border-white/25 text-white font-bold rounded-xl transition flex items-center justify-center space-x-2 text-sm cursor-pointer"
+                            >
+                                <i class="fa-solid fa-shuffle"></i>
+                                <span>Iniciar Nuevo Intento (Nueva Aleatorización)</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjetas Estadísticas Principales -->
+                <div class="p-6 sm:p-8 space-y-6">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+                        <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 text-center">
+                            <span class="block text-[11px] font-bold uppercase text-blue-700 mb-1">Nota Final</span>
+                            <span id="res-grade-10" class="text-2xl sm:text-3xl font-extrabold text-blue-950">0.00</span>
+                            <span class="block text-xs font-semibold text-blue-700">sobre 10</span>
+                        </div>
+                        <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-4 text-center">
+                            <span class="block text-[11px] font-bold uppercase text-indigo-700 mb-1">Calificación</span>
+                            <span id="res-qualitative-text" class="text-base sm:text-lg font-extrabold text-indigo-950 block mt-1.5">--</span>
+                            <span id="res-percentage" class="block text-xs font-bold text-indigo-600 mt-1">0% acierto</span>
+                        </div>
+                        <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-center">
+                            <span class="block text-[11px] font-bold uppercase text-emerald-700 mb-1">Aciertos</span>
+                            <span id="res-correct-count" class="text-2xl sm:text-3xl font-extrabold text-emerald-800">0</span>
+                            <span class="block text-xs font-semibold text-emerald-600">de 40</span>
+                        </div>
+                        <div class="bg-red-50 border border-red-200 rounded-2xl p-4 text-center">
+                            <span class="block text-[11px] font-bold uppercase text-red-700 mb-1">Fallos</span>
+                            <span id="res-incorrect-count" class="text-2xl sm:text-3xl font-extrabold text-red-800">0</span>
+                            <span class="block text-xs font-semibold text-red-600">incorrectas</span>
+                        </div>
+                        <div class="bg-slate-100 border border-slate-200 rounded-2xl p-4 text-center">
+                            <span class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Sin responder</span>
+                            <span id="res-unanswered-count" class="text-2xl sm:text-3xl font-extrabold text-slate-800">0</span>
+                            <span class="block text-xs font-semibold text-slate-500">en blanco</span>
+                        </div>
+                        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-center">
+                            <span class="block text-[11px] font-bold uppercase text-amber-700 mb-1">Tiempo empleado</span>
+                            <span id="res-time-spent" class="text-xl sm:text-2xl font-extrabold text-amber-900 block mt-1">00:00</span>
+                            <span class="block text-xs font-semibold text-amber-700 mt-0.5">duración</span>
+                        </div>
+                    </div>
+
+                    <!-- Desglose de Rendimiento por los 5 Bloques Temáticos -->
+                    <div class="bg-slate-50 rounded-2xl border border-slate-200 p-5 sm:p-6">
+                        <h3 class="text-sm font-bold text-slate-900 mb-4 flex items-center space-x-2">
+                            <i class="fa-solid fa-chart-bar text-blue-600"></i>
+                            <span>Desglose de Rendimiento por Bloques Temáticos (8 preguntas por bloque)</span>
+                        </h3>
+                        <div id="res-blocks-container" class="space-y-3.5">
+                            <!-- Barras horizontales de los 5 bloques generadas por JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Revisión Detallada Interactiva de las 40 Preguntas -->
+            <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 sm:p-8 space-y-5">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-200 pb-4">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 flex items-center space-x-2">
+                            <i class="fa-solid fa-magnifying-glass-chart text-blue-600"></i>
+                            <span>Revisión Detallada de las 40 Preguntas</span>
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Analiza cada cuestión con la respuesta marcada, la solución correcta y su justificación didáctica.</p>
+                    </div>
+
+                    <!-- Filtros por estado y por bloque temático -->
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <div class="inline-flex flex-wrap rounded-xl bg-slate-100 p-1 border border-slate-200 text-xs font-semibold">
+                            <button type="button" id="rev-filter-all" onclick="changeReviewStatusFilter('all')" class="px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-xs transition cursor-pointer">
+                                Todas (40)
+                            </button>
+                            <button type="button" id="rev-filter-correct" onclick="changeReviewStatusFilter('correct')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer">
+                                Acertadas
+                            </button>
+                            <button type="button" id="rev-filter-incorrect" onclick="changeReviewStatusFilter('incorrect')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer">
+                                Falladas
+                            </button>
+                            <button type="button" id="rev-filter-blank" onclick="changeReviewStatusFilter('blank')" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer">
+                                Sin responder
+                            </button>
+                        </div>
+
+                        <select
+                            id="rev-block-select"
+                            onchange="renderDetailedReviewList()"
+                            aria-label="Filtrar por bloque temático"
+                            class="px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        >
+                            <option value="all">Todos los bloques temáticos</option>
+                            <option value="1">Bloque 1: Múltiplos, divisores y criterios</option>
+                            <option value="2">Bloque 2: Números primos y compuestos</option>
+                            <option value="3">Bloque 3: Descomposición en factores primos</option>
+                            <option value="4">Bloque 4: m.c.d. y m.c.m.</option>
+                            <option value="5">Bloque 5: Problemas de aplicación</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Lista de tarjetas de revisión -->
+                <div id="res-review-cards" class="space-y-4">
+                    <!-- Generadas dinámicamente por JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL DE CONFIRMACIÓN PERSONALIZADO (SIN confirm() NATIVO)            -->
+    <!-- ===================================================================== -->
+    <div id="custom-confirm-modal" class="hidden fixed inset-0 z-50 bg-slate-900/65 backdrop-blur-xs flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title">
+        <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-md w-full p-6 space-y-5">
+            <div class="flex items-start space-x-3.5">
+                <div id="confirm-modal-icon" class="w-11 h-11 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl flex-shrink-0">
+                    <i class="fa-solid fa-circle-question"></i>
+                </div>
+                <div>
+                    <h3 id="confirm-modal-title" class="text-lg font-bold text-slate-900">
+                        Finalizar y Entregar Prueba
+                    </h3>
+                    <p id="confirm-modal-desc" class="text-sm text-slate-600 mt-1 leading-relaxed">
+                        --
+                    </p>
+                </div>
+            </div>
+
+            <!-- Resumen rápido antes de confirmar -->
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 grid grid-cols-2 gap-3 text-center text-xs">
+                <div class="bg-white p-2.5 rounded-lg border border-emerald-200">
+                    <span class="block text-slate-500 font-medium">Respondidas</span>
+                    <span id="modal-stat-answered" class="text-lg font-extrabold text-emerald-700">0 / 40</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-lg border border-slate-200">
+                    <span class="block text-slate-500 font-medium">Sin responder</span>
+                    <span id="modal-stat-unanswered" class="text-lg font-extrabold text-amber-600">40</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col-reverse sm:flex-row sm:justify-end gap-2.5 pt-1">
+                <button
+                    type="button"
+                    onclick="hideConfirmSubmitModal()"
+                    class="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 font-semibold text-sm transition cursor-pointer"
+                >
+                    Volver a revisar
+                </button>
+                <button
+                    type="button"
+                    onclick="confirmAndGradeTest()"
+                    class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow transition flex items-center justify-center space-x-2 cursor-pointer"
+                >
+                    <i class="fa-solid fa-check-double"></i>
+                    <span>Confirmar y ver nota</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- PIE DE PÁGINA                                                         -->
+    <!-- ===================================================================== -->
+    <footer class="bg-slate-900 text-slate-400 py-4 border-t border-slate-800 text-center text-xs mt-10">
+        <div class="max-w-7xl mx-auto px-4">
+            Cuestionario de Matemáticas: Divisibilidad, m.c.d. y m.c.m. &bull; Evaluación Interactiva de 40 Preguntas
+        </div>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- LÓGICA DE LA APLICACIÓN EN JAVASCRIPT                                 -->
+    <!-- ===================================================================== -->
+    <script>
+        // ---------------------------------------------------------------------
+        // NOMBRES DE LOS 5 BLOQUES TEMÁTICOS
+        // ---------------------------------------------------------------------
+        const THEMATIC_BLOCKS = {
+            1: "Bloque 1: Múltiplos, divisores y criterios de divisibilidad",
+            2: "Bloque 2: Números primos y compuestos",
+            3: "Bloque 3: Descomposición de un número en factores primos",
+            4: "Bloque 4: Máximo Común Divisor (m.c.d.) y Mínimo Común Múltiplo (m.c.m.)",
+            5: "Bloque 5: Problemas de aplicación de divisibilidad, m.c.d. y m.c.m."
+        };
+
+        // ---------------------------------------------------------------------
+        // BANCO EXACTO DE 40 PREGUNTAS (8 POR BLOQUE)
+        // La opción en índice 0 es siempre la correcta antes del barajado.
+        // ---------------------------------------------------------------------
+        const MASTER_QUESTION_BANK = [
+            // ================= BLOQUE 1 (Preguntas 1 a 8) =================
+            {
+                id: 1,
+                block: 1,
+                statement: "Si al dividir 84 entre 12 el cociente es 7 y el resto es 0, ¿cuál de las siguientes afirmaciones es correcta?",
+                options: [
+                    "84 es múltiplo de 12 y 12 es divisor de 84.",
+                    "12 es múltiplo de 84 y 7 es múltiplo de 84.",
+                    "84 es divisor de 12 y de 7.",
+                    "7 es múltiplo de 84 y divisor de 12."
+                ],
+                rationale: "Cuando la división a : b es exacta (resto 0), decimos que a es múltiplo de b y que b es divisor de a. Como 84 = 12 · 7, 84 es múltiplo de 12 (y de 7), mientras que 12 y 7 son divisores de 84."
+            },
+            {
+                id: 2,
+                block: 1,
+                statement: "¿Cuál es el conjunto completo de todos los divisores positivos del número 36?",
+                options: [
+                    "{1, 2, 3, 4, 6, 9, 12, 18, 36}",
+                    "{1, 2, 3, 4, 6, 12, 18, 36}",
+                    "{2, 3, 4, 6, 9, 12, 18}",
+                    "{1, 2, 3, 6, 8, 9, 12, 18, 36}"
+                ],
+                rationale: "Buscamos todas las parejas de factores naturales cuyo producto sea 36: 1·36, 2·18, 3·12, 4·9 y 6·6. Ordenados de menor a mayor, los 9 divisores son {1, 2, 3, 4, 6, 9, 12, 18, 36}."
+            },
+            {
+                id: 3,
+                block: 1,
+                statement: "¿Cuántos múltiplos de 7 hay comprendidos entre 20 y 60?",
+                options: [
+                    "6 múltiplos (21, 28, 35, 42, 49 y 56)",
+                    "5 múltiplos (21, 28, 35, 42 y 49)",
+                    "7 múltiplos (14, 21, 28, 35, 42, 49 y 56)",
+                    "6 múltiplos (20, 27, 34, 41, 48 y 55)"
+                ],
+                rationale: "Los múltiplos de 7 se obtienen multiplicando 7 por los números naturales: 7·3 = 21, 7·4 = 28, 7·5 = 35, 7·6 = 42, 7·7 = 49 y 7·8 = 56. En total hay 6 múltiplos entre 20 y 60."
+            },
+            {
+                id: 4,
+                block: 1,
+                statement: "¿Qué cifra debe sustituir a la letra \"a\" en el número 4.7a2 para que sea divisible por 9?",
+                options: [
+                    "a = 5",
+                    "a = 2",
+                    "a = 8",
+                    "a = 3"
+                ],
+                rationale: "Un número es divisible por 9 cuando la suma de sus cifras es múltiplo de 9. Sumamos las cifras conocidas: 4 + 7 + 2 = 13. El siguiente múltiplo de 9 es 18, por lo que a = 18 - 13 = 5 (4.752 : 9 = 528)."
+            },
+            {
+                id: 5,
+                block: 1,
+                statement: "¿Cuál de los siguientes números es divisible por 4?",
+                options: [
+                    "9.132",
+                    "7.318",
+                    "5.426",
+                    "6.514"
+                ],
+                rationale: "Un número es divisible por 4 si sus dos últimas cifras forman un múltiplo de 4 (o son 00). En 9.132, las dos últimas cifras forman el 32, y 32 = 4 · 8. En los demás casos (18, 26 y 14) no son múltiplos de 4."
+            },
+            {
+                id: 6,
+                block: 1,
+                statement: "Para que un número natural sea divisible por 6, debe cumplir simultáneamente:",
+                options: [
+                    "Ser divisible por 2 (terminar en cifra par) y ser divisible por 3 (la suma de sus cifras es múltiplo de 3).",
+                    "Terminar en 6 o en 0.",
+                    "Ser divisible por 3 y terminar en cifra impar.",
+                    "Que la suma de sus cifras sea exactamente 6."
+                ],
+                rationale: "Como 6 = 2 · 3 y 2 y 3 son primos entre sí, el criterio de divisibilidad por 6 exige que el número sea divisible a la vez por 2 y por 3."
+            },
+            {
+                id: 7,
+                block: 1,
+                statement: "Aplicando el criterio de divisibilidad por 11, ¿cuál de los siguientes números es divisible por 11?",
+                options: [
+                    "3.828",
+                    "2.543",
+                    "4.192",
+                    "7.314"
+                ],
+                rationale: "En 3.828, la suma de las cifras de posición impar es 3 + 2 = 5 y la de posición par es 8 + 8 = 16. Su diferencia es 16 - 5 = 11, que es múltiplo de 11 (3.828 : 11 = 348)."
+            },
+            {
+                id: 8,
+                block: 1,
+                statement: "¿Cuál de las siguientes propiedades sobre múltiplos y divisores de un número natural n > 1 es FALSA?",
+                options: [
+                    "Un número tiene infinitos divisores y una cantidad finita de múltiplos.",
+                    "El número 1 es divisor de cualquier número natural.",
+                    "Todo número natural distinto de cero es múltiplo y divisor de sí mismo.",
+                    "El 0 es múltiplo de cualquier número natural."
+                ],
+                rationale: "La afirmación falsa es la primera porque ocurre exactamente al revés: cualquier número natural n > 0 tiene infinitos múltiplos (n·0, n·1, n·2...) y una cantidad finita de divisores (comprendidos entre 1 y n)."
+            },
+
+            // ================= BLOQUE 2 (Preguntas 9 a 16) =================
+            {
+                id: 9,
+                block: 2,
+                statement: "Un número natural mayor que 1 se denomina número primo cuando:",
+                options: [
+                    "Tiene únicamente dos divisores positivos distintos: el 1 y él mismo.",
+                    "Es un número impar mayor que 1.",
+                    "Tiene más de dos divisores positivos.",
+                    "Solo es divisible por 2 y por sí mismo."
+                ],
+                rationale: "Por definición, un número primo es aquel número natural mayor que 1 que admite exactamente dos divisores positivos: la unidad (1) y el propio número."
+            },
+            {
+                id: 10,
+                block: 2,
+                statement: "¿Por qué el número 1 no se considera ni primo ni compuesto?",
+                options: [
+                    "Porque solo tiene un divisor positivo (él mismo), mientras que los primos tienen exactamente dos y los compuestos más de dos.",
+                    "Porque es un número impar y divide a todos los demás números.",
+                    "Porque es un número compuesto formado por una sola unidad.",
+                    "Porque al multiplicarlo por cualquier número el resultado no cambia."
+                ],
+                rationale: "La clasificación en primos (2 divisores) y compuestos (3 o más divisores) se aplica a los naturales mayores que 1. El 1 tiene un único divisor positivo y se denomina unidad."
+            },
+            {
+                id: 11,
+                block: 2,
+                statement: "¿En cuál de los siguientes conjuntos TODOS los números son primos?",
+                options: [
+                    "{13, 29, 43, 59}",
+                    "{11, 21, 37, 53}",
+                    "{17, 31, 49, 61}",
+                    "{19, 27, 41, 67}"
+                ],
+                rationale: "Los números 13, 29, 43 y 59 solo son divisibles por 1 y por sí mismos. En los otros grupos aparecen números compuestos: 21 = 3·7, 49 = 7·7 y 27 = 3·9."
+            },
+            {
+                id: 12,
+                block: 2,
+                statement: "¿Cuál de los siguientes números es compuesto?",
+                options: [
+                    "91",
+                    "83",
+                    "89",
+                    "97"
+                ],
+                rationale: "Aunque 91 parece primo a simple vista, es un número compuesto porque 91 = 7 · 13 (tiene cuatro divisores: 1, 7, 13 y 91). En cambio, 83, 89 y 97 son primos."
+            },
+            {
+                id: 13,
+                block: 2,
+                statement: "Para averiguar si el número 131 es primo, ¿hasta qué número primo debemos probar a dividirlo?",
+                options: [
+                    "Hasta el primo 11, porque 13² = 169 ya supera a 131.",
+                    "Hasta el primo 67, que es aproximadamente la mitad de 131.",
+                    "Hasta el primo 127, probando todos los primos menores que 131.",
+                    "Solo es necesario comprobar si es divisible por 2, 3 y 5."
+                ],
+                rationale: "Si un número N es compuesto, debe tener al menos un divisor primo menor o igual que su raíz cuadrada. Como 11² = 121 < 131 y 13² = 169 > 131, basta probar con los primos 2, 3, 5, 7 y 11. Como ninguno divide exactamente a 131, es primo."
+            },
+            {
+                id: 14,
+                block: 2,
+                statement: "Dos números naturales son primos entre sí (o coprimos) cuando:",
+                options: [
+                    "Su único divisor común positivo es el 1, es decir, su m.c.d. es 1.",
+                    "Ambos números tienen que ser obligatoriamente números primos.",
+                    "Su mínimo común múltiplo es igual a 1.",
+                    "Son dos números primos consecutivos cuya diferencia es 2."
+                ],
+                rationale: "Dos o más números son primos entre sí cuando no comparten ningún factor primo en su descomposición, por lo que su máximo común divisor es 1 (aunque alguno o ambos sean compuestos)."
+            },
+            {
+                id: 15,
+                block: 2,
+                statement: "¿Cuál de las siguientes parejas está formada por dos números compuestos que son primos entre sí?",
+                options: [
+                    "14 y 15",
+                    "12 y 18",
+                    "21 y 35",
+                    "11 y 13"
+                ],
+                rationale: "14 = 2 · 7 y 15 = 3 · 5 son ambos compuestos y no tienen ningún factor primo común, por lo que m.c.d.(14, 15) = 1. En 12 y 18 el m.c.d. es 6; en 21 y 35 es 7; y 11 y 13 son primos, no compuestos."
+            },
+            {
+                id: 16,
+                block: 2,
+                statement: "¿Cuántos números primos pares existen en el conjunto de los números naturales?",
+                options: [
+                    "Solo uno, el número 2, porque cualquier otro número par es divisible al menos por 1, por 2 y por sí mismo.",
+                    "Ninguno, porque todos los números primos son impares.",
+                    "Infinitos, todos los números acabados en 2.",
+                    "Dos, el 0 y el 2."
+                ],
+                rationale: "El 2 tiene exactamente dos divisores (1 y 2), por lo que es primo. Cualquier otro número par n > 2 tiene al menos tres divisores (1, 2 y n), siendo por tanto compuesto."
+            },
+
+            // ================= BLOQUE 3 (Preguntas 17 a 24) =================
+            {
+                id: 17,
+                block: 3,
+                statement: "¿Cuál es la descomposición en factores primos del número 180?",
+                options: [
+                    "2² · 3² · 5",
+                    "2 · 3² · 5²",
+                    "2² · 3 · 5²",
+                    "4 · 9 · 5"
+                ],
+                rationale: "Dividiendo sucesivamente por factores primos: 180 : 2 = 90; 90 : 2 = 45; 45 : 3 = 15; 15 : 3 = 5; 5 : 5 = 1. Por tanto, 180 = 2² · 3² · 5. (Nota: 4 · 9 · 5 no usa factores primos)."
+            },
+            {
+                id: 18,
+                block: 3,
+                statement: "¿Cuál es la factorización en números primos de 504?",
+                options: [
+                    "2³ · 3² · 7",
+                    "2² · 3³ · 7",
+                    "2³ · 3 · 7²",
+                    "2⁴ · 3² · 7"
+                ],
+                rationale: "Descomponemos 504: 504 : 2 = 252; 252 : 2 = 126; 126 : 2 = 63; 63 : 3 = 21; 21 : 3 = 7; 7 : 7 = 1. Agrupando en potencias resulta 504 = 2³ · 3² · 7."
+            },
+            {
+                id: 19,
+                block: 3,
+                statement: "Al descomponer el número 1.260 como producto de potencias de factores primos se obtiene:",
+                options: [
+                    "2² · 3² · 5 · 7",
+                    "2³ · 3 · 5 · 7",
+                    "2² · 3 · 5² · 7",
+                    "2 · 3² · 5 · 7²"
+                ],
+                rationale: "Podemos escribir 1.260 = 126 · 10 = (2 · 3² · 7) · (2 · 5) = 2² · 3² · 5 · 7. Comprobación: 4 · 9 · 5 · 7 = 36 · 35 = 1.260."
+            },
+            {
+                id: 20,
+                block: 3,
+                statement: "¿A qué número natural corresponde la descomposición factorial 2³ · 3 · 5²?",
+                options: [
+                    "600",
+                    "300",
+                    "1.200",
+                    "240"
+                ],
+                rationale: "Calculamos el valor de cada potencia y multiplicamos: 2³ = 8, 3¹ = 3 y 5² = 25. Entonces 8 · 3 · 25 = 24 · 25 = 600."
+            },
+            {
+                id: 21,
+                block: 3,
+                statement: "Dados los números A = 2⁴ · 3² · 7 y B = 2² · 3² · 7, ¿es A divisible por B?",
+                options: [
+                    "Sí, porque todos los factores primos de B están en A con exponente menor o igual, y el cociente A : B es 2² = 4.",
+                    "No, porque ambos números tienen exactamente las mismas bases primas.",
+                    "Sí, y el cociente exacto entre A y B es 2.",
+                    "No, porque el exponente del factor 2 en A es mayor que en B."
+                ],
+                rationale: "Un número A es divisible por B cuando en la factorización de A aparecen todos los factores primos de B elevados a exponentes mayores o iguales. Al dividir A : B restamos exponentes: 2^(4-2) · 3^(2-2) · 7^(1-1) = 2² = 4."
+            },
+            {
+                id: 22,
+                block: 3,
+                statement: "Sabiendo que 72 = 2³ · 3², ¿cuántos divisores positivos en total tiene el número 72?",
+                options: [
+                    "12 divisores",
+                    "6 divisores",
+                    "5 divisores",
+                    "10 divisores"
+                ],
+                rationale: "Para hallar el número total de divisores de un número factorizado, se suma 1 a cada exponente y se multiplican los resultados: (3 + 1) · (2 + 1) = 4 · 3 = 12 divisores."
+            },
+            {
+                id: 23,
+                block: 3,
+                statement: "Si la descomposición factorial de un número N es 2² · 5 · 11, ¿cuál será la descomposición en factores primos del triple de ese número (3N)?",
+                options: [
+                    "2² · 3 · 5 · 11",
+                    "6² · 15 · 33",
+                    "2³ · 5 · 11",
+                    "2² · 5³ · 11"
+                ],
+                rationale: "Multiplicar N por 3 equivale a añadir el factor primo 3 a su descomposición: 3N = 3 · (2² · 5 · 11) = 2² · 3 · 5 · 11."
+            },
+            {
+                id: 24,
+                block: 3,
+                statement: "¿Qué establece el Teorema Fundamental de la Aritmética respecto a la descomposición factorial?",
+                options: [
+                    "Que todo número natural mayor que 1 se puede expresar de forma única como producto de factores primos (salvo el orden de los factores).",
+                    "Que todo número natural tiene al menos tres factores primos diferentes.",
+                    "Que un mismo número compuesto puede descomponerse en factores primos distintos según el orden en que se divida.",
+                    "Que el producto de dos números primos siempre da como resultado otro número primo."
+                ],
+                rationale: "El Teorema Fundamental de la Aritmética garantiza la existencia y unicidad de la factorización prima de cualquier número entero mayor que 1."
+            },
+
+            // ================= BLOQUE 4 (Preguntas 25 a 32) =================
+            {
+                id: 25,
+                block: 4,
+                statement: "Para calcular el Máximo Común Divisor (m.c.d.) de varios números descompuestos en factores primos, se deben multiplicar:",
+                options: [
+                    "Únicamente los factores primos comunes elevados al menor exponente.",
+                    "Los factores primos comunes y no comunes elevados al mayor exponente.",
+                    "Únicamente los factores primos comunes elevados al mayor exponente.",
+                    "Los factores primos no comunes elevados al menor exponente."
+                ],
+                rationale: "El m.c.d. es el mayor divisor compartido por todos los números, por lo que solo puede incluir los factores primos que aparecen en todos ellos y con el menor exponente con el que figuren."
+            },
+            {
+                id: 26,
+                block: 4,
+                statement: "Para calcular el Mínimo Común Múltiplo (m.c.m.) de varios números descompuestos en factores primos, se deben multiplicar:",
+                options: [
+                    "Los factores primos comunes y no comunes elevados al mayor exponente.",
+                    "Únicamente los factores primos comunes elevados al menor exponente.",
+                    "Los factores primos comunes y no comunes elevados al menor exponente.",
+                    "Únicamente los factores primos no comunes elevados al mayor exponente."
+                ],
+                rationale: "El m.c.m. debe ser múltiplo de todos los números dados a la vez, por lo que debe contener todos los factores primos (comunes y no comunes) elevados al mayor exponente."
+            },
+            {
+                id: 27,
+                block: 4,
+                statement: "Calcula el m.c.d.(48, 72).",
+                options: [
+                    "24",
+                    "144",
+                    "12",
+                    "36"
+                ],
+                rationale: "Factorizamos ambos números: 48 = 2⁴ · 3 y 72 = 2³ · 3². Tomamos los factores primos comunes con el menor exponente: m.c.d.(48, 72) = 2³ · 3 = 8 · 3 = 24."
+            },
+            {
+                id: 28,
+                block: 4,
+                statement: "Calcula el m.c.m.(18, 24).",
+                options: [
+                    "72",
+                    "6",
+                    "432",
+                    "36"
+                ],
+                rationale: "Factorizamos ambos números: 18 = 2 · 3² y 24 = 2³ · 3. Tomamos los factores comunes y no comunes al mayor exponente: m.c.m.(18, 24) = 2³ · 3² = 8 · 9 = 72."
+            },
+            {
+                id: 29,
+                block: 4,
+                statement: "Halla simultáneamente el m.c.d.(60, 90, 150) y el m.c.m.(60, 90, 150).",
+                options: [
+                    "m.c.d. = 30 y m.c.m. = 900",
+                    "m.c.d. = 15 y m.c.m. = 450",
+                    "m.c.d. = 30 y m.c.m. = 450",
+                    "m.c.d. = 60 y m.c.m. = 900"
+                ],
+                rationale: "60 = 2² · 3 · 5; 90 = 2 · 3² · 5; 150 = 2 · 3 · 5². El m.c.d. toma comunes al menor exponente: 2 · 3 · 5 = 30. El m.c.m. toma todos al mayor exponente: 2² · 3² · 5² = 4 · 9 · 25 = 900."
+            },
+            {
+                id: 30,
+                block: 4,
+                statement: "Si un número natural a es múltiplo de otro b (por ejemplo, a = 45 y b = 15), ¿cuáles son su m.c.d. y su m.c.m.?",
+                options: [
+                    "m.c.d.(45, 15) = 15 (el menor) y m.c.m.(45, 15) = 45 (el mayor).",
+                    "m.c.d.(45, 15) = 45 y m.c.m.(45, 15) = 15.",
+                    "m.c.d.(45, 15) = 1 y m.c.m.(45, 15) = 675.",
+                    "m.c.d.(45, 15) = 5 y m.c.m.(45, 15) = 90."
+                ],
+                rationale: "Cuando un número es múltiplo de otro, el menor divide exactamente al mayor, por lo que el m.c.d. es siempre el menor (15) y el m.c.m. es el mayor (45)."
+            },
+            {
+                id: 31,
+                block: 4,
+                statement: "Si dos números naturales a y b son primos entre sí (como 8 y 9), su m.c.m.(8, 9) es igual a:",
+                options: [
+                    "El producto de ambos números: 8 · 9 = 72.",
+                    "1, porque no tienen factores primos comunes.",
+                    "La suma de ambos números: 8 + 9 = 17.",
+                    "El mayor de los dos números: 9."
+                ],
+                rationale: "Al ser primos entre sí (8 = 2³ y 9 = 3²), no comparten factores primos. Por ello, su m.c.d. es 1 y su m.c.m. es el producto de ambos: 2³ · 3² = 72."
+            },
+            {
+                id: 32,
+                block: 4,
+                statement: "Sabiendo que el m.c.d. de dos números es 6, su m.c.m. es 180 y uno de los números es 36, ¿cuál es el otro número?",
+                options: [
+                    "30",
+                    "60",
+                    "24",
+                    "45"
+                ],
+                rationale: "Se cumple la propiedad fundamental: a · b = m.c.d.(a, b) · m.c.m.(a, b). Sustituyendo: 36 · b = 6 · 180 = 1.080, de donde b = 1.080 : 36 = 30. (Comprobación: m.c.d.(36, 30) = 6 y m.c.m.(36, 30) = 180)."
+            },
+
+            // ================= BLOQUE 5 (Preguntas 33 a 40) =================
+            {
+                id: 33,
+                block: 5,
+                statement: "De una estación salen dos líneas de autobuses: la línea A sale cada 12 minutos y la línea B cada 18 minutos. Si ambos coinciden a las 9:00 de la mañana, ¿a qué hora volverán a coincidir por primera vez en la estación?",
+                options: [
+                    "A las 9:36 de la mañana (36 minutos después).",
+                    "A las 9:06 de la mañana (6 minutos después).",
+                    "A las 12:36 del mediodía (216 minutos después).",
+                    "A las 9:30 de la mañana (30 minutos después)."
+                ],
+                rationale: "Buscamos el primer tiempo futuro múltiplo común de 12 y 18: m.c.m.(12, 18) = m.c.m.(2² · 3, 2 · 3²) = 2² · 3² = 36 minutos. Sumando 36 minutos a las 9:00 obtenemos las 9:36."
+            },
+            {
+                id: 34,
+                block: 5,
+                statement: "Un carpintero tiene dos listones de madera de 120 cm y 168 cm de longitud. Quiere cortarlos en trozos iguales de la mayor longitud posible sin que sobre nada. ¿Cuánto medirá cada trozo y cuántos trozos obtendrá en total?",
+                options: [
+                    "Cada trozo medirá 24 cm y obtendrá 12 trozos en total.",
+                    "Cada trozo medirá 12 cm y obtendrá 24 trozos en total.",
+                    "Cada trozo medirá 24 cm y obtendrá 7 trozos en total.",
+                    "Cada trozo medirá 8 cm y obtendrá 36 trozos en total."
+                ],
+                rationale: "Para cortar en trozos máximos iguales sin desperdicio calculamos el m.c.d.(120, 168). Como 120 = 2³ · 3 · 5 y 168 = 2³ · 3 · 7, m.c.d. = 2³ · 3 = 24 cm. Del primer listón saca 120 : 24 = 5 trozos y del segundo 168 : 24 = 7 trozos; en total, 5 + 7 = 12 trozos."
+            },
+            {
+                id: 35,
+                block: 5,
+                statement: "Para una campaña solidaria se han recogido 48 briks de leche, 64 paquetes de pasta y 80 latas de conserva. Se quieren preparar cajas idénticas con el máximo número posible de cajas, repartiendo todos los alimentos sin que sobre ninguno. ¿Cuántas cajas se prepararán y qué contendrá cada una?",
+                options: [
+                    "16 cajas, cada una con 3 briks de leche, 4 paquetes de pasta y 5 latas de conserva.",
+                    "8 cajas, cada una con 6 briks de leche, 8 paquetes de pasta y 10 latas de conserva.",
+                    "16 cajas, cada una con 4 briks de leche, 3 paquetes de pasta y 5 latas de conserva.",
+                    "32 cajas, cada una con 2 briks de leche, 2 paquetes de pasta y 3 latas de conserva."
+                ],
+                rationale: "El número máximo de cajas iguales es m.c.d.(48, 64, 80). Factorizando: 48 = 2⁴ · 3, 64 = 2⁶ y 80 = 2⁴ · 5, luego m.c.d. = 2⁴ = 16 cajas. Cada caja llevará: 48 : 16 = 3 briks, 64 : 16 = 4 paquetes y 80 : 16 = 5 latas."
+            },
+            {
+                id: 36,
+                block: 5,
+                statement: "En un faro hay tres balizas luminosas: la roja destella cada 15 segundos, la verde cada 20 segundos y la azul cada 30 segundos. Si destellan las tres a la vez a medianoche, ¿cuántas veces volverán a coincidir juntas durante los siguientes 5 minutos?",
+                options: [
+                    "5 veces (coinciden cada 60 segundos, es decir, una vez por minuto).",
+                    "60 veces (coinciden cada 5 segundos).",
+                    "10 veces (coinciden cada 30 segundos).",
+                    "3 veces (coinciden cada 90 segundos)."
+                ],
+                rationale: "Calculamos el periodo de coincidencia: m.c.m.(15, 20, 30) = m.c.m.(3·5, 2²·5, 2·3·5) = 2² · 3 · 5 = 60 segundos = 1 minuto. En los siguientes 5 minutos volverán a coincidir en los minutos 1, 2, 3, 4 y 5, es decir, 5 veces."
+            },
+            {
+                id: 37,
+                block: 5,
+                statement: "Se desea cubrir el suelo rectangular de una sala de 420 cm de largo por 300 cm de ancho con baldosas cuadradas lo más grandes posible sin cortar ninguna. ¿Cuál debe ser el lado de cada baldosa y cuántas baldosas se necesitan?",
+                options: [
+                    "Baldosas de 60 cm de lado y se necesitan 35 baldosas.",
+                    "Baldosas de 60 cm de lado y se necesitan 12 baldosas.",
+                    "Baldosas de 30 cm de lado y se necesitan 140 baldosas.",
+                    "Baldosas de 20 cm de lado y se necesitan 315 baldosas."
+                ],
+                rationale: "El lado máximo de la baldosa cuadrada es m.c.d.(420, 300). Como 420 = 2² · 3 · 5 · 7 y 300 = 2² · 3 · 5², m.c.d. = 2² · 3 · 5 = 60 cm. A lo largo caben 420 : 60 = 7 baldosas y a lo ancho 300 : 60 = 5 baldosas; en total, 7 · 5 = 35 baldosas."
+            },
+            {
+                id: 38,
+                block: 5,
+                statement: "En un instituto hay 144 alumnos de 1.º de ESO y quieren organizarse en equipos iguales para una yincana, de modo que cada equipo tenga más de 10 y menos de 20 integrantes sin que sobre nadie. ¿De cuántos alumnos pueden formar cada equipo?",
+                options: [
+                    "De 12, de 16 o de 18 alumnos por equipo.",
+                    "De 12, de 14 o de 18 alumnos por equipo.",
+                    "Únicamente de 12 alumnos por equipo.",
+                    "De 15 o de 16 alumnos por equipo."
+                ],
+                rationale: "El número de integrantes por equipo debe ser un divisor de 144 comprendido entre 10 y 20. Los divisores de 144 son {1, 2, 3, 4, 6, 8, 9, 12, 16, 18, 24, 36, 48, 72, 144}. Los comprendidos entre 10 y 20 son 12, 16 y 18."
+            },
+            {
+                id: 39,
+                block: 5,
+                statement: "Andrea colecciona cromos. Si los agrupa de 6 en 6, de 8 en 8 o de 10 en 10, siempre le sobran 3 cromos. Sabiendo que tiene menos de 150 cromos, ¿cuántos cromos tiene Andrea exactamente?",
+                options: [
+                    "123 cromos",
+                    "120 cromos",
+                    "117 cromos",
+                    "63 cromos"
+                ],
+                rationale: "Si quitáramos los 3 cromos que siempre sobran, la cantidad sería un múltiplo común de 6, 8 y 10. Hallamos m.c.m.(6, 8, 10) = m.c.m.(2·3, 2³, 2·5) = 2³ · 3 · 5 = 120. Sumando los 3 cromos sobrantes: 120 + 3 = 123 cromos (que es menor que 150)."
+            },
+            {
+                id: 40,
+                block: 5,
+                statement: "En un hospital, la doctora Martín hace guardia cada 4 días, el doctor López cada 6 días y la doctora Ruiz cada 9 días. Si hoy coinciden los tres de guardia, ¿dentro de cuántos días volverán a coincidir los tres juntos por primera vez?",
+                options: [
+                    "Dentro de 36 días.",
+                    "Dentro de 18 días.",
+                    "Dentro de 72 días.",
+                    "Dentro de 216 días."
+                ],
+                rationale: "El número de días hasta la próxima coincidencia es el mínimo común múltiplo de 4, 6 y 9: como 4 = 2², 6 = 2 · 3 y 9 = 3², m.c.m.(4, 6, 9) = 2² · 3² = 4 · 9 = 36 días."
+            }
+        ];
+
+        // ---------------------------------------------------------------------
+        // ESTADO GLOBAL DE LA SESIÓN
+        // ---------------------------------------------------------------------
+        let studentData = {
+            name: '',
+            group: '',
+            school: ''
+        };
+
+        let activeQuestions = [];
+        let selectedAnswers = new Array(40).fill(null);
+        let currentIndex = 0;
+        let elapsedSeconds = 0;
+        let timerIntervalId = null;
+        let reviewStatusFilter = 'all';
+
+        // ---------------------------------------------------------------------
+        // ALGORITMO DE ALEATORIZACIÓN FISHER-YATES
+        // ---------------------------------------------------------------------
+        function shuffleFisherYates(array) {
+            const copy = [...array];
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const temp = copy[i];
+                copy[i] = copy[j];
+                copy[j] = temp;
+            }
+            return copy;
+        }
+
+        // Genera una sesión barajando las 40 preguntas y las 4 opciones de cada una
+        function prepareRandomizedExam() {
+            const shuffledBank = shuffleFisherYates(MASTER_QUESTION_BANK);
+
+            activeQuestions = shuffledBank.map((item) => {
+                // La opción correcta en el banco maestro siempre está en la posición 0
+                const correctOptionText = item.options[0];
+                const shuffledOptions = shuffleFisherYates(item.options);
+                const newCorrectIndex = shuffledOptions.indexOf(correctOptionText);
+
+                return {
+                    id: item.id,
+                    block: item.block,
+                    statement: item.statement,
+                    options: shuffledOptions,
+                    correctIndex: newCorrectIndex,
+                    rationale: item.rationale
+                };
+            });
+
+            selectedAnswers = new Array(activeQuestions.length).fill(null);
+            currentIndex = 0;
+            elapsedSeconds = 0;
+        }
+
+        // ---------------------------------------------------------------------
+        // CRONÓMETRO EN VIVO (MM:SS)
+        // ---------------------------------------------------------------------
+        function formatTimeMMSS(totalSeconds) {
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function startTimer() {
+            stopTimer();
+            elapsedSeconds = 0;
+            document.getElementById('header-timer').textContent = formatTimeMMSS(0);
+            timerIntervalId = setInterval(() => {
+                elapsedSeconds++;
+                document.getElementById('header-timer').textContent = formatTimeMMSS(elapsedSeconds);
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerIntervalId !== null) {
+                clearInterval(timerIntervalId);
+                timerIntervalId = null;
+            }
+        }
+
+        // ---------------------------------------------------------------------
+        // VALIDACIÓN ESTRICTA DE IDENTIFICACIÓN
+        // ---------------------------------------------------------------------
+        function clearInputError(inputId, errorId) {
+            const inputEl = document.getElementById(inputId);
+            const errorEl = document.getElementById(errorId);
+            inputEl.classList.remove('border-red-500', 'bg-red-50/40', 'focus:ring-red-500');
+            inputEl.classList.add('border-slate-300', 'focus:ring-blue-600');
+            errorEl.classList.add('hidden');
+            document.getElementById('validation-summary').classList.add('hidden');
+        }
+
+        function markInputError(inputId, errorId) {
+            const inputEl = document.getElementById(inputId);
+            const errorEl = document.getElementById(errorId);
+            inputEl.classList.remove('border-slate-300', 'focus:ring-blue-600');
+            inputEl.classList.add('border-red-500', 'bg-red-50/40', 'focus:ring-red-500');
+            errorEl.classList.remove('hidden');
+        }
+
+        function handleStartQuiz(event) {
+            event.preventDefault();
+
+            const nameVal = document.getElementById('input-student-name').value.trim();
+            const groupVal = document.getElementById('input-student-group').value.trim();
+            const schoolVal = document.getElementById('input-student-school').value.trim();
+
+            let valid = true;
+
+            if (!nameVal) {
+                markInputError('input-student-name', 'err-student-name');
+                valid = false;
+            }
+            if (!groupVal) {
+                markInputError('input-student-group', 'err-student-group');
+                valid = false;
+            }
+            if (!schoolVal) {
+                markInputError('input-student-school', 'err-student-school');
+                valid = false;
+            }
+
+            if (!valid) {
+                document.getElementById('validation-summary').classList.remove('hidden');
+                return;
+            }
+
+            studentData = {
+                name: nameVal,
+                group: groupVal,
+                school: schoolVal
+            };
+
+            document.getElementById('header-student-info').textContent = `${studentData.name} (${studentData.group})`;
+
+            prepareRandomizedExam();
+            startTimer();
+
+            document.getElementById('view-register').classList.add('hidden');
+            document.getElementById('view-quiz').classList.remove('hidden');
+            document.getElementById('header-active-bar').classList.remove('hidden');
+            document.getElementById('header-progress-wrapper').classList.remove('hidden');
+
+            renderNavigator40();
+            renderQuestionCard();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ---------------------------------------------------------------------
+        // RENDERIZADO DE LA PREGUNTA Y DEL NAVEGADOR NUMÉRICO (40 CASILLAS)
+        // ---------------------------------------------------------------------
+        function updateGlobalProgressUI() {
+            const total = activeQuestions.length;
+            const answered = selectedAnswers.filter((ans) => ans !== null).length;
+            const pending = total - answered;
+            const pct = Math.round((answered / total) * 100);
+
+            document.getElementById('header-progress-label').textContent = `${answered} de ${total} (${pct}%)`;
+            document.getElementById('header-progress-bar').style.width = `${pct}%`;
+
+            document.getElementById('nav-answered-label').textContent = `${answered} / ${total}`;
+            document.getElementById('nav-pending-label').textContent = `${pending}`;
+        }
+
+        function renderNavigator40() {
+            const grid = document.getElementById('navigator-40-grid');
+            grid.innerHTML = '';
+
+            activeQuestions.forEach((_, idx) => {
+                const isAnswered = selectedAnswers[idx] !== null;
+                const isCurrent = idx === currentIndex;
+
+                const cell = document.createElement('button');
+                cell.type = 'button';
+                cell.textContent = idx + 1;
+                cell.setAttribute('aria-label', `Ir a pregunta ${idx + 1}`);
+                cell.onclick = () => jumpToQuestion(idx);
+
+                let classes = 'w-full aspect-square rounded-lg font-bold text-xs flex items-center justify-center transition-all cursor-pointer ';
+
+                if (isCurrent) {
+                    classes += 'ring-2 ring-blue-600 ring-offset-1 z-10 ';
+                }
+
+                if (isAnswered) {
+                    classes += 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-xs';
+                } else {
+                    classes += 'bg-slate-100 text-slate-700 border border-slate-300 hover:bg-slate-200';
+                }
+
+                cell.className = classes;
+                grid.appendChild(cell);
+            });
+
+            updateGlobalProgressUI();
+        }
+
+        function renderQuestionCard() {
+            const q = activeQuestions[currentIndex];
+            const chosenIdx = selectedAnswers[currentIndex];
+            const isAnswered = chosenIdx !== null;
+
+            // Badges de cabecera
+            document.getElementById('q-number-badge').textContent = `Pregunta ${currentIndex + 1} de ${activeQuestions.length}`;
+            document.getElementById('q-block-badge').textContent = THEMATIC_BLOCKS[q.block];
+
+            const statusBadge = document.getElementById('q-answer-status');
+            const eraseBtn = document.getElementById('btn-erase-answer');
+
+            if (isAnswered) {
+                statusBadge.textContent = 'Respondida';
+                statusBadge.className = 'bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-1 rounded-full';
+                eraseBtn.classList.remove('hidden');
+            } else {
+                statusBadge.textContent = 'Sin responder';
+                statusBadge.className = 'bg-slate-200 text-slate-700 font-semibold text-xs px-3 py-1 rounded-full';
+                eraseBtn.classList.add('hidden');
+            }
+
+            // Enunciado
+            document.getElementById('q-statement-text').textContent = `${currentIndex + 1}. ${q.statement}`;
+
+            // Tarjetas de 4 opciones (A, B, C, D)
+            const container = document.getElementById('q-options-container');
+            container.innerHTML = '';
+            const optionLetters = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((optText, idx) => {
+                const isSelected = chosenIdx === idx;
+
+                const cardBtn = document.createElement('button');
+                cardBtn.type = 'button';
+                cardBtn.setAttribute('role', 'radio');
+                cardBtn.setAttribute('aria-checked', isSelected ? 'true' : 'false');
+                cardBtn.onclick = () => handleOptionClick(idx);
+
+                cardBtn.className = `w-full text-left p-4 rounded-xl border transition-all flex items-start space-x-3.5 cursor-pointer ${
+                    isSelected
+                        ? 'border-blue-600 bg-blue-50/85 text-blue-950 font-semibold shadow-xs ring-1 ring-blue-600'
+                        : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 text-slate-800'
+                }`;
+
+                const letterBox = document.createElement('span');
+                letterBox.className = `w-7 h-7 rounded-lg font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 transition-colors ${
+                    isSelected
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-slate-100 text-slate-600 border border-slate-300'
+                }`;
+                letterBox.textContent = optionLetters[idx];
+
+                const textEl = document.createElement('span');
+                textEl.className = 'text-sm sm:text-base leading-snug';
+                textEl.textContent = optText;
+
+                cardBtn.appendChild(letterBox);
+                cardBtn.appendChild(textEl);
+                container.appendChild(cardBtn);
+            });
+
+            // Botones Anterior / Siguiente
+            document.getElementById('btn-prev').disabled = (currentIndex === 0);
+            document.getElementById('btn-next').disabled = (currentIndex === activeQuestions.length - 1);
+
+            renderNavigator40();
+        }
+
+        // Al hacer clic en una opción ya seleccionada, se desmarca
+        function handleOptionClick(optionIndex) {
+            if (selectedAnswers[currentIndex] === optionIndex) {
+                selectedAnswers[currentIndex] = null;
+            } else {
+                selectedAnswers[currentIndex] = optionIndex;
+            }
+            renderQuestionCard();
+        }
+
+        function eraseCurrentAnswer() {
+            selectedAnswers[currentIndex] = null;
+            renderQuestionCard();
+        }
+
+        function stepQuestion(delta) {
+            const target = currentIndex + delta;
+            if (target >= 0 && target < activeQuestions.length) {
+                currentIndex = target;
+                renderQuestionCard();
+            }
+        }
+
+        function jumpToQuestion(idx) {
+            if (idx >= 0 && idx < activeQuestions.length) {
+                currentIndex = idx;
+                renderQuestionCard();
+            }
+        }
+
+        // ---------------------------------------------------------------------
+        // MODAL DE CONFIRMACIÓN PERSONALIZADO
+        // ---------------------------------------------------------------------
+        function showConfirmSubmitModal() {
+            const answered = selectedAnswers.filter((a) => a !== null).length;
+            const unanswered = activeQuestions.length - answered;
+
+            document.getElementById('modal-stat-answered').textContent = `${answered} / 40`;
+            document.getElementById('modal-stat-unanswered').textContent = `${unanswered}`;
+
+            const iconBox = document.getElementById('confirm-modal-icon');
+            const descEl = document.getElementById('confirm-modal-desc');
+
+            if (unanswered > 0) {
+                iconBox.className = 'w-11 h-11 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl flex-shrink-0';
+                iconBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+                descEl.innerHTML = `Has respondido a <strong>${answered} de 40</strong> preguntas y quedan <strong>${unanswered} sin responder</strong>. ¿Deseas entregar la prueba ahora o volver a revisar?`;
+            } else {
+                iconBox.className = 'w-11 h-11 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl flex-shrink-0';
+                iconBox.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                descEl.innerHTML = 'Has completado las <strong>40 preguntas</strong> de la prueba. Confirma la entrega para calcular tu nota y generar tu informe académico.';
+            }
+
+            document.getElementById('custom-confirm-modal').classList.remove('hidden');
+        }
+
+        function hideConfirmSubmitModal() {
+            document.getElementById('custom-confirm-modal').classList.add('hidden');
+        }
+
+        // ---------------------------------------------------------------------
+        // CÁLCULO DE RESULTADOS Y PANTALLA DE EVALUACIÓN
+        // ---------------------------------------------------------------------
+        function getQualitativeGrade(gradeNumeric) {
+            if (gradeNumeric >= 9.0) return 'Sobresaliente';
+            if (gradeNumeric >= 7.0) return 'Notable';
+            if (gradeNumeric >= 6.0) return 'Bien';
+            if (gradeNumeric >= 5.0) return 'Suficiente';
+            return 'Insuficiente';
+        }
+
+        function evaluateTestResults() {
+            let correct = 0;
+            let incorrect = 0;
+            let unanswered = 0;
+
+            const byBlock = {
+                1: { total: 0, correct: 0, incorrect: 0, unanswered: 0 },
+                2: { total: 0, correct: 0, incorrect: 0, unanswered: 0 },
+                3: { total: 0, correct: 0, incorrect: 0, unanswered: 0 },
+                4: { total: 0, correct: 0, incorrect: 0, unanswered: 0 },
+                5: { total: 0, correct: 0, incorrect: 0, unanswered: 0 }
+            };
+
+            activeQuestions.forEach((q, idx) => {
+                const ans = selectedAnswers[idx];
+                byBlock[q.block].total++;
+
+                if (ans === null) {
+                    unanswered++;
+                    byBlock[q.block].unanswered++;
+                } else if (ans === q.correctIndex) {
+                    correct++;
+                    byBlock[q.block].correct++;
+                } else {
+                    incorrect++;
+                    byBlock[q.block].incorrect++;
+                }
+            });
+
+            const rawGrade = (correct / 40) * 10;
+            const gradeFormatted = rawGrade.toFixed(2);
+            const qualitative = getQualitativeGrade(rawGrade);
+            const percentage = Math.round((correct / 40) * 100);
+
+            return {
+                correct,
+                incorrect,
+                unanswered,
+                rawGrade,
+                gradeFormatted,
+                qualitative,
+                percentage,
+                byBlock
+            };
+        }
+
+        function confirmAndGradeTest() {
+            hideConfirmSubmitModal();
+            stopTimer();
+
+            const stats = evaluateTestResults();
+            const durationFormatted = formatTimeMMSS(elapsedSeconds);
+
+            document.getElementById('view-quiz').classList.add('hidden');
+            document.getElementById('header-progress-wrapper').classList.add('hidden');
+            document.getElementById('view-results').classList.remove('hidden');
+
+            document.getElementById('res-student-subtitle').textContent =
+                `Alumno/a: ${studentData.name}  |  Curso/Grupo: ${studentData.group}  |  Centro: ${studentData.school}  |  Fecha: ${new Date().toLocaleDateString('es-ES')}`;
+
+            document.getElementById('res-grade-10').textContent = stats.gradeFormatted;
+            document.getElementById('res-qualitative-text').textContent = stats.qualitative;
+            document.getElementById('res-percentage').textContent = `${stats.percentage}% acierto`;
+            document.getElementById('res-correct-count').textContent = stats.correct;
+            document.getElementById('res-incorrect-count').textContent = stats.incorrect;
+            document.getElementById('res-unanswered-count').textContent = stats.unanswered;
+            document.getElementById('res-time-spent').textContent = durationFormatted;
+
+            // Estilo de la píldora de calificación cualitativa
+            const pill = document.getElementById('res-qualitative-pill');
+            pill.textContent = `${stats.qualitative} (${stats.gradeFormatted}/10)`;
+            if (stats.rawGrade >= 7) {
+                pill.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500 text-white';
+            } else if (stats.rawGrade >= 5) {
+                pill.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500 text-slate-950';
+            } else {
+                pill.className = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-red-500 text-white';
+            }
+
+            // Renderizar barras horizontales de desglose por bloques temáticos
+            const blocksContainer = document.getElementById('res-blocks-container');
+            blocksContainer.innerHTML = '';
+
+            for (let b = 1; b <= 5; b++) {
+                const bStat = stats.byBlock[b];
+                const bPct = bStat.total > 0 ? Math.round((bStat.correct / bStat.total) * 100) : 0;
+                const barColor = bPct >= 75 ? 'bg-emerald-500' : (bPct >= 50 ? 'bg-blue-600' : 'bg-red-500');
+
+                const row = document.createElement('div');
+                row.className = 'bg-white p-3.5 rounded-xl border border-slate-200 space-y-2';
+                row.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+                        <span class="font-bold text-slate-800">${THEMATIC_BLOCKS[b]}</span>
+                        <span class="font-extrabold ${bPct >= 50 ? 'text-emerald-700' : 'text-red-600'}">
+                            ${bStat.correct} / ${bStat.total} aciertos (${bPct}%)
+                        </span>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                        <div class="${barColor} h-2.5 rounded-full transition-all duration-500" style="width: ${bPct}%;"></div>
+                    </div>
+                `;
+                blocksContainer.appendChild(row);
+            }
+
+            // Reiniciar filtros de revisión y mostrar tarjetas
+            reviewStatusFilter = 'all';
+            document.getElementById('rev-block-select').value = 'all';
+            updateReviewFilterButtons();
+            renderDetailedReviewList();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function changeReviewStatusFilter(status) {
+            reviewStatusFilter = status;
+            updateReviewFilterButtons();
+            renderDetailedReviewList();
+        }
+
+        function updateReviewFilterButtons() {
+            const statuses = ['all', 'correct', 'incorrect', 'blank'];
+            statuses.forEach((st) => {
+                const btn = document.getElementById(`rev-filter-${st}`);
+                if (st === reviewStatusFilter) {
+                    btn.className = 'px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-xs transition cursor-pointer';
+                } else {
+                    btn.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition cursor-pointer';
+                }
+            });
+        }
+
+        function renderDetailedReviewList() {
+            const container = document.getElementById('res-review-cards');
+            container.innerHTML = '';
+
+            const blockFilter = document.getElementById('rev-block-select').value;
+            const optionLetters = ['A', 'B', 'C', 'D'];
+            let countShown = 0;
+
+            activeQuestions.forEach((q, idx) => {
+                const ans = selectedAnswers[idx];
+                const state = ans === null ? 'blank' : (ans === q.correctIndex ? 'correct' : 'incorrect');
+
+                if (reviewStatusFilter !== 'all' && state !== reviewStatusFilter) return;
+                if (blockFilter !== 'all' && String(q.block) !== blockFilter) return;
+
+                countShown++;
+
+                const studentChoiceText = ans !== null
+                    ? `${optionLetters[ans]}) ${q.options[ans]}`
+                    : 'Sin responder';
+                const correctChoiceText = `${optionLetters[q.correctIndex]}) ${q.options[q.correctIndex]}`;
+
+                let cardBorder = 'border-slate-200 bg-slate-50/50';
+                let statusPill = '<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-200 text-slate-700"><i class="fa-regular fa-circle mr-1"></i>Sin responder</span>';
+
+                if (state === 'correct') {
+                    cardBorder = 'border-emerald-200 bg-emerald-50/40';
+                    statusPill = '<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800"><i class="fa-solid fa-circle-check mr-1"></i>Acertada</span>';
+                } else if (state === 'incorrect') {
+                    cardBorder = 'border-red-200 bg-red-50/40';
+                    statusPill = '<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-800"><i class="fa-solid fa-circle-xmark mr-1"></i>Fallada</span>';
+                }
+
+                const card = document.createElement('article');
+                card.className = `p-4 sm:p-5 rounded-2xl border ${cardBorder} space-y-2.5`;
+                card.innerHTML = `
+                    <div class="flex flex-wrap items-start justify-between gap-2">
+                        <div class="space-y-1 max-w-3xl">
+                            <span class="text-[11px] font-bold text-blue-700 uppercase tracking-wide">${THEMATIC_BLOCKS[q.block]}</span>
+                            <h4 class="font-bold text-slate-900 text-sm sm:text-base">${idx + 1}. ${q.statement}</h4>
+                        </div>
+                        <div class="flex-shrink-0">${statusPill}</div>
+                    </div>
+
+                    <div class="text-xs sm:text-sm space-y-1 pt-1">
+                        <p class="${state === 'correct' ? 'text-emerald-900 font-semibold' : (state === 'incorrect' ? 'text-red-800 font-semibold' : 'text-slate-600 italic')}">
+                            <strong>Respuesta marcada:</strong> ${studentChoiceText}
+                        </p>
+                        ${state !== 'correct' ? `<p class="text-emerald-900 font-semibold"><strong>Respuesta correcta:</strong> ${correctChoiceText}</p>` : ''}
+                    </div>
+
+                    <div class="bg-white p-3.5 rounded-xl border border-slate-200/90 text-xs text-slate-700 leading-relaxed">
+                        <strong class="text-blue-700"><i class="fa-solid fa-book-open mr-1"></i>Justificación didáctica:</strong> ${q.rationale}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (countShown === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10 text-slate-500 text-sm bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+                        <i class="fa-solid fa-filter-circle-xmark text-2xl text-slate-400 mb-2"></i>
+                        <p>No se encontraron preguntas para la combinación de filtros seleccionada.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Reiniciar un nuevo intento con nueva aleatorización completa
+        function restartNewAttempt() {
+            prepareRandomizedExam();
+            startTimer();
+
+            document.getElementById('view-results').classList.add('hidden');
+            document.getElementById('view-quiz').classList.remove('hidden');
+            document.getElementById('header-progress-wrapper').classList.remove('hidden');
+
+            renderNavigator40();
+            renderQuestionCard();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ---------------------------------------------------------------------
+        // SANEAMIENTO DE TEXTO PARA jsPDF (CONSERVANDO TILDES Y Ñ)
+        // ---------------------------------------------------------------------
+        function sanitizePdfText(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/·/g, ' x ')
+                .replace(/×/g, 'x')
+                .replace(/²/g, '^2')
+                .replace(/³/g, '^3')
+                .replace(/⁴/g, '^4')
+                .replace(/⁶/g, '^6')
+                .replace(/≈/g, '~')
+                .replace(/→/g, '->')
+                .replace(/←/g, '<-')
+                .replace(/—/g, '-')
+                .replace(/–/g, '-');
+        }
+
+        // ---------------------------------------------------------------------
+        // GENERACIÓN Y DESCARGA DE INFORME ACADÉMICO EN PDF CON jsPDF
+        // ---------------------------------------------------------------------
+        function downloadAcademicPdfReport() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({
+                orientation: 'p',
+                unit: 'mm',
+                format: 'a4'
+            });
+
+            const stats = evaluateTestResults();
+            const durationStr = formatTimeMMSS(elapsedSeconds);
+            const emissionDateStr = new Date().toLocaleString('es-ES');
+            const optionLetters = ['A', 'B', 'C', 'D'];
+
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const marginLeft = 14;
+            const marginRight = 14;
+            const contentWidth = pageWidth - marginLeft - marginRight;
+
+            // 1. ENCABEZADO INSTITUCIONAL AZUL
+            doc.setFillColor(30, 58, 138); // Azul institucional profundo (#1e3a8a)
+            doc.rect(0, 0, pageWidth, 30, 'F');
+            doc.setFillColor(59, 130, 246); // Línea de acento azul brillante (#3b82f6)
+            doc.rect(0, 30, pageWidth, 2, 'F');
+
+            doc.setTextColor(255, 255, 255);
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(14);
+            doc.text(sanitizePdfText('INFORME ACADÉMICO DE EVALUACIÓN - MATEMÁTICAS'), marginLeft, 12.5);
+
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9.5);
+            doc.setTextColor(219, 234, 254);
+            doc.text(sanitizePdfText('Unidad Didáctica: Divisibilidad, m.c.d. y m.c.m. (40 Preguntas)'), marginLeft, 19.5);
+
+            doc.setFontSize(8);
+            doc.setTextColor(191, 219, 254);
+            doc.text(sanitizePdfText(`Fecha y hora de emisión: ${emissionDateStr}`), marginLeft, 25.5);
+
+            // 2. FICHA DE IDENTIFICACIÓN DEL ALUMNO Y CUADRO RESUMEN
+            let y = 38;
+
+            // Caja izquierda: Identificación
+            doc.setFillColor(248, 250, 252);
+            doc.setDrawColor(203, 213, 225);
+            doc.rect(marginLeft, y, 108, 30, 'FD');
+
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8.5);
+            doc.setTextColor(30, 58, 138);
+            doc.text(sanitizePdfText('IDENTIFICACIÓN DEL ALUMNO/A'), marginLeft + 3.5, y + 6);
+
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(9);
+            doc.setTextColor(15, 23, 42);
+            doc.text(sanitizePdfText(`Nombre: ${studentData.name}`), marginLeft + 3.5, y + 13);
+
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8.5);
+            doc.setTextColor(51, 65, 85);
+            doc.text(sanitizePdfText(`Curso / Grupo: ${studentData.group}`), marginLeft + 3.5, y + 19.5);
+            doc.text(sanitizePdfText(`Centro Educativo: ${studentData.school}`), marginLeft + 3.5, y + 25.5);
+
+            // Caja derecha: Calificación y Estadísticas
+            doc.setFillColor(239, 246, 255);
+            doc.setDrawColor(147, 197, 253);
+            doc.rect(marginLeft + 112, y, 70, 30, 'FD');
+
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8);
+            doc.setTextColor(30, 64, 175);
+            doc.text(sanitizePdfText('RESULTADO GLOBAL'), marginLeft + 115.5, y + 5.5);
+
+            doc.setFontSize(14);
+            doc.setTextColor(15, 23, 42);
+            doc.text(sanitizePdfText(`${stats.gradeFormatted} / 10`), marginLeft + 115.5, y + 13);
+
+            doc.setFontSize(9);
+            doc.setTextColor(30, 58, 138);
+            doc.text(sanitizePdfText(`${stats.qualitative} (${stats.percentage}%)`), marginLeft + 115.5, y + 19);
+
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(7.5);
+            doc.setTextColor(51, 65, 85);
+            doc.text(
+                sanitizePdfText(`Aciertos: ${stats.correct} | Fallos: ${stats.incorrect} | Blanco: ${stats.unanswered}`),
+                marginLeft + 115.5,
+                y + 24.5
+            );
+            doc.text(
+                sanitizePdfText(`Tiempo empleado: ${durationStr}`),
+                marginLeft + 115.5,
+                y + 28.5
+            );
+
+            y += 36;
+
+            // 3. TABLA RESUMEN DE RENDIMIENTO POR BLOQUES TEMÁTICOS
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(10);
+            doc.setTextColor(15, 23, 42);
+            doc.text(sanitizePdfText('Resumen de Rendimiento por Bloques Temáticos (8 preguntas por bloque)'), marginLeft, y);
+            y += 3.5;
+
+            // Cabecera de tabla
+            doc.setFillColor(30, 58, 138);
+            doc.rect(marginLeft, y, contentWidth, 6.5, 'F');
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8);
+            doc.setTextColor(255, 255, 255);
+            doc.text(sanitizePdfText('Bloque Temático'), marginLeft + 3, y + 4.4);
+            doc.text(sanitizePdfText('Aciertos / Total'), marginLeft + 130, y + 4.4);
+            doc.text(sanitizePdfText('Porcentaje'), marginLeft + 162, y + 4.4);
+            y += 6.5;
+
+            for (let b = 1; b <= 5; b++) {
+                const bStat = stats.byBlock[b];
+                const bPct = bStat.total > 0 ? Math.round((bStat.correct / bStat.total) * 100) : 0;
+
+                if (b % 2 === 0) {
+                    doc.setFillColor(248, 250, 252);
+                } else {
+                    doc.setFillColor(255, 255, 255);
+                }
+                doc.setDrawColor(226, 232, 240);
+                doc.rect(marginLeft, y, contentWidth, 6.5, 'FD');
+
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8);
+                doc.setTextColor(30, 41, 59);
+                doc.text(sanitizePdfText(THEMATIC_BLOCKS[b]), marginLeft + 3, y + 4.4);
+
+                doc.setFont('helvetica', 'bold');
+                doc.text(sanitizePdfText(`${bStat.correct} / ${bStat.total}`), marginLeft + 136, y + 4.4);
+                doc.text(sanitizePdfText(`${bPct}%`), marginLeft + 166, y + 4.4);
+
+                y += 6.5;
+            }
+
+            y += 8;
+
+            // 4. LISTADO COMPLETO DE LAS 40 PREGUNTAS CORREGIDAS
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(11);
+            doc.setTextColor(15, 23, 42);
+            doc.text(sanitizePdfText('Corrección Detallada de las 40 Preguntas'), marginLeft, y);
+            y += 5;
+
+            activeQuestions.forEach((q, idx) => {
+                const ans = selectedAnswers[idx];
+                const stateLabel = ans === null
+                    ? '[SIN RESPONDER]'
+                    : (ans === q.correctIndex ? '[CORRECTA]' : '[INCORRECTA]');
+
+                const qTitle = sanitizePdfText(`${idx + 1}. [${THEMATIC_BLOCKS[q.block]}] ${q.statement}`);
+                const studentLine = sanitizePdfText(
+                    ans !== null
+                        ? `Respuesta del alumno/a: ${optionLetters[ans]}) ${q.options[ans]}`
+                        : 'Respuesta del alumno/a: Sin responder'
+                );
+                const correctLine = sanitizePdfText(
+                    `Respuesta correcta: ${optionLetters[q.correctIndex]}) ${q.options[q.correctIndex]}`
+                );
+                const rationaleLine = sanitizePdfText(`Justificación didáctica: ${q.rationale}`);
+
+                const splitQ = doc.splitTextToSize(qTitle, contentWidth - 34);
+                const splitStudent = doc.splitTextToSize(studentLine, contentWidth - 6);
+                const splitCorrect = stateLabel !== '[CORRECTA]'
+                    ? doc.splitTextToSize(correctLine, contentWidth - 6)
+                    : [];
+                const splitRationale = doc.splitTextToSize(rationaleLine, contentWidth - 6);
+
+                const estimatedBlockHeight =
+                    (splitQ.length * 4) +
+                    (splitStudent.length * 3.8) +
+                    (splitCorrect.length * 3.8) +
+                    (splitRationale.length * 3.6) + 6;
+
+                // Control estricto de saltos de página automáticos
+                if (y > pageHeight - 25 || (y + estimatedBlockHeight > pageHeight - 20)) {
+                    doc.addPage();
+                    y = 18;
+                }
+
+                // Enunciado de la pregunta
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(8.8);
+                doc.setTextColor(15, 23, 42);
+                doc.text(splitQ, marginLeft, y);
+
+                // Etiqueta de estado a la derecha
+                if (stateLabel === '[CORRECTA]') {
+                    doc.setFillColor(209, 250, 229);
+                    doc.setTextColor(6, 95, 70);
+                    doc.rect(pageWidth - marginRight - 30, y - 3.2, 30, 5, 'F');
+                    doc.setFontSize(7.2);
+                    doc.text('[CORRECTA]', pageWidth - marginRight - 27, y + 0.3);
+                } else if (stateLabel === '[INCORRECTA]') {
+                    doc.setFillColor(254, 226, 226);
+                    doc.setTextColor(153, 27, 27);
+                    doc.rect(pageWidth - marginRight - 30, y - 3.2, 30, 5, 'F');
+                    doc.setFontSize(7.2);
+                    doc.text('[INCORRECTA]', pageWidth - marginRight - 28.5, y + 0.3);
+                } else {
+                    doc.setFillColor(241, 245, 249);
+                    doc.setTextColor(71, 85, 105);
+                    doc.rect(pageWidth - marginRight - 30, y - 3.2, 30, 5, 'F');
+                    doc.setFontSize(6.6);
+                    doc.text('[SIN RESPONDER]', pageWidth - marginRight - 29.5, y + 0.3);
+                }
+
+                y += splitQ.length * 4;
+
+                // Respuesta marcada
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8.2);
+                if (stateLabel === '[CORRECTA]') {
+                    doc.setTextColor(6, 95, 70);
+                } else if (stateLabel === '[INCORRECTA]') {
+                    doc.setTextColor(153, 27, 27);
+                } else {
+                    doc.setTextColor(100, 116, 139);
+                }
+                doc.text(splitStudent, marginLeft + 3, y);
+                y += splitStudent.length * 3.8;
+
+                // Respuesta correcta (si falló o dejó en blanco)
+                if (stateLabel !== '[CORRECTA]') {
+                    doc.setTextColor(6, 95, 70);
+                    doc.text(splitCorrect, marginLeft + 3, y);
+                    y += splitCorrect.length * 3.8;
+                }
+
+                // Justificación didáctica
+                doc.setFontSize(7.8);
+                doc.setTextColor(71, 85, 105);
+                doc.text(splitRationale, marginLeft + 3, y);
+                y += splitRationale.length * 3.6 + 3.5;
+
+                // Línea separadora
+                doc.setDrawColor(226, 232, 240);
+                doc.line(marginLeft, y - 1.5, pageWidth - marginRight, y - 1.5);
+            });
+
+            // 5. NUMERACIÓN DE PÁGINAS EN TODAS LAS PÁGINAS ("Página X de Y")
+            const totalPages = doc.internal.getNumberOfPages();
+            for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                doc.setPage(pageNum);
+                doc.setDrawColor(203, 213, 225);
+                doc.line(marginLeft, pageHeight - 13, pageWidth - marginRight, pageHeight - 13);
+
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8);
+                doc.setTextColor(100, 116, 139);
+                doc.text(
+                    sanitizePdfText(`Cuestionario de Matemáticas: Divisibilidad, m.c.d. y m.c.m. - ${studentData.name}`),
+                    marginLeft,
+                    pageHeight - 8
+                );
+                doc.text(
+                    sanitizePdfText(`Página ${pageNum} de ${totalPages}`),
+                    pageWidth - marginRight - 22,
+                    pageHeight - 8
+                );
+            }
+
+            const cleanFileName = studentData.name
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-zA-Z0-9]/g, '_');
+
+            doc.save(`Informe_Matematicas_Divisibilidad_MCD_MCM_${cleanFileName}.pdf`);
+        }
+    </script>
+</body>
+</html>
